@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PluginsForAEC — Professional plugins for architects and engineers</title>
+  <meta name="description" content="PluginsForAEC builds professional plugins for architecture, engineering and construction software. First product: ARQO for SketchUp, a modular toolset of 40 tools plus ARQOPush.">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <meta property="og:title" content="PluginsForAEC">
+  <meta property="og:description" content="Professional plugins for architects and engineers. First product: ARQO for SketchUp.">
+  <meta property="og:image" content="https://pluginsforaec.com/assets/hero.png">
+  <meta property="og:url" content="https://pluginsforaec.com/">
+  <style>
+    :root{--bg:#f7f6f2;--ink:#292e27;--muted:#6f766a;--line:#dedfd5;--accent:#a85f3c;--accent-ink:#8c4a2c;--panel:#fffefa;--dark:#2a3128;--dark-ink:#eeeee7;font-size:16px}
+    @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#1d201c;--ink:#e9e8e0;--muted:#a3a99c;--line:#3a3f36;--panel:#242923;--dark:#11140f;--dark-ink:#eeeee7}}
+    :root[data-theme="dark"]{--bg:#1d201c;--ink:#e9e8e0;--muted:#a3a99c;--line:#3a3f36;--panel:#242923;--dark:#11140f;--dark-ink:#eeeee7}
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:var(--ink);font-family:"Segoe UI",system-ui,-apple-system,Arial,sans-serif;line-height:1.55}
+    a{color:inherit}
+    .wrap{max-width:1120px;margin:0 auto;padding:0 16px}
+    header{display:flex;align-items:center;justify-content:space-between;height:68px;border-bottom:1px solid var(--line)}
+    .brand{font-weight:750;letter-spacing:-.5px;text-decoration:none;font-size:20px}
+    .brand small{display:block;font-size:9px;letter-spacing:2px;color:var(--muted);font-weight:500}
+    nav{display:flex;gap:18px;align-items:center;font-size:14px}
+    nav a{text-decoration:none;color:var(--muted)}
+    nav a:hover{color:var(--ink)}
+    .lang{border:1px solid var(--line);background:var(--panel);border-radius:6px;padding:5px 9px;font:inherit;font-size:12px;cursor:pointer;color:var(--ink)}
+    .hero{display:grid;grid-template-columns:1.05fr 1fr;gap:40px;align-items:center;padding:56px 0 40px}
+    .eyebrow{font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted);margin:0 0 14px}
+    h1{font-size:clamp(34px,5vw,58px);line-height:1.05;letter-spacing:-1.5px;margin:0 0 18px;font-weight:650}
+    h1 em{font-style:normal;color:var(--accent)}
+    .lead{font-size:18px;color:var(--muted);margin:0 0 26px;max-width:520px}
+    .cta{display:inline-flex;gap:10px;align-items:center;background:var(--dark);color:var(--dark-ink);padding:14px 22px;border-radius:8px;text-decoration:none;font-weight:600}
+    .cta.secondary{background:transparent;color:var(--ink);border:1px solid var(--line);margin-left:10px}
+    .hero img{width:100%;border-radius:12px;border:1px solid var(--line);box-shadow:0 20px 40px #0000001c}
+    .note{font-size:12px;color:var(--muted);margin-top:14px}
+    section{padding:48px 0;border-top:1px solid var(--line)}
+    h2{font-size:28px;letter-spacing:-.6px;margin:0 0 8px;font-weight:600}
+    .sub{color:var(--muted);margin:0 0 26px;max-width:640px}
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    .card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:20px}
+    .card h3{margin:0 0 6px;font-size:16px}
+    .card p{margin:0;color:var(--muted);font-size:14px}
+    .tag{display:inline-block;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;padding:3px 7px;border-radius:4px;background:#efe3da;color:var(--accent-ink);margin-bottom:10px}
+    .tag.soon{background:transparent;border:1px solid var(--line);color:var(--muted)}
+    .toolbar{width:100%;border:1px solid var(--line);border-radius:8px;margin:18px 0 6px;background:#f2f3ee}
+    .stats{display:flex;gap:34px;flex-wrap:wrap;margin-top:20px}
+    .stats b{display:block;font-size:30px;font-weight:600;letter-spacing:-1px}
+    .stats span{font-size:12px;color:var(--muted)}
+    .waitlist{background:var(--dark);color:var(--dark-ink);border-radius:14px;padding:40px;display:grid;grid-template-columns:1.2fr 1fr;gap:30px;align-items:center}
+    .waitlist h2{color:var(--dark-ink)}
+    .waitlist p{color:#b9bfb2}
+    .waitlist .cta{background:var(--accent);color:#fff}
+    footer{padding:28px 0 40px;font-size:13px;color:var(--muted);display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;border-top:1px solid var(--line)}
+    footer a{color:var(--muted)}
+    [data-lang]{display:none}
+    html[lang="en"] [data-lang="en"],html[lang="tr"] [data-lang="tr"]{display:revert}
+    @media (max-width:820px){.hero,.waitlist{grid-template-columns:1fr}.grid{grid-template-columns:1fr}nav a.hide-m{display:none}.hero{padding-top:34px}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <a class="brand" href="/">PluginsForAEC<small>ARCHITECTURE · ENGINEERING · CONSTRUCTION</small></a>
+      <nav>
+        <a class="hide-m" href="#arqo">ARQO</a>
+        <a class="hide-m" href="#push">ARQOPush</a>
+        <a class="hide-m" href="#waitlist"><span data-lang="en">Early access</span><span data-lang="tr">Erken erişim</span></a>
+        <button class="lang" id="lang" type="button" aria-label="Language">TR</button>
+      </nav>
+    </header>
+
+    <div class="hero">
+      <div>
+        <p class="eyebrow">PluginsForAEC</p>
+        <h1 data-lang="en">In the software you already use.<br><em>Do more.</em></h1>
+        <h1 data-lang="tr">Kullandığın yazılımda.<br><em>Daha fazlasını yap.</em></h1>
+        <p class="lead" data-lang="en">Professional plugins for architects and engineers. One product family, starting with ARQO for SketchUp: forty modelling tools you can buy one by one or as a complete package.</p>
+        <p class="lead" data-lang="tr">Mimarlar ve mühendisler için profesyonel eklentiler. Tek ürün ailesi, ilk ürün ARQO for SketchUp: tek tek ya da tam paket olarak alınabilen kırk modelleme aracı.</p>
+        <a class="cta" href="#waitlist"><span data-lang="en">Join the early access list</span><span data-lang="tr">Erken erişim listesine katıl</span> →</a>
+        <a class="cta secondary" href="#arqo"><span data-lang="en">See ARQO</span><span data-lang="tr">ARQO'yu gör</span></a>
+        <p class="note" data-lang="en">In development. Nothing is on sale yet; early access is free during the alpha.</p>
+        <p class="note" data-lang="tr">Geliştirme aşamasında. Henüz satışta değil; alfa süresince erken erişim ücretsiz.</p>
+      </div>
+      <img src="assets/hero.png" alt="ARQO Demo House model open in SketchUp 2025" width="1550" height="830">
+    </div>
+
+    <section id="arqo">
+      <p class="eyebrow">01 / SketchUp</p>
+      <h2>ARQO for SketchUp</h2>
+      <p class="sub" data-lang="en">A modular toolset built as one runtime: one toolbar, one undo step per command, visible feedback on every action, and every tool sold on its own or inside the complete package.</p>
+      <p class="sub" data-lang="tr">Tek çekirdek üzerine kurulu modüler bir araç seti: tek araç çubuğu, her komut için tek geri alma adımı, her işlemde görünür geri bildirim; her araç tek başına ya da tam paket içinde satılır.</p>
+      <img class="toolbar" src="assets/toolbar.png" alt="The single ARQO toolbar with 40 commands in SketchUp" width="1285" height="59">
+      <p class="note" data-lang="en">The real ARQO toolbar in SketchUp 2025: working tools in colour, planned tools greyed out until they ship.</p>
+      <p class="note" data-lang="tr">SketchUp 2025'teki gerçek ARQO araç çubuğu: çalışan araçlar renkli, planlananlar çıkana kadar sönük.</p>
+      <div class="stats">
+        <div><b>40</b><span data-lang="en">baseline tools</span><span data-lang="tr">temel araç</span></div>
+        <div><b>6</b><span data-lang="en">working today</span><span data-lang="tr">bugün çalışıyor</span></div>
+        <div><b>1</b><span data-lang="en">undo per command</span><span data-lang="tr">komut başına geri alma</span></div>
+        <div><b>2021+</b><span data-lang="en">SketchUp versions</span><span data-lang="tr">SketchUp sürümü</span></div>
+      </div>
+      <div class="grid" style="margin-top:26px">
+        <div class="card"><span class="tag">Working</span><h3>Make Face+</h3><p data-lang="en">Faces from selected edges; tells you why a loop was skipped.</p><p data-lang="tr">Seçili kenarlardan yüzey; atladığı döngünün sebebini söyler.</p></div>
+        <div class="card"><span class="tag">Working</span><h3>Line to Face</h3><p data-lang="en">Plan lines become walls, push/pull style: drag or type the height.</p><p data-lang="tr">Plan çizgileri duvar olur, push/pull mantığıyla: sürükle ya da yüksekliği yaz.</p></div>
+        <div class="card"><span class="tag">Working</span><h3>Weld+</h3><p data-lang="en">Chains of edges become curves; branches split cleanly.</p><p data-lang="tr">Kenar zincirleri eğri olur; dallanmalar temiz bölünür.</p></div>
+        <div class="card"><span class="tag">Working</span><h3>Find Gap · Connect / Heal</h3><p data-lang="en">Find every open end and gap, then close it with one click.</p><p data-lang="tr">Her açık ucu ve boşluğu bul, sonra tek tıkla kapat.</p></div>
+        <div class="card"><span class="tag">Working</span><h3>Delete Overlap</h3><p data-lang="en">Duplicate groups sitting on the same spot reduced to one.</p><p data-lang="tr">Aynı yerdeki kopya gruplar teke iner.</p></div>
+        <div class="card"><span class="tag soon">Planned</span><h3 data-lang="en">34 more</h3><h3 data-lang="tr">34 araç daha</h3><p data-lang="en">Mirror+, Align+, Smart Select, Smart Slice, Smart Stair, Import DXF and the rest of the baseline.</p><p data-lang="tr">Mirror+, Align+, Smart Select, Smart Slice, Smart Stair, Import DXF ve tabanın kalanı.</p></div>
+      </div>
+    </section>
+
+    <section id="push">
+      <p class="eyebrow">ARQO Special</p>
+      <h2>ARQOPush</h2>
+      <p class="sub" data-lang="en">A professional push/pull engine: twelve modes on one tool, on its own toolbar. Push to face, push to object, joint push, thicken, taper, offset + push, copy + push, symmetric push, axis lock, repeat. Select, drag or type, one undo.</p>
+      <p class="sub" data-lang="tr">Profesyonel bir push/pull motoru: tek araçta on iki mod, kendi araç çubuğunda. Yüzeye it, nesneye it, joint push, kalınlık, taper, ofset + it, kopya + it, simetrik, eksen kilidi, tekrar. Seç, sürükle ya da yaz, tek geri alma.</p>
+      <div class="grid">
+        <div class="card"><span class="tag soon">Coming</span><h3>Joint Push · Thicken</h3><p data-lang="en">Adjacent and curved faces pushed together, joints kept.</p><p data-lang="tr">Bitişik ve eğri yüzeyler köşeleri korunarak birlikte itilir.</p></div>
+        <div class="card"><span class="tag soon">Coming</span><h3>Push to Face · Object · Point</h3><p data-lang="en">Stop exactly where the target is.</p><p data-lang="tr">Tam hedefte durur.</p></div>
+        <div class="card"><span class="tag soon">Coming</span><h3 data-lang="en">Push inside groups</h3><h3 data-lang="tr">Grup içine girmeden itme</h3><p data-lang="en">No double-clicking into containers; materials preserved on the new sides.</p><p data-lang="tr">Kaplara çift tıklamak yok; yeni yan yüzeylerde malzeme korunur.</p></div>
+      </div>
+    </section>
+
+    <section id="waitlist">
+      <div class="waitlist">
+        <div>
+          <h2 data-lang="en">Get ARQO first.</h2>
+          <h2 data-lang="tr">ARQO'yu ilk sen al.</h2>
+          <p data-lang="en">Send one line to join the early access list. You get the alpha build for SketchUp 2021+, release notes, and a say in what gets built next. No spam, no newsletter.</p>
+          <p data-lang="tr">Erken erişim listesine katılmak için tek satır yaz. SketchUp 2021+ için alfa sürümü, sürüm notları ve sıradaki aracı seçme hakkı. Spam yok, bülten yok.</p>
+        </div>
+        <div>
+          <a class="cta" href="mailto:info@pluginsforaec.com?subject=ARQO%20early%20access&body=Hi%2C%20please%20add%20me%20to%20the%20ARQO%20early%20access%20list.%0A%0AI%20use%20SketchUp%20version%3A%20%0AI%20mostly%20model%3A%20"><span data-lang="en">Email info@pluginsforaec.com</span><span data-lang="tr">info@pluginsforaec.com adresine yaz</span> →</a>
+          <p class="note" style="color:#b9bfb2" data-lang="en">Or write to the same address with any question.</p>
+          <p class="note" style="color:#b9bfb2" data-lang="tr">Ya da her soru için aynı adrese yaz.</p>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <span>© 2026 PluginsForAEC · <a href="mailto:info@pluginsforaec.com">info@pluginsforaec.com</a></span>
+      <span data-lang="en">SketchUp is a trademark of Trimble Inc. PluginsForAEC is independent. Roadmap: AutoCAD, Rhino and Grasshopper after ARQO.</span>
+      <span data-lang="tr">SketchUp, Trimble Inc. markasıdır. PluginsForAEC bağımsızdır. Yol haritası: ARQO'dan sonra AutoCAD, Rhino ve Grasshopper.</span>
+    </footer>
+  </div>
+  <script>
+    (function(){
+      var root=document.documentElement,button=document.getElementById('lang');
+      function apply(lang){root.setAttribute('lang',lang);button.textContent=lang==='en'?'TR':'EN';try{localStorage.setItem('pfa-lang',lang)}catch(e){}}
+      var saved=null;try{saved=localStorage.getItem('pfa-lang')}catch(e){}
+      apply(saved||((navigator.language||'').toLowerCase().indexOf('tr')===0?'tr':'en'));
+      button.addEventListener('click',function(){apply(root.getAttribute('lang')==='en'?'tr':'en')});
+    })();
+  </script>
+</body>
+</html>
