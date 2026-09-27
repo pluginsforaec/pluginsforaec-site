@@ -86,8 +86,11 @@ function build() {
   resize();
 
   // Camera flights: target and zoom ease towards a goal each frame.
-  const goal = { target: new THREE.Vector3().fromArray(HOME.target), zoom: 1 };
-  function flyTo(target, zoom) { goal.target.copy(target); goal.zoom = zoom; }
+  // A flight runs only after a tool selection and stops as soon as the user
+  // touches the view, so wheel zoom and drags are never fought over.
+  const goal = { target: new THREE.Vector3().fromArray(HOME.target), zoom: 1, flying: false };
+  function flyTo(target, zoom) { goal.target.copy(target); goal.zoom = zoom; goal.flying = true; }
+  controls.addEventListener('start', () => { goal.flying = false; });
 
   Promise.all([
     new GLTFLoader().loadAsync('assets/arqo-demo-house-01.glb'),
@@ -199,13 +202,16 @@ function build() {
     }
   }
 
-  window.arqoStudio = { update, reset() { flyTo(new THREE.Vector3().fromArray(HOME.target), 1); camera.position.fromArray(HOME.position); } };
+  window.arqoStudio = { update, reset() { camera.position.fromArray(HOME.position); flyTo(new THREE.Vector3().fromArray(HOME.target), 1); } };
   if (pending) update(pending);
 
   renderer.setAnimationLoop(() => {
-    controls.target.lerp(goal.target, 0.08);
-    camera.zoom += (goal.zoom - camera.zoom) * 0.08;
-    camera.updateProjectionMatrix();
+    if (goal.flying) {
+      controls.target.lerp(goal.target, 0.08);
+      camera.zoom += (goal.zoom - camera.zoom) * 0.08;
+      camera.updateProjectionMatrix();
+      if (controls.target.distanceTo(goal.target) < 0.01 && Math.abs(goal.zoom - camera.zoom) < 0.005) goal.flying = false;
+    }
     controls.update();
     renderer.render(scene, camera);
   });
