@@ -33,6 +33,15 @@
     .cta{display:inline-flex;gap:10px;align-items:center;background:var(--dark);color:var(--dark-ink);padding:14px 22px;border-radius:8px;text-decoration:none;font-weight:600}
     .cta.secondary{background:transparent;color:var(--ink);border:1px solid var(--line);margin-left:10px}
     img{max-width:100%;height:auto}
+    .model-wrap{min-width:0}
+    #model{position:relative;aspect-ratio:16/11;border-radius:12px;border:1px solid var(--line);overflow:hidden;background:#eeeee7;box-shadow:0 20px 40px #0000001c;cursor:grab;touch-action:none}
+    #model:active{cursor:grabbing}
+    #model canvas{display:block;width:100%!important;height:100%!important}
+    #model-fallback{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border:0;border-radius:0;box-shadow:none}
+    #model-status{position:absolute;left:14px;bottom:10px;margin:0;font-size:12px;color:var(--muted)}
+    #model-label{position:absolute;left:14px;top:12px;font-size:12px;padding:4px 9px;border-radius:6px;background:#1f2320;color:#f4f4ef;pointer-events:none}
+    #model-reset{position:absolute;right:12px;top:12px;width:32px;height:32px;border-radius:8px;border:1px solid var(--line);background:#ffffffcc;color:#1f2320;font-size:16px;cursor:pointer}
+    .model-hint{font-size:12px;color:var(--muted);margin:10px 2px 0}
     .hero img{width:100%;border-radius:12px;border:1px solid var(--line);box-shadow:0 20px 40px #0000001c}
     .note{font-size:12px;color:var(--muted);margin-top:14px}
     section{padding:48px 0;border-top:1px solid var(--line)}
@@ -58,6 +67,8 @@
     html[lang="en"] [data-lang="en"],html[lang="tr"] [data-lang="tr"]{display:revert}
     @media (max-width:820px){.hero,.waitlist{grid-template-columns:1fr}.grid{grid-template-columns:1fr}nav a.hide-m{display:none}.hero{padding-top:34px}}
   </style>
+  <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.180.0/examples/jsm/"}}</script>
+  <script type="module" src="viewer.js"></script>
 </head>
 <body>
   <div class="wrap">
@@ -83,7 +94,15 @@
         <p class="note" data-lang="en">In development. Nothing is on sale yet; early access is free during the alpha.</p>
         <p class="note" data-lang="tr">Geliştirme aşamasında. Henüz satışta değil; alfa süresince erken erişim ücretsiz.</p>
       </div>
-      <img src="assets/hero.png" alt="ARQO Demo House model open in SketchUp 2025" width="1550" height="830">
+      <div class="model-wrap">
+        <div id="model" aria-label="ARQO Demo House, interactive 3D model">
+          <img id="model-fallback" src="assets/hero.png" alt="ARQO Demo House model open in SketchUp 2025" width="1550" height="830" hidden>
+          <p id="model-status"><span data-lang="en">Loading the model…</span><span data-lang="tr">Model yükleniyor…</span></p>
+          <span id="model-label" hidden></span>
+          <button id="model-reset" type="button" title="Reset view">↺</button>
+        </div>
+        <p class="model-hint"><span data-lang="en"><b>ARQO Demo House</b> · drag to rotate · wheel to zoom · right-drag to pan. The same model ships with the plugin.</span><span data-lang="tr"><b>ARQO Demo House</b> · sürükle döndür · tekerlek yakınlaştır · sağ tuşla kaydır. Aynı model eklentiyle birlikte gelir.</span></p>
+      </div>
     </div>
 
     <section id="arqo">
