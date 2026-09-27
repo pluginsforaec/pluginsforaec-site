@@ -1,0 +1,21 @@
+/* Generated from design/tokens.json. Edit the source, then npm run build. */
+:root {
+  --bg: #f7f6f2;
+  --surface: #fffefa;
+  --surface-2: #eeede7;
+  --ink: #262923;
+  --muted: #75796f;
+  --line: #dedfd5;
+  --font-family: "Segoe UI", Arial, sans-serif;
+  --accent: #d57750;
+  --accent-soft: #f2e4db;
+  --accent-ink: #9b4a2b;
+}
+body[data-theme="dark"] {
+  --bg: #20241f;
+  --surface: #292f27;
+  --surface-2: #252c23;
+  --ink: #e9ede0;
+  --muted: #abb7a1;
+  --line: #41493a;
+}
