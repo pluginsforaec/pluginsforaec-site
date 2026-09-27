@@ -65,66 +65,77 @@ export default {
       {
         "id": "geometry",
         "label": {
+          "en": "Geometry",
           "tr": "Geometri"
         }
       },
       {
         "id": "repair",
         "label": {
+          "en": "Repair",
           "tr": "Onarım"
         }
       },
       {
         "id": "transform",
         "label": {
+          "en": "Transform",
           "tr": "Dönüşüm"
         }
       },
       {
         "id": "cut",
         "label": {
+          "en": "Cut",
           "tr": "Kesme"
         }
       },
       {
         "id": "components",
         "label": {
+          "en": "Components",
           "tr": "Bileşen"
         }
       },
       {
         "id": "selection",
         "label": {
+          "en": "Selection",
           "tr": "Seçim"
         }
       },
       {
         "id": "materials",
         "label": {
+          "en": "Materials",
           "tr": "Malzeme"
         }
       },
       {
         "id": "architecture",
         "label": {
+          "en": "Architecture",
           "tr": "Mimari"
         }
       },
       {
         "id": "organization",
         "label": {
+          "en": "Organization",
           "tr": "Düzen"
         }
       },
       {
         "id": "import",
         "label": {
+          "en": "Import",
           "tr": "Aktarım"
         }
       },
       {
         "id": "presentation",
         "label": {
+          "en": "Presentation",
           "tr": "Sunum"
         }
       }
@@ -208,7 +219,9 @@ export default {
       "category": "geometry",
       "locales": {
         "en": {
-          "summary": "Create faces from suitable closed planar edges."
+          "name": "Make Face+",
+          "summary": "Create faces from suitable closed planar edges.",
+          "description": "Create faces from selected edges, also from the right-click menu."
         },
         "tr": {
           "name": "Make Face+",
@@ -286,7 +299,9 @@ export default {
       "category": "geometry",
       "locales": {
         "en": {
-          "summary": "Create faces from lines and reference directions."
+          "name": "Line to Face",
+          "summary": "Create faces from lines and reference directions.",
+          "description": "Turn selected lines into faces with a height: drag push/pull style or type the value; modifier keys change direction."
         },
         "tr": {
           "name": "Line to Face",
@@ -363,7 +378,9 @@ export default {
       "category": "geometry",
       "locales": {
         "en": {
-          "summary": "Draw and edit connected edges."
+          "name": "Line Tool",
+          "summary": "Draw and edit connected edges.",
+          "description": "Lines, guide lines and points; arithmetic in the length box and x,y,z input."
         },
         "tr": {
           "name": "Line Tool",
@@ -427,7 +444,9 @@ export default {
       "category": "geometry",
       "locales": {
         "en": {
-          "summary": "Build box geometry from reference inputs."
+          "name": "Make Box+",
+          "summary": "Build box geometry from reference inputs.",
+          "description": "Build a box from three or four points and a height."
         },
         "tr": {
           "name": "Make Box+",
@@ -491,7 +510,9 @@ export default {
       "category": "geometry",
       "locales": {
         "en": {
-          "summary": "Create panel elements from selected geometry."
+          "name": "Panel",
+          "summary": "Create panel elements from selected geometry.",
+          "description": "Create panels from three points or from a selected face."
         },
         "tr": {
           "name": "Panel",
@@ -555,7 +576,9 @@ export default {
       "category": "geometry",
       "locales": {
         "en": {
-          "summary": "Create frames around selected faces."
+          "name": "Frame",
+          "summary": "Create frames around selected faces.",
+          "description": "Create a frame from a face, edge or curve boundary."
         },
         "tr": {
           "name": "Frame",
@@ -619,7 +642,9 @@ export default {
       "category": "geometry",
       "locales": {
         "en": {
-          "summary": "Divide edges and faces into regular parts."
+          "name": "Divide+",
+          "summary": "Divide edges and faces into regular parts.",
+          "description": "Divide faces in two directions, with a right-click workflow."
         },
         "tr": {
           "name": "Divide+",
@@ -683,7 +708,9 @@ export default {
       "category": "geometry",
       "locales": {
         "en": {
-          "summary": "Offset selected geometry with guided distances."
+          "name": "Smart Offset",
+          "summary": "Offset selected geometry with guided distances.",
+          "description": "Multiple, two-sided and random offsets; reuse the previous value."
         },
         "tr": {
           "name": "Smart Offset",
@@ -747,7 +774,9 @@ export default {
       "category": "repair",
       "locales": {
         "en": {
-          "summary": "Connect edges and repair gaps."
+          "name": "Connect / Heal",
+          "summary": "Connect edges and repair gaps.",
+          "description": "Connect two edges, curves or arcs; extend an arc to a full circle."
         },
         "tr": {
           "name": "Connect / Heal",
@@ -824,7 +853,9 @@ export default {
       "category": "repair",
       "locales": {
         "en": {
-          "summary": "Find open endpoints and gaps in edge geometry."
+          "name": "Find Gap",
+          "summary": "Find open endpoints and gaps in edge geometry.",
+          "description": "Find gaps and open edge ends, then fix them with its own automatic connect workflow."
         },
         "tr": {
           "name": "Find Gap",
@@ -915,7 +946,9 @@ export default {
       "category": "repair",
       "locales": {
         "en": {
-          "summary": "Join compatible connected edges into curves."
+          "name": "Weld+",
+          "summary": "Join compatible connected edges into curves.",
+          "description": "Join edges into a curve or a set of curves."
         },
         "tr": {
           "name": "Weld+",
@@ -993,7 +1026,9 @@ export default {
       "category": "repair",
       "locales": {
         "en": {
-          "summary": "Convert suitable curves to arcs."
+          "name": "Curve to Arc",
+          "summary": "Convert suitable curves to arcs.",
+          "description": "Convert a curve into an arc or a circle."
         },
         "tr": {
           "name": "Curve to Arc",
@@ -1057,7 +1092,9 @@ export default {
       "category": "repair",
       "locales": {
         "en": {
-          "summary": "Control edge visibility in selected geometry."
+          "name": "Hide / Show Lines",
+          "summary": "Control edge visibility in selected geometry.",
+          "description": "Hide or show edges; hide the intersection lines between objects."
         },
         "tr": {
           "name": "Hide / Show Lines",
@@ -1121,7 +1158,9 @@ export default {
       "category": "transform",
       "locales": {
         "en": {
-          "summary": "Mirror selected objects about a reference plane."
+          "name": "Mirror+",
+          "summary": "Mirror selected objects about a reference plane.",
+          "description": "One-click mirror, mirror with copy, 45° and axis snapping."
         },
         "tr": {
           "name": "Mirror+",
@@ -1199,7 +1238,9 @@ export default {
       "category": "transform",
       "locales": {
         "en": {
-          "summary": "Align objects using reference geometry."
+          "name": "Align+",
+          "summary": "Align objects using reference geometry.",
+          "description": "Align the selected objects."
         },
         "tr": {
           "name": "Align+",
@@ -1263,7 +1304,9 @@ export default {
       "category": "transform",
       "locales": {
         "en": {
-          "summary": "Scale objects against a reference dimension."
+          "name": "Reference Scale",
+          "summary": "Scale objects against a reference dimension.",
+          "description": "Scale edges, faces, groups and components by reference points."
         },
         "tr": {
           "name": "Reference Scale",
@@ -1327,7 +1370,9 @@ export default {
       "category": "transform",
       "locales": {
         "en": {
-          "summary": "Scale objects along an axis or to a target length."
+          "name": "Axis / Length Scale",
+          "summary": "Scale objects along an axis or to a target length.",
+          "description": "Scale along X/Y/Z, by push/pull distance, to a fixed length, or reset the scale."
         },
         "tr": {
           "name": "Axis / Length Scale",
@@ -1391,7 +1436,9 @@ export default {
       "category": "transform",
       "locales": {
         "en": {
-          "summary": "Normalize component definition scale."
+          "name": "Scale Definition",
+          "summary": "Normalize component definition scale.",
+          "description": "Edit the scale of a group or component definition; right-click access."
         },
         "tr": {
           "name": "Scale Definition",
@@ -1455,7 +1502,9 @@ export default {
       "category": "transform",
       "locales": {
         "en": {
-          "summary": "Transform objects using controlled move, rotate and scale inputs."
+          "name": "Transformer",
+          "summary": "Transform objects using controlled move, rotate and scale inputs.",
+          "description": "Scale, move, rotate and colour groups and components."
         },
         "tr": {
           "name": "Transformer",
@@ -1519,7 +1568,9 @@ export default {
       "category": "transform",
       "locales": {
         "en": {
-          "summary": "Reset object axes while preserving geometry placement."
+          "name": "Reset Axis+",
+          "summary": "Reset object axes while preserving geometry placement.",
+          "description": "Reset origin and axes; fit the X axis to the nearest, longest or shortest edge."
         },
         "tr": {
           "name": "Reset Axis+",
@@ -1583,7 +1634,9 @@ export default {
       "category": "cut",
       "locales": {
         "en": {
-          "summary": "Slice geometry using a reference cutting plane."
+          "name": "Smart Slice",
+          "summary": "Slice geometry using a reference cutting plane.",
+          "description": "Cut and separate by two or three points, an edge, a face or a perpendicular plane; with a section face."
         },
         "tr": {
           "name": "Smart Slice",
@@ -1661,7 +1714,9 @@ export default {
       "category": "cut",
       "locales": {
         "en": {
-          "summary": "Apply multiple cutting planes to geometry."
+          "name": "Multi Slice",
+          "summary": "Apply multiple cutting planes to geometry.",
+          "description": "Batch Slice, Cut and Detach on the selected objects."
         },
         "tr": {
           "name": "Multi Slice",
@@ -1725,7 +1780,9 @@ export default {
       "category": "components",
       "locales": {
         "en": {
-          "summary": "Explode selected grouped geometry."
+          "name": "Explode",
+          "summary": "Explode selected grouped geometry.",
+          "description": "Explode groups, components, curves and images in the inner or outer context."
         },
         "tr": {
           "name": "Explode",
@@ -1789,7 +1846,9 @@ export default {
       "category": "selection",
       "locales": {
         "en": {
-          "summary": "Select entities using reusable type and similarity filters."
+          "name": "Smart Select",
+          "summary": "Select entities using reusable type and similarity filters.",
+          "description": "Advanced selection by length, area and other criteria."
         },
         "tr": {
           "name": "Smart Select",
@@ -1853,7 +1912,9 @@ export default {
       "category": "selection",
       "locales": {
         "en": {
-          "summary": "Filter the current selection by entity properties."
+          "name": "Filter Selection",
+          "summary": "Filter the current selection by entity properties.",
+          "description": "Filters for edges, faces, groups, components, guides, dimensions, images, section planes and text."
         },
         "tr": {
           "name": "Filter Selection",
@@ -1917,7 +1978,9 @@ export default {
       "category": "selection",
       "locales": {
         "en": {
-          "summary": "Select entities using crop and lasso regions."
+          "name": "Crop / Lasso Select",
+          "summary": "Select entities using crop and lasso regions.",
+          "description": "Lasso, polyline, circle and rectangle; selection state, extend and opposite-side modes."
         },
         "tr": {
           "name": "Crop / Lasso Select",
@@ -1981,7 +2044,9 @@ export default {
       "category": "components",
       "locales": {
         "en": {
-          "summary": "Convert selected geometry to component instances."
+          "name": "To Components+",
+          "summary": "Convert selected geometry to component instances.",
+          "description": "Create components from point, line, face, group and component input."
         },
         "tr": {
           "name": "To Components+",
@@ -2045,7 +2110,9 @@ export default {
       "category": "components",
       "locales": {
         "en": {
-          "summary": "Attach selected objects to a reference face."
+          "name": "Attach to Face",
+          "summary": "Attach selected objects to a reference face.",
+          "description": "Attach and glue the selected components to a face."
         },
         "tr": {
           "name": "Attach to Face",
@@ -2109,7 +2176,9 @@ export default {
       "category": "components",
       "locales": {
         "en": {
-          "summary": "Copy objects along a reference path."
+          "name": "Copy Follow",
+          "summary": "Copy objects along a reference path.",
+          "description": "Copy a source object by following the selected groups and components, or every copy of a component."
         },
         "tr": {
           "name": "Copy Follow",
@@ -2173,7 +2242,9 @@ export default {
       "category": "repair",
       "locales": {
         "en": {
-          "summary": "Find and remove overlapping duplicate geometry."
+          "name": "Delete Overlap",
+          "summary": "Find and remove overlapping duplicate geometry.",
+          "description": "Remove group and component copies that sit on the same spot, in the selection or the whole model."
         },
         "tr": {
           "name": "Delete Overlap",
@@ -2237,7 +2308,9 @@ export default {
       "category": "materials",
       "locales": {
         "en": {
-          "summary": "Manage materials on selected geometry."
+          "name": "Material Tools",
+          "summary": "Manage materials on selected geometry.",
+          "description": "Swap front and back materials; fix the face orientation of groups and components."
         },
         "tr": {
           "name": "Material Tools",
@@ -2301,7 +2374,9 @@ export default {
       "category": "materials",
       "locales": {
         "en": {
-          "summary": "Apply materials to selected faces and objects."
+          "name": "Paint+",
+          "summary": "Apply materials to selected faces and objects.",
+          "description": "Paint inner faces, delete or replace materials, rotate, move and align textures, flip faces and measure area."
         },
         "tr": {
           "name": "Paint+",
@@ -2365,7 +2440,9 @@ export default {
       "category": "architecture",
       "locales": {
         "en": {
-          "summary": "Build stairs from architectural input dimensions."
+          "name": "Smart Stair",
+          "summary": "Build stairs from architectural input dimensions.",
+          "description": "Simple, Slab, ZigZag, Steps, Extrude and Treads types; sloped surfaces. The ARQO version adds architectural rule checks."
         },
         "tr": {
           "name": "Smart Stair",
@@ -2443,7 +2520,9 @@ export default {
       "category": "organization",
       "locales": {
         "en": {
-          "summary": "Organize entities using tags."
+          "name": "Tag Tools",
+          "summary": "Organize entities using tags.",
+          "description": "Previous, Next, Isolate, Current, Off and On for tags and visibility."
         },
         "tr": {
           "name": "Tag Tools",
@@ -2507,7 +2586,9 @@ export default {
       "category": "import",
       "locales": {
         "en": {
-          "summary": "Import DXF geometry into a controlled context."
+          "name": "Import DXF",
+          "summary": "Import DXF geometry into a controlled context.",
+          "description": "Text DXF import; targets dynamic blocks, mline, ellipse, spline, polyline, circle, arc, line and text."
         },
         "tr": {
           "name": "Import DXF",
@@ -2571,7 +2652,9 @@ export default {
       "category": "presentation",
       "locales": {
         "en": {
-          "summary": "Import camera definitions."
+          "name": "Import Camera",
+          "summary": "Import camera definitions.",
+          "description": "Bring the camera and two-point perspective from another SketchUp file."
         },
         "tr": {
           "name": "Import Camera",
@@ -2635,7 +2718,9 @@ export default {
       "category": "presentation",
       "locales": {
         "en": {
-          "summary": "Export selected scene views."
+          "name": "Export Scenes",
+          "summary": "Export selected scene views.",
+          "description": "Export scenes to JPG/PNG, reorder and rename scenes."
         },
         "tr": {
           "name": "Export Scenes",
@@ -2699,7 +2784,9 @@ export default {
       "category": "presentation",
       "locales": {
         "en": {
-          "summary": "Manage scene shadow settings."
+          "name": "Scene Shadows",
+          "summary": "Manage scene shadow settings.",
+          "description": "Turn shadows on and off in every scene."
         },
         "tr": {
           "name": "Scene Shadows",
@@ -2763,7 +2850,9 @@ export default {
       "category": "presentation",
       "locales": {
         "en": {
-          "summary": "Use camera-related clipping controls."
+          "name": "Clipping Camera",
+          "summary": "Use camera-related clipping controls.",
+          "description": "Near clipping plane control with FORCE/NEAR. Windows-focused reference; version support awaits technical verification."
         },
         "tr": {
           "name": "Clipping Camera",
@@ -2827,7 +2916,9 @@ export default {
       "category": "import",
       "locales": {
         "en": {
-          "summary": "Draw a boundary from reference geometry."
+          "name": "Draw Boundary",
+          "summary": "Draw a boundary from reference geometry.",
+          "description": "Draw a boundary from a coordinate file."
         },
         "tr": {
           "name": "Draw Boundary",
@@ -2891,7 +2982,9 @@ export default {
       "category": "geometry",
       "locales": {
         "en": {
-          "summary": "Professional push/pull engine: twelve modes on one tool."
+          "name": "ARQOPush",
+          "summary": "Professional push/pull engine: twelve modes on one tool.",
+          "description": "Twelve modes: normal, multi-face, joint, to face or object, thicken, taper, offset, copy, symmetric, axis lock and repeat."
         },
         "tr": {
           "name": "ARQOPush",

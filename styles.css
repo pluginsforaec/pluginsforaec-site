@@ -14,7 +14,9 @@ body[data-theme=dark]{color-scheme:dark}body[data-theme=dark] .scene-top{fill:#b
 @media(max-width:600px){.marketplace-nav{padding:17px 22px;gap:12px}.marketplace-nav nav{display:none}.marketplace-brand>span:last-child{font-size:13px}.marketplace-hero{padding:38px 0}.marketplace-hero h1{font-size:40px}.marketplace-hero p{font-size:12px}.platform-grid{grid-template-columns:1fr;gap:12px}.platform-card{min-height:230px;padding:23px}.platform-top{flex-wrap:nowrap}.platform-card.featured>strong{font-size:43px}.platform-card h3{font-size:14px}.platform-card p{font-size:11px}.shared-services{grid-template-columns:repeat(2,1fr);gap:25px}.breadcrumbs{font-size:8px;gap:9px}.breadcrumbs button{font-size:8px}}
 
 /* public site additions */
-.preview-settings .theme-toggle{margin-left:0}
+.preview-settings{gap:12px}
+.lang-switch{font-size:10px;font-weight:700;letter-spacing:1px;padding:6px 9px;border:1px solid var(--line);border-radius:6px;color:var(--ink);text-decoration:none}
+.lang-switch:hover{border-color:var(--accent);color:var(--accent-ink)}
 .live-model{position:relative;cursor:grab}
 .live-model:active{cursor:grabbing}
 .live-model canvas{display:block;width:100%!important;height:100%!important}
@@ -23,3 +25,14 @@ body[data-theme=dark]{color-scheme:dark}body[data-theme=dark] .scene-top{fill:#b
 .studio-note{color:var(--accent-ink);max-width:60%;white-space:normal;text-align:left}
 .viewport-bottom{gap:12px}
 .site-footer a{color:inherit}
+.marketplace-hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:56px;align-items:center}
+.marketplace-hero-copy>p{font-size:14px;line-height:1.9;color:var(--muted);margin-bottom:25px}
+.home-model-wrap{min-width:0}
+.home-model{position:relative;aspect-ratio:16/11;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:var(--surface-2);box-shadow:var(--shadow);cursor:grab;touch-action:none}
+.home-model:active{cursor:grabbing}
+.home-model canvas{display:block;width:100%!important;height:100%!important}
+.home-model-tag{position:absolute;left:18px;top:16px;z-index:2;font-size:8px;letter-spacing:1.4px;color:var(--muted);pointer-events:none}
+.home-model .studio-label{top:auto;bottom:16px;left:18px}
+.home-model.failed{display:none}
+.home-model-caption{font-size:11px;color:var(--muted);margin:12px 2px 0;line-height:1.7}
+@media(max-width:850px){.marketplace-hero{grid-template-columns:1fr;gap:28px}}

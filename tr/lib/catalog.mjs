@@ -1,4 +1,4 @@
-import data from '../generated/catalog.mjs';
+import data from '../../generated/catalog.mjs';
 
 export const catalog = data;
 export const tools = data.tools.map(manifest => ({
@@ -8,8 +8,7 @@ export const tools = data.tools.map(manifest => ({
   moduleId: manifest.moduleId,
   entitlement: manifest.license.entitlement,
   ...manifest.locales.tr,
-  ...manifest.locales.en,
-  category: data.product.categories.find(item => item.id === manifest.category).label.en,
+  category: data.product.categories.find(item => item.id === manifest.category).label.tr,
   manifest,
   icons: manifest.icons
 }));

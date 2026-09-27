@@ -12,6 +12,12 @@ const label = document.getElementById('studio-label');
 const note = document.getElementById('studio-note');
 const HOME = { position: [14, 11, 16], target: [0, 1.0, 0], span: 10.6 };
 const ACCENT = 0xd57750;
+const LANG = document.documentElement.lang === 'tr' ? 'tr' : 'en';
+const TEXT = {
+  en: { noWebgl: 'WebGL is not available in this browser', failed: 'The model could not be loaded', inScope: n => `${n} object${n === 1 ? '' : 's'} in this tool's scope.`, noScene: 'This tool has no prepared scene in the model yet.' },
+  tr: { noWebgl: 'Bu tarayıcıda WebGL yok', failed: 'Model yüklenemedi', inScope: n => `${n} nesne bu aracın kapsamında.`, noScene: 'Bu araç için modelde hazır sahne henüz yok.' }
+}[LANG];
+const asset = name => new URL(`assets/${name}`, import.meta.url).href;
 
 let pending = null;
 let ready = false;
@@ -30,7 +36,7 @@ function surfaceColor() {
 function build() {
   let renderer;
   try { renderer = new THREE.WebGLRenderer({ antialias: true }); }
-  catch (error) { if (loading) loading.textContent = 'Bu tarayıcıda WebGL yok'; return; }
+  catch (error) { if (loading) loading.textContent = TEXT.noWebgl; return; }
   renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
   renderer.outputColorSpace = THREE.SRGBColorSpace;
   renderer.shadowMap.enabled = true;
@@ -88,13 +94,16 @@ function build() {
   // Camera flights: target and zoom ease towards a goal each frame.
   // A flight runs only after a tool selection and stops as soon as the user
   // touches the view, so wheel zoom and drags are never fought over.
-  const goal = { target: new THREE.Vector3().fromArray(HOME.target), zoom: 1, flying: false };
-  function flyTo(target, zoom) { goal.target.copy(target); goal.zoom = zoom; goal.flying = true; }
+  const goal = { target: new THREE.Vector3().fromArray(HOME.target), position: new THREE.Vector3().fromArray(HOME.position), zoom: 1, flying: false };
+  const HOME_OFFSET = new THREE.Vector3().fromArray(HOME.position).sub(new THREE.Vector3().fromArray(HOME.target));
+  // Tool scenes sit on the back of the platform, so they are seen from behind the house.
+  const SCENE_OFFSET = new THREE.Vector3(9, 11, -15);
+  function flyTo(target, zoom, offset = HOME_OFFSET) { goal.target.copy(target); goal.position.copy(target).add(offset); goal.zoom = zoom; goal.flying = true; }
   controls.addEventListener('start', () => { goal.flying = false; });
 
   Promise.all([
-    new GLTFLoader().loadAsync('assets/arqo-demo-house-01.glb'),
-    fetch('assets/showcase.json').then(response => { if (!response.ok) throw new Error(`showcase.json ${response.status}`); return response.json(); })
+    new GLTFLoader().loadAsync(asset('arqo-demo-house-01.glb')),
+    fetch(asset('showcase.json')).then(response => { if (!response.ok) throw new Error(`showcase.json ${response.status}`); return response.json(); })
   ]).then(([gltf, showcase]) => {
     data = showcase;
     const root = gltf.scene;
@@ -124,7 +133,7 @@ function build() {
         if (!child.isLine) return;
         child.material = new THREE.LineBasicMaterial({ color: '#3f4a3c', depthTest: false, transparent: true });
         child.renderOrder = 10;
-        const points = new THREE.Points(child.geometry, new THREE.PointsMaterial({ color: ACCENT, size: 0.14, depthTest: false, transparent: true }));
+        const points = new THREE.Points(child.geometry, new THREE.PointsMaterial({ color: ACCENT, size: 7, sizeAttenuation: false, depthTest: false, transparent: true }));
         points.renderOrder = 11; points.visible = false; points.raycast = () => {};
         child.add(points); markers.push({ line: child, points });
       });
@@ -136,7 +145,7 @@ function build() {
     if (pending) update(pending);
   }).catch(error => {
     console.error(error);
-    if (loading) loading.textContent = 'Model yüklenemedi';
+    if (loading) loading.textContent = TEXT.failed;
   });
 
   // Hover names the part, as ARQO names it in SketchUp's Entity Info.
@@ -187,30 +196,34 @@ function build() {
     if (showcaseGroup && showcaseGroup.name === 'Showcase_Objects') showcaseGroup.visible = Boolean(active);
     clearHighlight();
     if (active) {
-      const pivot = active.record.pivot ? new THREE.Vector3().fromArray(active.record.pivot) : new THREE.Box3().setFromObject(active.node).getCenter(new THREE.Vector3());
-      flyTo(pivot, 1.7);
+      // Frame the scene by its own extent: centre of its bounds, zoom from its size.
+      const box = new THREE.Box3().setFromObject(active.node);
+      const size = box.getSize(new THREE.Vector3());
+      const zoom = THREE.MathUtils.clamp(HOME.span / (Math.max(size.x, size.z, 0.5) * 2.6), 1.6, 4.5);
+      flyTo(box.getCenter(new THREE.Vector3()), zoom, SCENE_OFFSET);
       for (const entry of fixtures.values()) for (const m of entry.markers) { m.points.visible = highlight && entry === active; m.line.material.color.set(highlight && entry === active ? ACCENT : '#3f4a3c'); }
-      if (note) note.textContent = active.record.showcaseNote || '';
+      if (note) note.textContent = (active.record.note && active.record.note[LANG]) || '';
     } else {
       flyTo(new THREE.Vector3().fromArray(HOME.target), 1);
       const rule = data.rules?.[productId];
       if (highlight && rule) {
         const matches = Object.entries(data.objects || {}).filter(([, record]) => rule.allowedTypes.includes(record.type) && (!rule.requiredFlag || record[rule.requiredFlag])).map(([id]) => byArqoId.get(id)).filter(Boolean);
         highlightNodes(scope === 'model' ? matches : matches.slice(0, 1));
-        if (note) note.textContent = matches.length ? `${scope === 'model' ? matches.length : 1} nesne bu aracın kapsamında.` : '';
-      } else if (note) note.textContent = highlight ? 'Bu araç için modelde hazır sahne henüz yok.' : '';
+        if (note) note.textContent = matches.length ? TEXT.inScope(scope === 'model' ? matches.length : 1) : '';
+      } else if (note) note.textContent = highlight ? TEXT.noScene : '';
     }
   }
 
-  window.arqoStudio = { update, reset() { camera.position.fromArray(HOME.position); flyTo(new THREE.Vector3().fromArray(HOME.target), 1); } };
+  window.arqoStudio = { update, reset() { flyTo(new THREE.Vector3().fromArray(HOME.target), 1); } };
   if (pending) update(pending);
 
   renderer.setAnimationLoop(() => {
     if (goal.flying) {
       controls.target.lerp(goal.target, 0.08);
+      camera.position.lerp(goal.position, 0.08);
       camera.zoom += (goal.zoom - camera.zoom) * 0.08;
       camera.updateProjectionMatrix();
-      if (controls.target.distanceTo(goal.target) < 0.01 && Math.abs(goal.zoom - camera.zoom) < 0.005) goal.flying = false;
+      if (controls.target.distanceTo(goal.target) < 0.01 && camera.position.distanceTo(goal.position) < 0.01 && Math.abs(goal.zoom - camera.zoom) < 0.005) goal.flying = false;
     }
     controls.update();
     renderer.render(scene, camera);

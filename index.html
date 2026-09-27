@@ -1,122 +1,127 @@
 <!doctype html>
-<html lang="tr" data-site="public">
+<html lang="en" data-site="public">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light dark">
   <title>PluginsForAEC — ARQO for SketchUp</title>
-  <meta name="description" content="PluginsForAEC: mimarlar ve mühendisler için profesyonel eklentiler. İlk ürün ARQO for SketchUp: tek tek ya da tam paket olarak alınabilen kırk modelleme aracı.">
+  <meta name="description" content="PluginsForAEC: professional plugins for architects and engineers. First product: ARQO for SketchUp, forty modelling tools you can buy one by one or as a complete package.">
   <link rel="canonical" href="https://pluginsforaec.com/">
-  <meta property="og:title" content="PluginsForAEC — ARQO for SketchUp">
-  <meta property="og:description" content="Kullandığın yazılımda. Daha fazlasını yap. ARQO for SketchUp: kırk modelleme aracı, tek araç çubuğu, canlı demo model.">
   <meta property="og:url" content="https://pluginsforaec.com/">
+  <link rel="alternate" hreflang="en" href="https://pluginsforaec.com/">
+  <link rel="alternate" hreflang="tr" href="https://pluginsforaec.com/tr/">
+  <link rel="alternate" hreflang="x-default" href="https://pluginsforaec.com/">
+  <meta property="og:title" content="PluginsForAEC — ARQO for SketchUp">
+  <meta property="og:description" content="In the software you already use. Do more. ARQO for SketchUp: forty modelling tools, one toolbar, a live demo model.">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="generated/tokens.css">
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="icon-review.css">
   <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.180.0/examples/jsm/"}}</script>
   <script type="module" src="studio.mjs"></script>
+  <script type="module" src="hero.mjs"></script>
   <script type="module" src="app.js"></script>
 </head>
 <body>
   <header class="preview-bar">
-    <div class="preview-label"><span class="status-dot"></span> PLUGINSFORAEC <span class="draft-tag">ARQO FOR SKETCHUP · ALFA</span></div>
-    <nav class="view-switch" aria-label="Önizleme türü">
-      <button class="active" data-view="website" aria-pressed="true">Web sitesi</button>
-      <button data-view="plugin" aria-pressed="false">SketchUp eklentisi</button>
-      <button data-view="icons" aria-pressed="false">İkon sistemi</button>
+    <div class="preview-label"><span class="status-dot"></span> PLUGINSFORAEC <span class="draft-tag">ARQO FOR SKETCHUP · ALPHA</span></div>
+    <nav class="view-switch" aria-label="View">
+      <button class="active" data-view="website" aria-pressed="true">Website</button>
+      <button data-view="plugin" aria-pressed="false">SketchUp plugin</button>
+      <button data-view="icons" aria-pressed="false">Icon system</button>
     </nav>
     <div class="preview-settings">
-      <button id="theme-toggle" class="theme-toggle" aria-label="Koyu temayı aç" aria-pressed="false">◐ <span>Tema</span></button>
+      <a class="lang-switch" href="tr/" hreflang="tr" lang="tr" title="Türkçe">TR</a>
+      <button id="theme-toggle" class="theme-toggle" aria-label="Switch to dark theme" aria-pressed="false">◐ <span>Theme</span></button>
     </div>
   </header>
 
   <main id="website-view" class="view active">
-    <header class="marketplace-nav"><button class="marketplace-brand" data-site-page="home"><span class="marketplace-mark">P<span>/</span></span><span>Plugins<span>ForAEC</span><small>PLUGINSFORAEC.COM</small></span></button><nav aria-label="Marketplace menüsü"><button data-site-page="home">Ürünler</button><button data-info="docs">Dokümantasyon</button><button data-info="downloads">İndirilenler</button><button data-info="support">Destek</button></nav><button class="account-button" data-info="account">Hesap & lisanslar ↗</button></header>
+    <header class="marketplace-nav"><button class="marketplace-brand" data-site-page="home"><span class="marketplace-mark">P<span>/</span></span><span>Plugins<span>ForAEC</span><small>PLUGINSFORAEC.COM</small></span></button><nav aria-label="Marketplace menu"><button data-site-page="home">Products</button><button data-info="docs">Documentation</button><button data-info="downloads">Downloads</button><button data-info="support">Support</button></nav><button class="account-button" data-info="account">Account & licences ↗</button></header>
     <section id="marketplace-home" class="marketplace-home site-container">
-      <div class="marketplace-hero"><div class="eyebrow"><span class="short-line"></span> MİMARLIK · MÜHENDİSLİK · TASARIM</div><h1>Kullandığın yazılımda.<br><em>Daha fazlasını yap.</em></h1><p>Günlük modellemeden proje kontrolüne.<br>AEC dünyası için araçlar, tek bir ürün ailesinde.</p><button class="button primary" data-site-page="arqo">İlk ürünümüzü keşfet <span>↗</span></button><div class="roadmap-caption">Büyük roadmap / Önce ARQO. Ardından yeni platformlar.</div></div>
-      <div class="portfolio-heading"><h2>Bir ekosistem. Dört çalışma alanı.</h2><span>PLATFORMLAR / 01—04</span></div>
+      <div class="marketplace-hero"><div class="marketplace-hero-copy"><div class="eyebrow"><span class="short-line"></span> ARCHITECTURE · ENGINEERING · DESIGN</div><h1>In the software you already use.<br><em>Do more.</em></h1><p>From everyday modelling to project control.<br>Tools for the AEC world, in one product family.</p><button class="button primary" data-site-page="arqo">Explore our first product <span>↗</span></button><div class="roadmap-caption">The big roadmap / ARQO first. New platforms next.</div></div><div class="home-model-wrap"><div id="home-model" class="home-model" aria-label="ARQO Demo House, live 3D model"><span class="home-model-tag">ARQO DEMO HOUSE · 01</span><span id="home-model-label" class="studio-label" hidden></span></div><p class="home-model-caption"><b>The model that ships with the plugin.</b> Drag to turn it and hover a part to read its name. The same model opens with the tools in the plugin view.</p></div></div>
+      <div class="portfolio-heading"><h2>One ecosystem. Four workspaces.</h2><span>PLATFORMS / 01—04</span></div>
       <div class="platform-grid">
-        <button class="platform-card featured" data-site-page="arqo"><span class="platform-top"><span class="platform-index">01 / SKETCHUP</span><span class="platform-state">İLK ÜRÜN · TASARIM AŞAMASI</span></span><strong>arqo<span>.</span></strong><h3>Günlük modellemenin yeni araç seti.</h3><p>40 temel araç + ARQO geliştirmeleri.<br>Tekil araçlar ve tam paket seçenekleri.</p><span class="platform-link">Ürün sayfasını incele <b>↗</b></span><span class="platform-cube" aria-hidden="true"></span></button>
-        <button class="platform-card future" data-info="autocad"><span class="platform-top"><span class="platform-index">02 / AUTOCAD</span><span class="platform-state">YOL HARİTASINDA</span></span><strong>CADPILOT</strong><h3>Çizim zekâsı ve proje kontrolü.</h3><p>QA, standardizasyon ve teslim otomasyonu.<br>ARQO ticari doğrulamasından sonra.</p><span class="platform-link">Planlanan kapsam <b>↗</b></span></button>
-        <button class="platform-card future" data-info="rhino"><span class="platform-top"><span class="platform-index">03 / RHINO</span><span class="platform-state">YOL HARİTASINDA</span></span><strong>RHINOPILOT</strong><h3>Geometriden üretime.</h3><p>Geometry intelligence, yüzeyler ve fabrication.<br>AutoCAD ürün aşamalarının ardından.</p><span class="platform-link">Planlanan kapsam <b>↗</b></span></button>
-        <button class="platform-card future" data-info="grasshopper"><span class="platform-top"><span class="platform-index">04 / GRASSHOPPER</span><span class="platform-state">YOL HARİTASINDA</span></span><strong>GH Tools</strong><h3>Parametrik akışını görünür kıl.</h3><p>GH Doctor, Copilot ve definition araçları.<br>Rhino'dan gelişen bağımsız modüller.</p><span class="platform-link">Planlanan kapsam <b>↗</b></span></button>
+        <button class="platform-card featured" data-site-page="arqo"><span class="platform-top"><span class="platform-index">01 / SKETCHUP</span><span class="platform-state">FIRST PRODUCT · IN DEVELOPMENT</span></span><strong>arqo<span>.</span></strong><h3>A new toolset for everyday modelling.</h3><p>40 baseline tools + ARQO additions.<br>Single tools and complete package options.</p><span class="platform-link">View the product page <b>↗</b></span><span class="platform-cube" aria-hidden="true"></span></button>
+        <button class="platform-card future" data-info="autocad"><span class="platform-top"><span class="platform-index">02 / AUTOCAD</span><span class="platform-state">ON THE ROADMAP</span></span><strong>CADPILOT</strong><h3>Drawing intelligence and project control.</h3><p>QA, standardisation and delivery automation.<br>After ARQO's commercial validation.</p><span class="platform-link">Planned scope <b>↗</b></span></button>
+        <button class="platform-card future" data-info="rhino"><span class="platform-top"><span class="platform-index">03 / RHINO</span><span class="platform-state">ON THE ROADMAP</span></span><strong>RHINOPILOT</strong><h3>From geometry to fabrication.</h3><p>Geometry intelligence, surfaces and fabrication.<br>After the AutoCAD product stages.</p><span class="platform-link">Planned scope <b>↗</b></span></button>
+        <button class="platform-card future" data-info="grasshopper"><span class="platform-top"><span class="platform-index">04 / GRASSHOPPER</span><span class="platform-state">ON THE ROADMAP</span></span><strong>GH Tools</strong><h3>Make your parametric flow visible.</h3><p>GH Doctor, Copilot and definition tools.<br>Independent modules grown from Rhino.</p><span class="platform-link">Planned scope <b>↗</b></span></button>
       </div>
-      <div class="shared-services"><div><span class="eyebrow">ORTAK ALTYAPI</span><h2>Ürünler farklı.<br>Deneyim tutarlı.</h2></div><button data-info="account"><span>01</span><strong>Hesap & lisans</strong><small>Tekil araçların ve paketlerin</small></button><button data-info="downloads"><span>02</span><strong>İndirme & güncelleme</strong><small>Sürümler ve değişiklikler</small></button><button data-info="docs"><span>03</span><strong>Dokümantasyon</strong><small>Her araç için açık rehberler</small></button><button data-info="support"><span>04</span><strong>Destek</strong><small>Yardım ve bilinen sorunlar</small></button></div>
-      <footer class="site-footer"><strong>PluginsForAEC</strong><span>AEC araçları için ortak ürün platformu.</span><span>Geliştirme aşamasında · Henüz satışta değil · Erken erişim: <a href="mailto:info@pluginsforaec.com?subject=ARQO%20erken%20eri%C5%9Fim">info@pluginsforaec.com</a></span></footer>
+      <div class="shared-services"><div><span class="eyebrow">SHARED FOUNDATION</span><h2>Different products.<br>One consistent experience.</h2></div><button data-info="account"><span>01</span><strong>Account & licences</strong><small>Your single tools and packages</small></button><button data-info="downloads"><span>02</span><strong>Download & update</strong><small>Versions and changes</small></button><button data-info="docs"><span>03</span><strong>Documentation</strong><small>Clear guides for every tool</small></button><button data-info="support"><span>04</span><strong>Support</strong><small>Help and known issues</small></button></div>
+      <footer class="site-footer"><strong>PluginsForAEC</strong><span>One product platform for AEC tools.</span><span>In development · Not on sale yet · Early access: <a href="mailto:info@pluginsforaec.com?subject=ARQO%20early%20access">info@pluginsforaec.com</a></span></footer>
     </section>
     <div class="site-container" id="arqo-product" hidden>
       <div class="breadcrumbs"><button data-site-page="home">PluginsForAEC</button><span>/</span><span>SketchUp</span><span>/</span><strong>ARQO for SketchUp</strong></div>
       <header class="site-nav">
-        <a class="brand" href="#" aria-label="ARQO ana sayfa"><span class="brand-mark" aria-hidden="true"></span><span>arqo<span class="brand-dot">.</span></span></a>
-        <nav aria-label="Site menüsü"><a href="#tools">Araçlar</a><a href="#packages">Paketler</a><button data-view="plugin">Eklentiyi keşfet <span>↗</span></button></nav>
-        <button class="collection-button" id="collection-open">Seçtiğim araçlar <span id="collection-count">0</span></button>
+        <a class="brand" href="#" aria-label="ARQO home"><span class="brand-mark" aria-hidden="true"></span><span>arqo<span class="brand-dot">.</span></span></a>
+        <nav aria-label="Site menu"><a href="#tools">Tools</a><a href="#packages">Packages</a><button data-view="plugin">Explore the plugin <span>↗</span></button></nav>
+        <button class="collection-button" id="collection-open">My tools <span id="collection-count">0</span></button>
       </header>
 
       <section class="hero">
         <div class="hero-copy">
           <div class="eyebrow"><span class="short-line"></span> ARQO FOR SKETCHUP</div>
-          <h1>Daha az adım.<br>Daha çok <em>tasarım.</em></h1>
-          <p>Çizgiden yapıya, ilk eskizden son detaya.<br>Modelleme araçların aynı atölyede.</p>
-          <div class="hero-actions"><a class="button primary" href="#tools">Araçları keşfet <span>↗</span></a><a class="text-link" href="#packages">Tam paketi incele <span>→</span></a></div>
-          <div class="hero-meta"><span><strong>40</strong> temel araç</span><span><strong>1</strong> ortak çalışma alanı</span><span>İster tek tek.<br><strong>İster hepsi birlikte.</strong></span></div>
+          <h1>Fewer steps.<br>More <em>design.</em></h1>
+          <p>From line to structure, from first sketch to final detail.<br>Your modelling tools in one workshop.</p>
+          <div class="hero-actions"><a class="button primary" href="#tools">Explore the tools <span>↗</span></a><a class="text-link" href="#packages">See the complete package <span>→</span></a></div>
+          <div class="hero-meta"><span><strong>40</strong> baseline tools</span><span><strong>1</strong> shared workspace</span><span>One by one.<br><strong>Or all of them together.</strong></span></div>
         </div>
         <div class="hero-art">
           <div class="art-topline"><span>FORM STUDY — 001</span><span>AXONOMETRIC / ARQO</span></div>
           <div id="hero-scene" class="architectural-scene"></div>
-          <div class="floating-tool"><span class="floating-icon" id="hero-icon"></span><div><strong>Make Face+</strong><small>Çizgilere bir yüzey kazandır.</small></div><span class="floating-check">↗</span></div>
-          <div class="art-bottomline"><span><i></i> FİKİRDEN GEOMETRİYE</span><span>01 — 40</span></div>
+          <div class="floating-tool"><span class="floating-icon" id="hero-icon"></span><div><strong>Make Face+</strong><small>Give your lines a face.</small></div><span class="floating-check">↗</span></div>
+          <div class="art-bottomline"><span><i></i> FROM IDEA TO GEOMETRY</span><span>01 — 40</span></div>
         </div>
       </section>
 
-      <div class="capability-strip"><span>GEOMETRİ</span><span>ONARIM</span><span>DÖNÜŞÜM</span><span>BİLEŞENLER</span><span>MİMARİ</span><span>SUNUM</span></div>
+      <div class="capability-strip"><span>GEOMETRY</span><span>REPAIR</span><span>TRANSFORM</span><span>COMPONENTS</span><span>ARCHITECTURE</span><span>PRESENTATION</span></div>
 
       <section id="tools" class="tools-section">
-        <div class="section-heading"><div><div class="eyebrow">SENİN AKIŞIN, SENİN ARAÇLARIN</div><h2>Doğru araç. Tam yerinde.</h2><p>Her araç ayrı alınabilir. İhtiyacın büyüdükçe koleksiyonun da büyür.</p></div><span class="section-number">01 / ARAÇLAR</span></div>
-        <div class="catalog-controls"><div id="category-filters" class="filters" aria-label="Araç kategorileri"></div><label class="search-box"><span aria-hidden="true">⌕</span><input id="tool-search" type="search" placeholder="Araç ara…" aria-label="Araç adı veya işlevi ara"><kbd>/</kbd></label></div>
-        <div class="results-line"><span id="result-count">40 araç</span><span>Her biri aynı ARQO ailesinin parçası.</span></div>
+        <div class="section-heading"><div><div class="eyebrow">YOUR FLOW, YOUR TOOLS</div><h2>The right tool. Right where you need it.</h2><p>Every tool can be bought on its own. Your collection grows with your needs.</p></div><span class="section-number">01 / TOOLS</span></div>
+        <div class="catalog-controls"><div id="category-filters" class="filters" aria-label="Tool categories"></div><label class="search-box"><span aria-hidden="true">⌕</span><input id="tool-search" type="search" placeholder="Search tools…" aria-label="Search by tool name or function"><kbd>/</kbd></label></div>
+        <div class="results-line"><span id="result-count">40 tools</span><span>Each one part of the same ARQO family.</span></div>
         <div id="tool-grid" class="tool-grid"></div>
-        <div id="empty-state" class="empty-state" hidden><h3>Bu aramada araç bulunamadı.</h3><p>Başka bir kelime veya kategori deneyebilirsin.</p><button id="clear-filters" class="button secondary">Filtreleri temizle</button></div>
+        <div id="empty-state" class="empty-state" hidden><h3>No tool matches this search.</h3><p>Try another word or category.</p><button id="clear-filters" class="button secondary">Clear filters</button></div>
       </section>
 
       <section id="packages" class="packages-section">
-        <div class="section-heading"><div><div class="eyebrow">BİRLİKTE DAHA FAZLASI</div><h2>Bir araçtan bütün atölyeye.</h2></div><span class="section-number">02 / PAKETLER</span></div>
+        <div class="section-heading"><div><div class="eyebrow">MORE, TOGETHER</div><h2>From one tool to the whole workshop.</h2></div><span class="section-number">02 / PACKAGES</span></div>
         <div class="package-grid">
-          <article class="single-package"><span class="package-kicker">TEKİL ARAÇLAR</span><div id="single-package-icon" class="large-tool-icon"></div><h3>Yalnızca ihtiyacın olan.</h3><p>40 aracın her biri ayrı bir ürün. Seçtiğin aracı bütün temel işlevleriyle kullan.</p><ul><li>Araca özel kullanım ve yardım ekranı</li><li>Ortak ARQO kurulumu ve güncellemeleri</li><li>Sonradan yeni araç ekleme</li></ul><a href="#tools" class="button secondary">Kendi setini oluştur <span>↗</span></a><small>Fiyatlandırma henüz belirlenmedi.</small></article>
-          <article class="complete-package"><div class="complete-copy"><span class="package-kicker">ARQO / TAM PAKET</span><h3>Bütün araçların.<br>Tek bir yerde.</h3><p>40 temel aracın tamamı. Paket sürümüne dahil ARQO geliştirmeleri. Kesintisiz bir modelleme akışı.</p><div class="complete-metrics"><strong>40<span>temel araç</span></strong><span class="metric-plus">+</span><strong>ARQO<span>ek geliştirmeleri</span></strong></div><button id="bundle-preview" class="button accent-button">Paket içeriğini gör <span>↗</span></button><small>Bu ekranda satın alma yapılmaz.</small></div><div class="package-art" aria-hidden="true"><div class="software-box"><span class="box-label">FOR SKETCHUP</span><strong>arqo.</strong><div class="box-lines"></div><span class="box-bottom">THE COMPLETE TOOLSET<br><b>40 / TOOLS & MORE</b></span></div><span class="package-art-note">COMPLETE COLLECTION — 01</span></div></article>
+          <article class="single-package"><span class="package-kicker">SINGLE TOOLS</span><div id="single-package-icon" class="large-tool-icon"></div><h3>Only what you need.</h3><p>Each of the 40 tools is a product of its own. Use the one you pick with all its core functions.</p><ul><li>Its own usage and help screen</li><li>One shared ARQO installation and updates</li><li>Add more tools later</li></ul><a href="#tools" class="button secondary">Build your own set <span>↗</span></a><small>Pricing is not set yet.</small></article>
+          <article class="complete-package"><div class="complete-copy"><span class="package-kicker">ARQO / COMPLETE PACKAGE</span><h3>All your tools.<br>In one place.</h3><p>All 40 baseline tools. The ARQO additions included in the package. One uninterrupted modelling flow.</p><div class="complete-metrics"><strong>40<span>baseline tools</span></strong><span class="metric-plus">+</span><strong>ARQO<span>additions</span></strong></div><button id="bundle-preview" class="button accent-button">See what's inside <span>↗</span></button><small>Nothing is sold on this page yet.</small></div><div class="package-art" aria-hidden="true"><div class="software-box"><span class="box-label">FOR SKETCHUP</span><strong>arqo.</strong><div class="box-lines"></div><span class="box-bottom">THE COMPLETE TOOLSET<br><b>40 / TOOLS & MORE</b></span></div><span class="package-art-note">COMPLETE COLLECTION — 01</span></div></article>
         </div>
       </section>
-      <footer class="site-footer"><span class="brand footer-brand">arqo.</span><span>Çizgilerin ötesinde.</span><span>© 2026 PluginsForAEC · <a href="mailto:info@pluginsforaec.com">info@pluginsforaec.com</a></span></footer>
+      <footer class="site-footer"><span class="brand footer-brand">arqo.</span><span>Beyond the lines.</span><span>© 2026 PluginsForAEC · <a href="mailto:info@pluginsforaec.com">info@pluginsforaec.com</a></span></footer>
     </div>
   </main>
 
   <main id="plugin-view" class="view" hidden>
     <section class="studio-container">
-      <div class="section-heading studio-heading"><div><div class="eyebrow">SKETCHUP İÇİN TASARLANDI</div><h2>Modelin merkezde kalsın.</h2><p>Araç seç, modelde hazırlanmış sahnesine git ve işlem vurgusunu aç. Model döndürülebilir: sürükle, tekerlekle yaklaş.</p></div><span class="draft-badge">Canlı model · Araç seç, sahnesi modelde açılır</span></div>
+      <div class="section-heading studio-heading"><div><div class="eyebrow">DESIGNED FOR SKETCHUP</div><h2>Keep your model at the centre.</h2><p>Pick a tool, jump to its prepared scene in the model and turn on the operation highlight. Drag to rotate, scroll to zoom.</p></div><span class="draft-badge">Live model · Pick a tool to open its scene</span></div>
       <div class="workspace-shell">
-        <div class="workspace-title"><div class="window-dots"><i></i><i></i><i></i></div><span>ARQO — Demo House 01.skp</span><span class="workspace-title-right">Eklentiyle gelen demo model</span></div>
-        <div class="workspace-toolbar"><strong class="small-brand">arqo.</strong><div id="quick-tools" class="quick-tools" aria-label="Örnek araç çubuğu"></div><button id="all-tools-open" class="toolbar-library" title="Tüm araçları incele">Araç kitaplığı ↗</button></div>
+        <div class="workspace-title"><div class="window-dots"><i></i><i></i><i></i></div><span>ARQO — Demo House 01.skp</span><span class="workspace-title-right">The demo model that ships with the plugin</span></div>
+        <div class="workspace-toolbar"><strong class="small-brand">arqo.</strong><div id="quick-tools" class="quick-tools" aria-label="Sample toolbar"></div><button id="all-tools-open" class="toolbar-library" title="Browse all tools">Tool library ↗</button></div>
         <div class="workspace-body">
-          <aside class="tool-sidebar"><div class="sidebar-heading">ARAÇLAR <span>40</span></div><label class="sidebar-search"><input id="plugin-search" type="search" placeholder="Araç bul…" aria-label="Eklenti araçlarında ara"></label><div id="plugin-tool-list" class="plugin-tool-list"></div></aside>
-          <div class="model-viewport"><div class="viewport-top"><span>AXONOMETRIC</span><div class="viewport-mode"><span class="active">Model</span><span>01</span></div></div><div id="plugin-scene" class="architectural-scene live-model"><p id="studio-loading" class="studio-loading">Model yükleniyor…</p><span id="studio-label" class="studio-label" hidden></span></div><div class="viewport-tool-label"><span id="viewport-active-icon"></span><span id="viewport-active-label">Make Face+</span><span class="live-dot"></span></div><div class="viewport-bottom"><span class="axis-marker">Y <b>↗</b><em>→ X</em></span><span id="studio-note" class="studio-note"></span><span>Demo House 01 · metre</span></div></div>
-          <aside class="properties-panel"><div class="panel-top"><span>ARAÇ AYARLARI</span><span>↗</span></div><div id="property-icon" class="property-icon"></div><span id="property-category" class="eyebrow"></span><h3 id="property-title"></h3><p id="property-description"></p><div class="property-divider"></div><div class="property-label">İŞLEM KAPSAMI</div><div class="segmented-control"><button class="active" data-scope="selection" aria-pressed="true">Seçim</button><button data-scope="model" aria-pressed="false">Model</button></div><label class="parameter-label">Örnek tolerans <span>mm</span><input id="demo-tolerance" type="number" value="1" min="0.01" max="100" step="0.01"></label><label class="checkbox-row"><input id="show-guides" type="checkbox" checked> Referans çizgilerini göster</label><button id="toggle-highlight" class="button primary">İşlem vurgusunu göster</button><button id="plugin-details" class="panel-detail-button">Araç detaylarını incele ↗</button><p class="panel-footnote">Araç algoritmaları SketchUp içinde çalışır; bu ekran sahneyi ve ayarları gösterir.</p></aside>
+          <aside class="tool-sidebar"><div class="sidebar-heading">TOOLS <span>40</span></div><label class="sidebar-search"><input id="plugin-search" type="search" placeholder="Find a tool…" aria-label="Search plugin tools"></label><div id="plugin-tool-list" class="plugin-tool-list"></div></aside>
+          <div class="model-viewport"><div class="viewport-top"><span>AXONOMETRIC</span><div class="viewport-mode"><span class="active">Model</span><span>01</span></div></div><div id="plugin-scene" class="architectural-scene live-model"><p id="studio-loading" class="studio-loading">Loading the model…</p><span id="studio-label" class="studio-label" hidden></span></div><div class="viewport-tool-label"><span id="viewport-active-icon"></span><span id="viewport-active-label">Make Face+</span><span class="live-dot"></span></div><div class="viewport-bottom"><span class="axis-marker">Y <b>↗</b><em>→ X</em></span><span id="studio-note" class="studio-note"></span><span>Demo House 01 · metres</span></div></div>
+          <aside class="properties-panel"><div class="panel-top"><span>TOOL SETTINGS</span><span>↗</span></div><div id="property-icon" class="property-icon"></div><span id="property-category" class="eyebrow"></span><h3 id="property-title"></h3><p id="property-description"></p><div class="property-divider"></div><div class="property-label">OPERATION SCOPE</div><div class="segmented-control"><button class="active" data-scope="selection" aria-pressed="true">Selection</button><button data-scope="model" aria-pressed="false">Model</button></div><label class="parameter-label">Sample tolerance <span>mm</span><input id="demo-tolerance" type="number" value="1" min="0.01" max="100" step="0.01"></label><label class="checkbox-row"><input id="show-guides" type="checkbox" checked> Show reference lines</label><button id="toggle-highlight" class="button primary">Show operation highlight</button><button id="plugin-details" class="panel-detail-button">View tool details ↗</button><p class="panel-footnote">Tool algorithms run inside SketchUp; this screen shows the scene and the settings.</p></aside>
         </div>
-        <div class="workspace-status"><span><i class="status-dot"></i> <span id="studio-status" role="status">Make Face+ seçili · Arayüz önizlemesi</span></span><span id="demo-measurement">Tolerans: 1 mm</span></div>
+        <div class="workspace-status"><span><i class="status-dot"></i> <span id="studio-status" role="status">Make Face+ selected · Live model</span></span><span id="demo-measurement">Tolerance: 1 mm</span></div>
       </div>
-      <div class="studio-notes"><div><span>01</span><strong>Ortak görsel dil</strong><p>Sitede gördüğün ikon, eklentide kullandığın araç.</p></div><div><span>02</span><strong>Sana ait araçlar</strong><p>Tekil araçlar ve tam paket aynı çalışma alanında.</p></div><div><span>03</span><strong>Modeline alan aç</strong><p>Kategorilere ayrılmış araçlar, sade ve tutarlı ayarlar.</p></div></div>
+      <div class="studio-notes"><div><span>01</span><strong>One visual language</strong><p>The icon you see on the site is the tool you use in the plugin.</p></div><div><span>02</span><strong>Tools that are yours</strong><p>Single tools and the complete package in the same workspace.</p></div><div><span>03</span><strong>Make room for your model</strong><p>Tools sorted into categories, with simple and consistent settings.</p></div></div>
     </section>
   </main>
 
   <main id="icons-view" class="view" hidden>
-    <section class="icon-container"><div class="section-heading"><div><div class="eyebrow">ARQO / GÖRSEL SİSTEM</div><h2>40 araç. Ortak bir dil.</h2><p>Mimari çizgiler, sade geometriler ve tek bir vurgu rengi.</p></div><span class="draft-badge">Özgün vektör ikon taslakları</span></div>
-      <section class="icon-review-section" aria-label="Altı ikon için revizyon karşılaştırması"><div class="review-heading"><div><div class="eyebrow">REVİZYON 02 / İLK 6 ARAÇ</div><h3>Küçük boyutta daha açık.</h3><p>İlk taslak ve revize ikonlar, gerçek piksel boyutlarında yan yana.</p></div><span class="review-status">DEĞERLENDİRME TASLAĞI</span></div><div id="icon-comparisons" class="icon-comparisons"></div><div class="toolbar-review"><div class="toolbar-review-copy"><h3>Bir de araç çubuğunda bak.</h3><p>Boyutları büyütmeden karşılaştır. Tek renk görünümü, ayrımın yalnızca renge bağlı olup olmadığını gösterir.</p><label class="mono-toggle"><input id="icon-monochrome" type="checkbox"> Tek renk karşılaştır</label><div class="icon-version-controls"><button data-icon-version="current" class="active" aria-pressed="true">Revize set</button><button data-icon-version="legacy" aria-pressed="false">İlk taslak</button></div></div><div id="toolbar-size-review"></div></div></section>
-      <div class="icon-library-heading"><div><h3>40 aracın ikon kitaplığı</h3><p>6 ikon revize edildi. Diğer 34 ikon ilk taslak olarak korunuyor.</p></div><span class="draft-badge">Site ve eklenti aynı ikon kaynağını kullanır</span></div>
-      <div class="design-tokens"><div><span class="token-sample graphite"></span><span>Grafit<small>Ana karakter</small></span></div><div><span class="token-sample chalk"></span><span>Kırık beyaz<small>Çalışma yüzeyi</small></span></div><div><span class="token-sample accent-sample"></span><span>Vurgu rengi<small>İşlem ve odak</small></span></div><div class="type-token"><strong>Aa</strong><span>Sade tipografi<small>Okunur ve sakin</small></span></div><div class="icon-size-controls" aria-label="İkon boyutu"><button data-size="16" aria-pressed="false">16 px</button><button data-size="24" aria-pressed="false">24 px</button><button data-size="32" class="active" aria-pressed="true">32 px</button><button data-size="48" aria-pressed="false">48 px</button></div></div>
-      <div id="icon-grid" class="icon-grid"></div><p class="icon-bottom-note">Bir ikona tıklayarak aracı ve farklı boyutlardaki görünümünü inceleyebilirsin. İsimler ve görseller henüz kesinleşmedi.</p>
+    <section class="icon-container"><div class="section-heading"><div><div class="eyebrow">ARQO / VISUAL SYSTEM</div><h2>40 tools. One shared language.</h2><p>Architectural lines, simple geometry and a single accent colour.</p></div><span class="draft-badge">Original vector icon drafts</span></div>
+      <section class="icon-review-section" aria-label="Revision comparison for six icons"><div class="review-heading"><div><div class="eyebrow">REVISION 02 / FIRST 6 TOOLS</div><h3>Clearer at small sizes.</h3><p>First drafts and revised icons side by side at real pixel sizes.</p></div><span class="review-status">REVIEW DRAFT</span></div><div id="icon-comparisons" class="icon-comparisons"></div><div class="toolbar-review"><div class="toolbar-review-copy"><h3>Now look at them in a toolbar.</h3><p>Compare them without enlarging. The monochrome view shows whether they differ only by colour.</p><label class="mono-toggle"><input id="icon-monochrome" type="checkbox"> Compare in monochrome</label><div class="icon-version-controls"><button data-icon-version="current" class="active" aria-pressed="true">Revised set</button><button data-icon-version="legacy" aria-pressed="false">First draft</button></div></div><div id="toolbar-size-review"></div></div></section>
+      <div class="icon-library-heading"><div><h3>Icon library for 40 tools</h3><p>6 icons revised. The other 34 are kept as first drafts.</p></div><span class="draft-badge">The site and the plugin share one icon source</span></div>
+      <div class="design-tokens"><div><span class="token-sample graphite"></span><span>Graphite<small>Main character</small></span></div><div><span class="token-sample chalk"></span><span>Off-white<small>Working surface</small></span></div><div><span class="token-sample accent-sample"></span><span>Accent colour<small>Action and focus</small></span></div><div class="type-token"><strong>Aa</strong><span>Simple typography<small>Readable and calm</small></span></div><div class="icon-size-controls" aria-label="Icon size"><button data-size="16" aria-pressed="false">16 px</button><button data-size="24" aria-pressed="false">24 px</button><button data-size="32" class="active" aria-pressed="true">32 px</button><button data-size="48" aria-pressed="false">48 px</button></div></div>
+      <div id="icon-grid" class="icon-grid"></div><p class="icon-bottom-note">Click an icon to see the tool and how it looks at each size. Names and artwork are not final yet.</p>
     </section>
   </main>
 
-  <dialog id="tool-dialog" class="tool-dialog" aria-labelledby="dialog-title"><button class="dialog-close" aria-label="Kapat">×</button><div id="dialog-content"></div></dialog>
+  <dialog id="tool-dialog" class="tool-dialog" aria-labelledby="dialog-title"><button class="dialog-close" aria-label="Close">×</button><div id="dialog-content"></div></dialog>
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
 </body>
 </html>
