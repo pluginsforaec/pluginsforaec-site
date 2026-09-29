@@ -14,9 +14,13 @@
   <meta property="og:title" content="PluginsForAEC — ARQO for SketchUp">
   <meta property="og:description" content="Kullandığın yazılımda. Daha fazlasını yap. ARQO for SketchUp: kırk modelleme aracı, tek araç çubuğu, canlı demo model.">
   <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="../assets/icon-180.png">
+  <meta property="og:image" content="https://pluginsforaec.com/assets/og.png">
+  <meta name="twitter:card" content="summary_large_image">
   <link rel="stylesheet" href="../generated/tokens.css">
   <link rel="stylesheet" href="../styles.css">
   <link rel="stylesheet" href="../icon-review.css">
+  <link rel="stylesheet" href="../su.css">
   <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.180.0/examples/jsm/"}}</script>
   <script type="module" src="../studio.mjs"></script>
   <script type="module" src="../hero.mjs"></script>
@@ -37,7 +41,7 @@
   </header>
 
   <main id="website-view" class="view active">
-    <header class="marketplace-nav"><button class="marketplace-brand" data-site-page="home"><span class="marketplace-mark">P<span>/</span></span><span>Plugins<span>ForAEC</span><small>PLUGINSFORAEC.COM</small></span></button><nav aria-label="Marketplace menüsü"><button data-site-page="home">Ürünler</button><button data-info="docs">Dokümantasyon</button><button data-info="downloads">İndirilenler</button><button data-info="support">Destek</button></nav><button class="account-button" data-info="account">Hesap & lisanslar ↗</button></header>
+    <header class="marketplace-nav"><button class="marketplace-brand" data-site-page="home"><span class="marketplace-mark"><svg viewBox="120 80 274 372" aria-hidden="true"><path d="M178,296 H382 A204,204 0 0 0 178,92 Z" fill="var(--accent)"/><rect x="132" y="92" width="46" height="348" fill="currentColor"/><rect x="178" y="282" width="204" height="28" fill="currentColor"/></svg></span><span>Plugins<span>ForAEC</span><small>PLUGINSFORAEC.COM</small></span></button><nav aria-label="Marketplace menüsü"><button data-site-page="home">Ürünler</button><button data-info="docs">Dokümantasyon</button><button data-info="downloads">İndirilenler</button><button data-info="support">Destek</button></nav><button class="account-button" data-info="account">Hesap & lisanslar ↗</button></header>
     <section id="marketplace-home" class="marketplace-home site-container">
       <div class="marketplace-hero"><div class="marketplace-hero-copy"><div class="eyebrow"><span class="short-line"></span> MİMARLIK · MÜHENDİSLİK · TASARIM</div><h1>Kullandığın yazılımda.<br><em>Daha fazlasını yap.</em></h1><p>Günlük modellemeden proje kontrolüne.<br>AEC dünyası için araçlar, tek bir ürün ailesinde.</p><button class="button primary" data-site-page="arqo">İlk ürünümüzü keşfet <span>↗</span></button><div class="roadmap-caption">Büyük roadmap / Önce ARQO. Ardından yeni platformlar.</div></div><div class="home-model-wrap"><div id="home-model" class="home-model" aria-label="ARQO Demo House, canlı 3B model"><span class="home-model-tag">ARQO DEMO HOUSE · 01</span><span id="home-model-label" class="studio-label" hidden></span></div><p class="home-model-caption"><b>Eklentiyle gelen model.</b> Sürükle, döndür; parçanın üstüne gel, adını gör. Aynı model eklenti ekranında araçlarla birlikte açılır.</p></div></div>
       <div class="portfolio-heading"><h2>Bir ekosistem. Dört çalışma alanı.</h2><span>PLATFORMLAR / 01—04</span></div>
@@ -97,17 +101,44 @@
 
   <main id="plugin-view" class="view" hidden>
     <section class="studio-container">
-      <div class="section-heading studio-heading"><div><div class="eyebrow">SKETCHUP İÇİN TASARLANDI</div><h2>Modelin merkezde kalsın.</h2><p>Araç seç, modelde hazırlanmış sahnesine git ve işlem vurgusunu aç. Model döndürülebilir: sürükle, tekerlekle yaklaş.</p></div><span class="draft-badge">Canlı model · Araç seç, sahnesi modelde açılır</span></div>
-      <div class="workspace-shell">
-        <div class="workspace-title"><div class="window-dots"><i></i><i></i><i></i></div><span>ARQO — Demo House 01.skp</span><span class="workspace-title-right">Eklentiyle gelen demo model</span></div>
-        <div class="workspace-toolbar"><strong class="small-brand">arqo.</strong><div id="quick-tools" class="quick-tools" aria-label="Örnek araç çubuğu"></div><button id="all-tools-open" class="toolbar-library" title="Tüm araçları incele">Araç kitaplığı ↗</button></div>
-        <div class="workspace-body">
-          <aside class="tool-sidebar"><div class="sidebar-heading">ARAÇLAR <span>40</span></div><label class="sidebar-search"><input id="plugin-search" type="search" placeholder="Araç bul…" aria-label="Eklenti araçlarında ara"></label><div id="plugin-tool-list" class="plugin-tool-list"></div></aside>
-          <div class="model-viewport"><div class="viewport-top"><span>AXONOMETRIC</span><div class="viewport-mode"><span class="active">Model</span><span>01</span></div></div><div id="plugin-scene" class="architectural-scene live-model"><p id="studio-loading" class="studio-loading">Model yükleniyor…</p><span id="studio-label" class="studio-label" hidden></span></div><div class="viewport-tool-label"><span id="viewport-active-icon"></span><span id="viewport-active-label">Make Face+</span><span class="live-dot"></span></div><div class="viewport-bottom"><span class="axis-marker">Y <b>↗</b><em>→ X</em></span><span id="studio-note" class="studio-note"></span><span>Demo House 01 · metre</span></div></div>
-          <aside class="properties-panel"><div class="panel-top"><span>ARAÇ AYARLARI</span><span>↗</span></div><div id="property-icon" class="property-icon"></div><span id="property-category" class="eyebrow"></span><h3 id="property-title"></h3><p id="property-description"></p><div class="property-divider"></div><div class="property-label">İŞLEM KAPSAMI</div><div class="segmented-control"><button class="active" data-scope="selection" aria-pressed="true">Seçim</button><button data-scope="model" aria-pressed="false">Model</button></div><label class="parameter-label">Örnek tolerans <span>mm</span><input id="demo-tolerance" type="number" value="1" min="0.01" max="100" step="0.01"></label><label class="checkbox-row"><input id="show-guides" type="checkbox" checked> Referans çizgilerini göster</label><button id="toggle-highlight" class="button primary">İşlem vurgusunu göster</button><button id="plugin-details" class="panel-detail-button">Araç detaylarını incele ↗</button><p class="panel-footnote">Araç algoritmaları SketchUp içinde çalışır; bu ekran sahneyi ve ayarları gösterir.</p></aside>
+      <div class="section-heading studio-heading"><div><div class="eyebrow">SKETCHUP İÇİN TASARLANDI</div><h2>Modelin merkezde kalsın.</h2><p>ARQO araç çubuğundan bir araç seç: kamera aracın sahnesine gider, Uygula ile sonucu gör, Ctrl+Z ile geri al. Orta tuş döndürür, Shift + orta tuş kaydırır, tekerlek yakınlaştırır.</p></div><span class="draft-badge">Web önizleme · Eklentinin kendisi SketchUp içinde çalışır</span></div>
+      <div class="su-window" id="su-window">
+        <div class="su-titlebar"><span class="su-app-icon" aria-hidden="true"></span><span class="su-title">arqo_demo_house_01.skp — ARQO web önizleme (SketchUp düzeni)</span><span class="su-winbtns" aria-hidden="true"><span>—</span><span>▢</span><span>✕</span></span></div>
+        <nav class="su-menubar" id="su-menubar" aria-label="Menü"><button type="button" data-su-menu="File">File</button><button type="button" data-su-menu="Edit">Edit</button><button type="button" data-su-menu="View">View</button><button type="button" data-su-menu="Camera">Camera</button><button type="button" data-su-menu="Draw">Draw</button><button type="button" data-su-menu="Tools">Tools</button><button type="button" data-su-menu="Window">Window</button><button type="button" data-su-menu="Extensions">Extensions</button><button type="button" data-su-menu="Help">Help</button></nav>
+        <div class="su-toolbars">
+          <div class="su-toolbar" id="su-native" aria-label="SketchUp araçları"></div>
+          <div class="su-toolbar su-arqo"><span class="su-grip" title="ARQO for SketchUp"></span><div id="quick-tools" class="quick-tools" aria-label="ARQO araç çubuğu"></div><button id="all-tools-open" class="toolbar-library" title="Tüm araçları incele">Araç kitaplığı ↗</button></div>
         </div>
-        <div class="workspace-status"><span><i class="status-dot"></i> <span id="studio-status" role="status">Make Face+ seçili · Canlı model</span></span><span id="demo-measurement">Tolerans: 1 mm</span></div>
+        <div class="su-body">
+          <div class="model-viewport su-viewport">
+            <div id="plugin-scene" class="architectural-scene live-model"><p id="studio-loading" class="studio-loading">Model yükleniyor…</p><span id="studio-label" class="studio-label" hidden></span></div>
+            <div id="su-toast" class="su-toast" role="status" hidden></div>
+          </div>
+          <aside class="su-tray" aria-label="Default Tray">
+            <div class="su-tray-head">Default Tray</div>
+            <details class="su-panel" open><summary>Entity Info</summary><div class="su-panel-body su-entity" id="su-entity"></div></details>
+            <details class="su-panel su-arqo-panel" open><summary>ARQO</summary><div class="su-panel-body">
+              <div id="property-icon" class="property-icon"></div><span id="property-category" class="eyebrow"></span><h3 id="property-title"></h3><p id="property-description"></p>
+              <div class="property-label">İŞLEM KAPSAMI</div><div class="segmented-control"><button class="active" data-scope="selection" aria-pressed="true">Seçim</button><button data-scope="model" aria-pressed="false">Model</button></div>
+              <div class="su-settings" id="su-settings"></div>
+              <label class="checkbox-row"><input id="show-guides" type="checkbox" checked> Eksenleri göster</label>
+              <button id="toggle-highlight" type="button">Uygula</button>
+              <button id="plugin-details" class="panel-detail-button" type="button">Araç detaylarını incele ↗</button>
+              <p class="panel-footnote">Web önizleme: hazır sahnesi olan araçlar burada çalışır. Eklentinin kendisi SketchUp içinde çalışır.</p>
+            </div></details>
+            <details class="su-panel su-tools-panel"><summary>ARQO Araçları</summary><div class="su-panel-body"><div class="sidebar-heading">ARAÇLAR <span>40</span></div><label class="sidebar-search"><input id="plugin-search" type="search" placeholder="Araç bul…" aria-label="Eklenti araçlarında ara"></label><div id="plugin-tool-list" class="plugin-tool-list"></div></div></details>
+            <details class="su-panel"><summary>Materials</summary><div class="su-panel-body"><p class="su-muted">SketchUp'ta açılır.</p></div></details>
+            <details class="su-panel"><summary>Components</summary><div class="su-panel-body"><p class="su-muted">SketchUp'ta açılır.</p></div></details>
+            <details class="su-panel"><summary>Styles</summary><div class="su-panel-body"><p class="su-muted">SketchUp'ta açılır.</p></div></details>
+            <details class="su-panel"><summary>Tags</summary><div class="su-panel-body"><p class="su-muted">SketchUp'ta açılır.</p></div></details>
+            <details class="su-panel"><summary>Scenes</summary><div class="su-panel-body"><p class="su-muted">SketchUp'ta açılır.</p></div></details>
+            <details class="su-panel"><summary>Shadows</summary><div class="su-panel-body"><p class="su-muted">SketchUp'ta açılır.</p></div></details>
+          </aside>
+        </div>
+        <div class="su-status"><span class="su-status-tool"><span id="viewport-active-icon"></span><span id="viewport-active-label"></span></span><span id="studio-status" role="status">Hazır</span><label class="su-vcb"><span id="su-vcb-label">Measurements</span><input id="su-vcb" autocomplete="off" spellcheck="false" aria-label="Measurements"></label></div>
       </div>
+      <p class="su-disclaimer">SketchUp, Trimble Inc.'in ticari markasıdır. Bu ekran ARQO eklentisinin tarayıcıda çalışan bir önizlemesidir; SketchUp'ın kendisi değildir.</p>
+      
       <div class="studio-notes"><div><span>01</span><strong>Ortak görsel dil</strong><p>Sitede gördüğün ikon, eklentide kullandığın araç.</p></div><div><span>02</span><strong>Sana ait araçlar</strong><p>Tekil araçlar ve tam paket aynı çalışma alanında.</p></div><div><span>03</span><strong>Modeline alan aç</strong><p>Kategorilere ayrılmış araçlar, sade ve tutarlı ayarlar.</p></div></div>
     </section>
   </main>

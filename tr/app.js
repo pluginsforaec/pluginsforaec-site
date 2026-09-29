@@ -40,11 +40,7 @@ function selectTool(id){
   $$('.quick-tool').forEach(b=>{b.classList.toggle('active',b.dataset.pluginTool===id);b.setAttribute('aria-pressed',String(b.dataset.pluginTool===id))});
   renderPluginList();updateStudio();
 }
-function updateStudio(){
-  const t=toolById(state.tool);window.arqoStudio?.update({tool:t,highlight:state.highlight,guides:$('#show-guides').checked,scope:state.scope});
-  $('#toggle-highlight').textContent=state.highlight?'İşlem vurgusunu gizle':'İşlem vurgusunu göster';$('#toggle-highlight').setAttribute('aria-pressed',String(state.highlight));
-  $('#studio-status').textContent=`${t.name} · ${state.scope==='selection'?'Seçim':'Model'} · ${state.highlight?'Örnek vurgu açık':'Canlı model'}`;
-  const value=$('#demo-tolerance').value;$('#demo-measurement').textContent=value&&$('#demo-tolerance').validity.valid?`Tolerans: ${value} mm`:'Geçerli bir tolerans gir';
+function updateStudio(){const t=toolById(state.tool);window.arqoStudio?.update({tool:t,scope:state.scope,guides:$('#show-guides').checked});
 }
 function openDialog(content){$('#dialog-content').innerHTML=content;if(!$('#tool-dialog').open)$('#tool-dialog').showModal()}
 function toolDetail(id){const t=toolById(id);if(!t)return;openDialog(`<div class="dialog-icon">${icon(id)}</div><div class="eyebrow">ARQO / ${escapeHTML(t.category.toLocaleUpperCase('tr-TR'))} / ${t.requirementId}</div><h2 id="dialog-title">${escapeHTML(t.name)}</h2><p>${escapeHTML(t.description)}</p><div class="dialog-sizes">${[16,24,32,48].map(size=>`<div>${icon(id,size)}<small>${size} px</small></div>`).join('')}</div><div class="dialog-actions"><button class="button primary" data-add="${id}">${state.selected.has(id)?'Seçimden çıkar':'Önizleme listeme ekle'} <span>${state.selected.has(id)?'−':'+'}</span></button><button class="button secondary" data-try="${id}">Eklentide göster ↗</button></div><p class="dialog-caption">Tekil araç veya tam paket içinde sunulacak. Fiyat ve uyumluluk ayrıntıları henüz kesinleşmedi.</p>`)}
@@ -57,13 +53,13 @@ $('#hero-scene').innerHTML=scene('hero');$('#hero-icon').innerHTML=icon('01');$(
 $('.floating-tool strong').textContent=toolById('S01').name;
 $('.sidebar-heading span').textContent=tools.length;
 $('#category-filters').innerHTML=categories.map(c=>`<button class="filter ${c==='Tümü'?'active':''}" data-category="${escapeHTML(c)}" aria-pressed="${c==='Tümü'}">${escapeHTML(c)}</button>`).join('');
-$('#quick-tools').innerHTML=quickTools.map(({id})=>`<button class="quick-tool" data-plugin-tool="${id}" aria-label="${escapeHTML(toolById(id).name)}" title="${escapeHTML(toolById(id).name)}">${icon(id)}</button>`).join('');
+$('#quick-tools').innerHTML=tools.map(t=>`<button class="quick-tool ${t.manifest.implementationStatus==='planned'?'is-planned':'is-built'}" data-plugin-tool="${t.id}" aria-label="${escapeHTML(t.name)}" title="${escapeHTML(t.name)} — ${escapeHTML(t.summary)}">${icon(t.id,24)}</button>`).join('');
 renderIconReview();
 $('#tool-search').addEventListener('input',e=>{state.search=e.target.value;renderTools()});$('#plugin-search').addEventListener('input',renderPluginList);
 $('#theme-toggle').addEventListener('click',()=>{state.theme=state.theme==='light'?'dark':'light';applyAppearance()});
 $('#collection-open').addEventListener('click',showCollection);$('#bundle-preview').addEventListener('click',showBundle);
 $('#clear-filters').addEventListener('click',()=>{state.category='Tümü';state.search='';$('#tool-search').value='';renderTools()});
-$('#toggle-highlight').addEventListener('click',()=>{state.highlight=!state.highlight;updateStudio()});$('#show-guides').addEventListener('change',updateStudio);$('#demo-tolerance').addEventListener('input',updateStudio);
+$('#toggle-highlight').addEventListener('click',()=>window.arqoStudio?.apply());$('#show-guides').addEventListener('change',updateStudio);
 $('#plugin-details').addEventListener('click',()=>toolDetail(state.tool));$('#all-tools-open').addEventListener('click',()=>showView('icons'));
 $('.dialog-close').addEventListener('click',()=>$('#tool-dialog').close());
 $('#tool-dialog').addEventListener('click',e=>{if(e.target===$('#tool-dialog')){const r=e.target.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)e.target.close()}});
@@ -91,5 +87,5 @@ $('#icon-monochrome').addEventListener('change',e=>$('#icons-view').classList.to
 applyAppearance();renderTools();selectTool('S01');
 const initialParams=new URLSearchParams(location.search);
 if(initialParams.get('page')==='arqo')showSitePage('arqo');
-if(initialParams.has('tool'))selectTool(initialParams.get('tool'));if(initialParams.get('highlight')==='1'){state.highlight=true;updateStudio()}
+if(initialParams.has('tool'))selectTool(initialParams.get('tool'));
 if(initialParams.has('view'))showView(initialParams.get('view'));
