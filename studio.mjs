@@ -76,24 +76,24 @@ const TEXT = {
 // Native tools: our own simple glyphs, not SketchUp's artwork.
 const G = (body, extra = '') => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" ${extra}>${body}</svg>`;
 const NATIVE = [
-  { id: 'select', name: 'Select', key: 'Space', web: true, icon: G('<path d="M6 3l12 9-5.5 1.2L15.5 20l-2.6 1.2-2.9-6.6L6 18z" fill="#fff"/>') },
-  { id: 'eraser', name: 'Eraser', key: 'E', icon: G('<path d="M4 16l8-8 7 7-5 5H8z" fill="#f4c7c7"/><path d="M9 20h11"/>') },
+  { id: 'select', x: 90, name: 'Select', key: 'Space', web: true, icon: G('<path d="M6 3l12 9-5.5 1.2L15.5 20l-2.6 1.2-2.9-6.6L6 18z" fill="#fff"/>') },
+  { id: 'eraser', x: 152, name: 'Eraser', key: 'E', icon: G('<path d="M4 16l8-8 7 7-5 5H8z" fill="#f4c7c7"/><path d="M9 20h11"/>') },
   { sep: true },
-  { id: 'line', name: 'Line', key: 'L', icon: G('<path d="M5 19L18 6"/><path d="M16 4l4 4" stroke="#d24a3a"/>') },
-  { id: 'rectangle', name: 'Rectangle', key: 'R', icon: G('<rect x="4" y="6" width="16" height="12" fill="#fff"/>') },
-  { id: 'pushpull', name: 'Push/Pull', key: 'P', icon: G('<path d="M4 15l8-4 8 4-8 4z" fill="#e9eef7"/><path d="M12 13V3m-3 3l3-3 3 3" stroke="#d24a3a"/>') },
+  { id: 'line', x: 192, name: 'Line', key: 'L', icon: G('<path d="M5 19L18 6"/><path d="M16 4l4 4" stroke="#d24a3a"/>') },
+  { id: 'rectangle', x: 302, name: 'Rectangle', key: 'R', icon: G('<rect x="4" y="6" width="16" height="12" fill="#fff"/>') },
+  { id: 'pushpull', x: 365, name: 'Push/Pull', key: 'P', icon: G('<path d="M4 15l8-4 8 4-8 4z" fill="#e9eef7"/><path d="M12 13V3m-3 3l3-3 3 3" stroke="#d24a3a"/>') },
   { sep: true },
-  { id: 'move', name: 'Move', key: 'M', icon: G('<path d="M12 3v18M3 12h18M12 3l-2.5 2.5M12 3l2.5 2.5M12 21l-2.5-2.5M12 21l2.5-2.5M3 12l2.5-2.5M3 12l2.5 2.5M21 12l-2.5-2.5M21 12l-2.5 2.5" stroke="#d24a3a"/>') },
-  { id: 'rotate', name: 'Rotate', key: 'Q', icon: G('<path d="M19 12a7 7 0 1 1-2-4.9"/><path d="M17 3v4.5h-4.5" stroke="#d24a3a"/>') },
-  { id: 'scale', name: 'Scale', key: 'S', icon: G('<rect x="4" y="9" width="11" height="11" fill="#fff"/><path d="M13 11l7-7m-4 0h4v4" stroke="#d24a3a"/>') },
+  { id: 'move', x: 445, name: 'Move', key: 'M', icon: G('<path d="M12 3v18M3 12h18M12 3l-2.5 2.5M12 3l2.5 2.5M12 21l-2.5-2.5M12 21l2.5-2.5M3 12l2.5-2.5M3 12l2.5 2.5M21 12l-2.5-2.5M21 12l-2.5 2.5" stroke="#d24a3a"/>') },
+  { id: 'rotate', x: 485, name: 'Rotate', key: 'Q', icon: G('<path d="M19 12a7 7 0 1 1-2-4.9"/><path d="M17 3v4.5h-4.5" stroke="#d24a3a"/>') },
+  { id: 'scale', x: 525, name: 'Scale', key: 'S', icon: G('<rect x="4" y="9" width="11" height="11" fill="#fff"/><path d="M13 11l7-7m-4 0h4v4" stroke="#d24a3a"/>') },
   { sep: true },
-  { id: 'tape', name: 'Tape Measure', key: 'T', icon: G('<rect x="3" y="8" width="18" height="8" rx="1" fill="#f6e7a6"/><path d="M7 8v3M11 8v4M15 8v3M19 8v4"/>') },
-  { id: 'paint', name: 'Paint Bucket', key: 'B', icon: G('<path d="M5 11l6-6 7 7-6 6z" fill="#fff"/><path d="M19 15c0 1.5 1 2.2 1 3.2a1 1 0 0 1-2 0c0-1 1-1.7 1-3.2z" fill="#3a78d8" stroke="#3a78d8"/>') },
+  { id: 'tape', x: 612, name: 'Tape Measure', key: 'T', icon: G('<rect x="3" y="8" width="18" height="8" rx="1" fill="#f6e7a6"/><path d="M7 8v3M11 8v4M15 8v3M19 8v4"/>') },
+  { id: 'paint', x: 652, name: 'Paint Bucket', key: 'B', icon: G('<path d="M5 11l6-6 7 7-6 6z" fill="#fff"/><path d="M19 15c0 1.5 1 2.2 1 3.2a1 1 0 0 1-2 0c0-1 1-1.7 1-3.2z" fill="#3a78d8" stroke="#3a78d8"/>') },
   { sep: true },
-  { id: 'orbit', name: 'Orbit', key: 'O', web: true, icon: G('<ellipse cx="12" cy="12" rx="9" ry="4.5"/><path d="M12 3a9 9 0 0 1 0 18" stroke="#d24a3a"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/>') },
-  { id: 'pan', name: 'Pan', key: 'H', web: true, icon: G('<path d="M8 13V6.5a1.3 1.3 0 0 1 2.6 0V11m0-5.5V5a1.3 1.3 0 0 1 2.6 0v6m0-5a1.3 1.3 0 0 1 2.6 0v5.5m0-3.5a1.3 1.3 0 0 1 2.6 0V15a6 6 0 0 1-6 6h-1a6 6 0 0 1-5-2.7L4.5 14a1.3 1.3 0 0 1 2.2-1.4L8 14" fill="#fff"/>') },
-  { id: 'zoom', name: 'Zoom', key: 'Z', web: true, icon: G('<circle cx="10" cy="10" r="6" fill="#fff"/><path d="M14.5 14.5L20 20" stroke-width="2.4"/>') },
-  { id: 'extents', name: 'Zoom Extents', key: 'Shift+Z', web: true, icon: G('<circle cx="11" cy="11" r="5" fill="#fff"/><path d="M15 15l4 4M3 7V3h4M21 7V3h-4M3 17v4h4" stroke-width="1.6"/>') }
+  { id: 'orbit', x: 700, name: 'Orbit', key: 'O', web: true, icon: G('<ellipse cx="12" cy="12" rx="9" ry="4.5"/><path d="M12 3a9 9 0 0 1 0 18" stroke="#d24a3a"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/>') },
+  { id: 'pan', x: 740, name: 'Pan', key: 'H', web: true, icon: G('<path d="M8 13V6.5a1.3 1.3 0 0 1 2.6 0V11m0-5.5V5a1.3 1.3 0 0 1 2.6 0v6m0-5a1.3 1.3 0 0 1 2.6 0v5.5m0-3.5a1.3 1.3 0 0 1 2.6 0V15a6 6 0 0 1-6 6h-1a6 6 0 0 1-5-2.7L4.5 14a1.3 1.3 0 0 1 2.2-1.4L8 14" fill="#fff"/>') },
+  { id: 'zoom', x: 780, name: 'Zoom', key: 'Z', web: true, icon: G('<circle cx="10" cy="10" r="6" fill="#fff"/><path d="M14.5 14.5L20 20" stroke-width="2.4"/>') },
+  { id: 'extents', x: 820, name: 'Zoom Extents', key: 'Shift+Z', web: true, icon: G('<circle cx="11" cy="11" r="5" fill="#fff"/><path d="M15 15l4 4M3 7V3h4M21 7V3h-4M3 17v4h4" stroke-width="1.6"/>') }
 ];
 
 const state = {
@@ -308,7 +308,7 @@ function build() {
     root.add(model);
     state.ready = true;
     if (loading) loading.hidden = true;
-    renderNative(); renderMenus(); renderFloating(); showEntity(null); status(TEXT.ready); setVcb(TEXT.measurements, '');
+    renderNative(); renderMenus(); showFixture(null); wireDialog(); showEntity(null); status(TEXT.ready); setVcb(TEXT.measurements, '');
     if (state.pending) update(state.pending);
   }).catch(error => { console.error(error); if (loading) loading.textContent = TEXT.failed; });
 
@@ -346,7 +346,7 @@ function build() {
     return Number.isFinite(value) && value > 0 ? value : fallback;
   };
   function renderSettings(tool) {
-    if (!settingsBox) return;
+    if (!settingsBox || document.getElementById('su-dialog')) return;
     const list = tool?.manifest?.settings || [];
     settingsBox.innerHTML = list.length ? list.map(s => `<label>${TEXT.settings[s.id] || s.id}<input type="number" min="0" step="any" data-setting="${s.id}" value="${s.default}"></label>`).join('') : `<p class="su-muted">${TEXT.noSettings}</p>`;
   }
@@ -383,9 +383,13 @@ function build() {
     status(TEXT.prompt[tool.id] || tool.name);
     if (fly) frame(new THREE.Box3().setFromObject(fixture.node), runner.interactive ? setting(tool, 'heightMm') / 1000 : 0);
     if (runner.interactive) startInteractive(fixture);
+    else { clearTimeout(state.runTimer); state.runTimer = setTimeout(apply, fly ? 1300 : 0); }
   }
 
   function record(op) {
+    op.toolId = state.tool?.id;
+    const prior = state.undo.findIndex(o => o.toolId === op.toolId);
+    if (prior >= 0) { state.undo[prior].undo(); state.undo.splice(prior, 1); op.redo(); }
     state.undo.push(op); state.redo.length = 0;
     if (op.objects && op.objects.length) { const box = new THREE.Box3(); op.objects.forEach(o => box.expandByObject(o)); if (!box.isEmpty()) frame(box); }
     toast(`ARQO · ${op.tool}`, op.message); status(`${op.tool}: ${op.message}`);
@@ -570,7 +574,7 @@ function build() {
     const M = THREE.MOUSE;
     controls.mouseButtons = { LEFT: id === 'orbit' ? M.ROTATE : id === 'pan' ? M.PAN : id === 'zoom' ? M.DOLLY : null, MIDDLE: M.ROTATE, RIGHT: M.PAN };
     renderer.domElement.style.cursor = { select: 'default', orbit: 'grab', pan: 'move', zoom: 'zoom-in' }[id];
-    document.querySelectorAll('[data-native]').forEach(b => b.classList.toggle('active', b.dataset.native === id));
+    document.querySelectorAll('[data-native]').forEach(b => { b.classList.toggle('active', b.dataset.native === id && id !== 'select'); b.classList.toggle('mute', b.dataset.native === 'select' && id !== 'select'); });
     if (id !== 'select') cancelInteractive();
   }
   function zoomExtents() {
@@ -582,7 +586,10 @@ function build() {
   function renderNative() {
     const bar = document.getElementById('su-native');
     if (!bar) return;
-    bar.innerHTML = NATIVE.map(t => t.sep ? '<span class="su-sep"></span>' : `<button type="button" data-native="${t.id}" class="${t.web ? '' : 'is-native-off'}" title="${t.name} (${t.key})" aria-label="${t.name}">${t.icon}</button>`).join('');
+    const real = bar.classList.contains('su-native');
+    bar.innerHTML = real
+      ? NATIVE.filter(t => !t.sep).map(t => `<button type="button" data-native="${t.id}" title="${t.name} (${t.key})" aria-label="${t.name}" style="left:${((t.x - 10 - 19) / 1540 * 100).toFixed(3)}%;width:${(38 / 1540 * 100).toFixed(3)}%;top:${(69 / 110 * 100).toFixed(2)}%;height:${(38 / 110 * 100).toFixed(2)}%"></button>`).join('')
+      : NATIVE.map(t => t.sep ? '<span class="su-sep"></span>' : `<button type="button" data-native="${t.id}" class="${t.web ? '' : 'is-native-off'}" title="${t.name} (${t.key})" aria-label="${t.name}">${t.icon}</button>`).join('');
     bar.addEventListener('click', e => { const b = e.target.closest('[data-native]'); if (b) setNative(b.dataset.native); });
     setNative('select');
   }
@@ -660,7 +667,7 @@ function build() {
     }
     const push = tools.find(t => t.id === 'A01');
     if (push) { out.push({ head: 'ARQO Special' }, item(push.name, () => document.querySelector(`#quick-tools [data-plugin-tool="A01"]`)?.click(), { icon: state.catalog.icon('A01', 16) })); }
-    out.push({ sep: true }, item('Settings…', null, { disabled: true }), item('Toolbar layout', null, { disabled: true }));
+    out.push({ sep: true }, item('Settings…', openDialog), item('Toolbar layout', null, { disabled: true }));
     return out;
   }
   function showMenu(button) {
@@ -691,6 +698,20 @@ function build() {
       else { const s = xrayStore.get(m); if (s) Object.assign(m.material, { transparent: s.t, opacity: s.o, depthWrite: s.d }); }
       m.material.needsUpdate = true;
     }
+  }
+
+  function openDialog() { const d = document.getElementById('su-dialog'); if (!d) return; renderSettingsAll(); d.hidden = false; }
+  function wireDialog() {
+    const d = document.getElementById('su-dialog'); if (!d) return;
+    const close = () => { d.hidden = true; };
+    document.getElementById('su-dialog-ok')?.addEventListener('click', close);
+    document.getElementById('su-dialog-close')?.addEventListener('click', close);
+  }
+  function renderSettingsAll() {
+    if (!settingsBox || settingsBox.dataset.all) return;
+    const seen = new Set(); const rows = [];
+    for (const t of state.catalog?.tools || []) for (const st of t.manifest.settings || []) { if (seen.has(st.id) || !TEXT.settings[st.id] || st.id === 'lastDistanceMm') continue; seen.add(st.id); rows.push(`<label>${TEXT.settings[st.id]}<input type="number" min="0" step="any" data-setting="${st.id}" value="${st.default}"></label>`); }
+    settingsBox.innerHTML = rows.join(''); settingsBox.dataset.all = '1';
   }
 
   function renderFloating() {
@@ -729,7 +750,7 @@ function build() {
     if (state.tool && state.tool.id === tool.id && state.toolDef) return;
     activate(tool, true);
     // Deep link: ?tool=S10&apply=1 opens the tool and shows its result.
-    if (!state.applied && new URLSearchParams(location.search).get('apply') === '1') { state.applied = true; setTimeout(apply, 1500); }
+    if (!state.applied && state.toolDef?.runner.interactive && new URLSearchParams(location.search).get('apply') === '1') { state.applied = true; setTimeout(apply, 1500); }
   }
   window.arqoStudio = { update, apply, undo, redo };
   if (state.pending) update(state.pending);

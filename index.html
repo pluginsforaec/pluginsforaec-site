@@ -101,41 +101,30 @@
 
   <main id="plugin-view" class="view" hidden>
     <section class="studio-container">
-      <div class="section-heading studio-heading"><div><div class="eyebrow">DESIGNED FOR SKETCHUP</div><h2>Keep your model at the centre.</h2><p>Pick a tool on the ARQO toolbar: the camera goes to its scene, Apply shows the result and Ctrl+Z undoes it. Middle button orbits, Shift + middle button pans, the wheel zooms.</p></div><span class="draft-badge">Web preview · The plugin itself runs inside SketchUp</span></div>
-      <div class="su-window" id="su-window">
-        <div class="su-titlebar"><span class="su-app-icon" aria-hidden="true"></span><span class="su-title">arqo_demo_house_01.skp — ARQO web preview (SketchUp layout)</span><span class="su-winbtns" aria-hidden="true"><span>—</span><span>▢</span><span>✕</span></span></div>
-        <nav class="su-menubar" id="su-menubar" aria-label="Menu"><button type="button" data-su-menu="File">File</button><button type="button" data-su-menu="Edit">Edit</button><button type="button" data-su-menu="View">View</button><button type="button" data-su-menu="Camera">Camera</button><button type="button" data-su-menu="Draw">Draw</button><button type="button" data-su-menu="Tools">Tools</button><button type="button" data-su-menu="Window">Window</button><button type="button" data-su-menu="Extensions">Extensions</button><button type="button" data-su-menu="Help">Help</button></nav>
+      <div class="section-heading studio-heading"><div><div class="eyebrow">DESIGNED FOR SKETCHUP</div><h2>Keep your model at the centre.</h2><p>Click a tool on the ARQO toolbar: it runs on its scene in the model and reports the result. Ctrl+Z undoes it. Middle button orbits, Shift + middle button pans, the wheel zooms.</p></div><span class="draft-badge">Web preview · The plugin itself runs inside SketchUp</span></div>
+      <div class="su-window su-real" id="su-window">
+        <div class="su-chrome">
+          <img src="assets/su/chrome-top.png" width="1540" height="110" alt="SketchUp 2025: title bar, menu bar and toolbar" draggable="false">
+          <nav class="su-menubar" id="su-menubar" aria-label="Menu bar"><button type="button" data-su-menu="File" style="left:0.519%;width:2.078%;top:35.455%;height:21.818%"><span>File</span></button><button type="button" data-su-menu="Edit" style="left:3.247%;width:2.208%;top:35.455%;height:21.818%"><span>Edit</span></button><button type="button" data-su-menu="View" style="left:6.169%;width:2.662%;top:35.455%;height:21.818%"><span>View</span></button><button type="button" data-su-menu="Camera" style="left:9.481%;width:4.026%;top:35.455%;height:21.818%"><span>Camera</span></button><button type="button" data-su-menu="Draw" style="left:14.221%;width:2.857%;top:35.455%;height:21.818%"><span>Draw</span></button><button type="button" data-su-menu="Tools" style="left:17.727%;width:2.922%;top:35.455%;height:21.818%"><span>Tools</span></button><button type="button" data-su-menu="Window" style="left:21.299%;width:4.221%;top:35.455%;height:21.818%"><span>Window</span></button><button type="button" data-su-menu="Extensions" style="left:26.169%;width:5.455%;top:35.455%;height:21.818%"><span>Extensions</span></button><button type="button" data-su-menu="Help" style="left:32.273%;width:2.597%;top:35.455%;height:21.818%"><span>Help</span></button></nav>
+          <div class="su-native" id="su-native" aria-label="SketchUp tools"></div>
+        </div>
         <div class="su-toolbars">
-          <div class="su-toolbar" id="su-native" aria-label="SketchUp tools"></div>
-          <div class="su-toolbar su-arqo"><span class="su-grip" title="ARQO for SketchUp"></span><div id="quick-tools" class="quick-tools" aria-label="ARQO toolbar"></div><button id="all-tools-open" class="toolbar-library" title="Browse all tools">Tool library ↗</button></div>
+          <div class="su-toolbar su-arqo"><span class="su-grip" title="ARQO for SketchUp"></span><div id="quick-tools" class="quick-tools" aria-label="ARQO for SketchUp"></div></div>
         </div>
         <div class="su-body">
           <div class="model-viewport su-viewport">
             <div id="plugin-scene" class="architectural-scene live-model"><p id="studio-loading" class="studio-loading">Loading the model…</p><span id="studio-label" class="studio-label" hidden></span></div>
+            <div id="su-dialog" class="su-dialog" hidden><div class="su-dialog-title"><span>ARQO Settings</span><button type="button" id="su-dialog-close" aria-label="Close">✕</button></div><div class="su-settings" id="su-settings"></div><div class="su-dialog-actions"><button type="button" id="su-dialog-ok">OK</button></div></div>
             <div id="su-toast" class="su-toast" role="status" hidden></div>
           </div>
-          <aside class="su-tray" aria-label="Default Tray">
-            <div class="su-tray-head">Default Tray</div>
-            <details class="su-panel" open><summary>Entity Info</summary><div class="su-panel-body su-entity" id="su-entity"></div></details>
-            <details class="su-panel su-arqo-panel" open><summary>ARQO</summary><div class="su-panel-body">
-              <div id="property-icon" class="property-icon"></div><span id="property-category" class="eyebrow"></span><h3 id="property-title"></h3><p id="property-description"></p>
-              <div class="property-label">OPERATION SCOPE</div><div class="segmented-control"><button class="active" data-scope="selection" aria-pressed="true">Selection</button><button data-scope="model" aria-pressed="false">Model</button></div>
-              <div class="su-settings" id="su-settings"></div>
-              <label class="checkbox-row"><input id="show-guides" type="checkbox" checked> Show axes</label>
-              <button id="toggle-highlight" type="button">Apply</button>
-              <button id="plugin-details" class="panel-detail-button" type="button">View tool details ↗</button>
-              <p class="panel-footnote">Web preview: tools with a prepared scene run here. The plugin itself runs inside SketchUp.</p>
-            </div></details>
-            <details class="su-panel su-tools-panel"><summary>ARQO Tools</summary><div class="su-panel-body"><div class="sidebar-heading">TOOLS <span>40</span></div><label class="sidebar-search"><input id="plugin-search" type="search" placeholder="Find a tool…" aria-label="Search plugin tools"></label><div id="plugin-tool-list" class="plugin-tool-list"></div></div></details>
-            <details class="su-panel"><summary>Materials</summary><div class="su-panel-body"><p class="su-muted">Opens in SketchUp.</p></div></details>
-            <details class="su-panel"><summary>Components</summary><div class="su-panel-body"><p class="su-muted">Opens in SketchUp.</p></div></details>
-            <details class="su-panel"><summary>Styles</summary><div class="su-panel-body"><p class="su-muted">Opens in SketchUp.</p></div></details>
-            <details class="su-panel"><summary>Tags</summary><div class="su-panel-body"><p class="su-muted">Opens in SketchUp.</p></div></details>
-            <details class="su-panel"><summary>Scenes</summary><div class="su-panel-body"><p class="su-muted">Opens in SketchUp.</p></div></details>
-            <details class="su-panel"><summary>Shadows</summary><div class="su-panel-body"><p class="su-muted">Opens in SketchUp.</p></div></details>
-          </aside>
+          <aside class="su-tray" aria-label="Default Tray"><img src="assets/su/tray.png" width="212" height="720" alt="SketchUp Default Tray" draggable="false"><div class="su-entity" id="su-entity"></div></aside>
         </div>
         <div class="su-status"><span class="su-status-tool"><span id="viewport-active-icon"></span><span id="viewport-active-label"></span></span><span id="studio-status" role="status">Ready</span><label class="su-vcb"><span id="su-vcb-label">Measurements</span><input id="su-vcb" autocomplete="off" spellcheck="false" aria-label="Measurements"></label></div>
+        <div hidden>
+          <div id="property-icon"></div><span id="property-category"></span><h3 id="property-title"></h3><p id="property-description"></p>
+          <button data-scope="selection" class="active" aria-pressed="true">Selection</button><input id="show-guides" type="checkbox" checked><button id="toggle-highlight" type="button">Apply</button><button id="plugin-details" type="button">Details</button>
+          <button id="all-tools-open" type="button">Library</button><div class="sidebar-heading"><span>40</span></div><input id="plugin-search" type="search"><div id="plugin-tool-list"></div>
+        </div>
       </div>
       <p class="su-disclaimer">SketchUp is a trademark of Trimble Inc. This screen is a browser preview of the ARQO plugin; it is not SketchUp itself.</p>
       
