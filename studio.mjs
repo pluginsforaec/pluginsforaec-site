@@ -217,7 +217,33 @@ function lines(pairs, color, { dashed = false, onTop = true } = {}) {
   return l;
 }
 function faceMaterial() { return new THREE.MeshStandardMaterial({ color: ACCENT, emissive: ACCENT, emissiveIntensity: 0.25, side: THREE.DoubleSide, polygonOffset: true, polygonOffsetFactor: -2, roughness: 0.9 }); }
-function settle(material) { setTimeout(() => { material.color.set('#f3f1ea'); material.emissive.set(0x000000); }, 1400); }
+// ARQO result flash: new geometry pulses three times in the clay accent (1.5 s), then settles to the model colour.
+function settle(material) {
+  const start = performance.now();
+  const step = () => {
+    const t = (performance.now() - start) / 1000;
+    if (t >= 1.5) { material.color.set('#f3f1ea'); material.emissive.set(0x000000); material.emissiveIntensity = 1; return; }
+    const pulse = 0.5 + 0.5 * Math.cos(2 * Math.PI * t / 0.5);
+    material.emissiveIntensity = 0.1 + 0.6 * pulse;
+    requestAnimationFrame(step);
+  };
+  requestAnimationFrame(step);
+}
+// The same pulse on objects a tool moved or outlined: a clay glow that fades.
+function flashObjects(objects) {
+  const mats = [];
+  objects.forEach(o => o.traverse?.(c => { if (c.isMesh && c.material && c.material.emissive) { const m = c.material; mats.push([m, m.emissive.getHex(), m.emissiveIntensity]); } }));
+  if (!mats.length) return;
+  const start = performance.now();
+  const step = () => {
+    const t = (performance.now() - start) / 1000;
+    if (t >= 1.5) { mats.forEach(([m, hex, k]) => { m.emissive.setHex(hex); m.emissiveIntensity = k; }); return; }
+    const pulse = 0.5 + 0.5 * Math.cos(2 * Math.PI * t / 0.5);
+    mats.forEach(([m]) => { m.emissive.setHex(ACCENT); m.emissiveIntensity = 0.55 * pulse; });
+    requestAnimationFrame(step);
+  };
+  requestAnimationFrame(step);
+}
 
 function build() {
   let renderer;
@@ -571,6 +597,7 @@ function build() {
       const apply = () => boxes.forEach((o, i) => { o.position.copy(before[i]); o.position[axis] += sign * targets.get(o); });
       const restore = () => boxes.forEach((o, i) => o.position.copy(before[i]));
       apply();
+      flashObjects(boxes.filter(o => Math.abs(targets.get(o)) > 1e-6));
       const label = TEXT.options.mode[mode] || mode;
       return { tool: tool.name, message: TEXT.align(label, moved, boxes.length), objects: boxes, undo: restore, redo: apply };
     } },
@@ -905,11 +932,14 @@ function build() {
   if (state.pending) update(state.pending);
 
   renderer.setAnimationLoop(() => {
+    // Time-based easing: the same ~0.6 s flight at any frame rate.
+    const now = performance.now(); const dt = Math.min(0.1, (now - (goal.last || now)) / 1000); goal.last = now;
     if (goal.flying) {
-      controls.target.lerp(goal.target, 0.09);
+      const k = 1 - Math.exp(-dt * 5.6);
+      controls.target.lerp(goal.target, k);
       const wanted = controls.target.clone().addScaledVector(goal.dir, camera === persp ? DIST / goal.zoom : DIST);
-      camera.position.lerp(wanted, 0.09);
-      if (camera === ortho) { ortho.zoom += (goal.zoom - ortho.zoom) * 0.09; ortho.updateProjectionMatrix(); }
+      camera.position.lerp(wanted, k);
+      if (camera === ortho) { ortho.zoom += (goal.zoom - ortho.zoom) * k; ortho.updateProjectionMatrix(); }
       if (controls.target.distanceTo(goal.target) < 0.005 && camera.position.distanceTo(wanted) < 0.01) goal.flying = false;
     }
     controls.update();

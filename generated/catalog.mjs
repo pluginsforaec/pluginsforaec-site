@@ -703,19 +703,19 @@ export default {
       "requirementId": "S08",
       "moduleId": "arqo.smart_offset",
       "host": "sketchup",
-      "version": "0.2.0",
+      "version": "0.3.0",
       "implementationStatus": "in-development",
       "category": "geometry",
       "locales": {
         "en": {
           "name": "Smart Offset",
           "summary": "Offset selected geometry with guided distances.",
-          "description": "Offset every selected face outline inside, outside or both, several times over; distance, side and count are remembered."
+          "description": "Offset every selected face outline with the mouse or a typed distance: inside, outside or both, several copies, remembered."
         },
         "tr": {
           "name": "Smart Offset",
           "summary": "Bir sınırdan sayısız olasılığa.",
-          "description": "Seçili tüm yüzeylerin dış hattını içe, dışa ya da iki yöne, istenen sayıda öteler; mesafe, taraf ve adet hatırlanır."
+          "description": "Seçili tüm yüzeylerin hattını fareyle ya da yazılan mesafeyle öteler: içe, dışa ya da iki yöne, birkaç kopya; değerler hatırlanır."
         }
       },
       "license": {
@@ -1190,7 +1190,7 @@ export default {
       "requirementId": "S14",
       "moduleId": "arqo.mirror",
       "host": "sketchup",
-      "version": "0.2.0",
+      "version": "0.3.0",
       "implementationStatus": "in-development",
       "category": "transform",
       "locales": {
@@ -1270,19 +1270,19 @@ export default {
       "requirementId": "S15",
       "moduleId": "arqo.align",
       "host": "sketchup",
-      "version": "0.2.0",
+      "version": "0.3.0",
       "implementationStatus": "in-development",
       "category": "transform",
       "locales": {
         "en": {
           "name": "Align+",
           "summary": "Align objects using reference geometry.",
-          "description": "Align left, centre or right in X, Y or Z, or distribute with equal gaps; the outermost object stays and the choice is remembered."
+          "description": "Line objects up or space them evenly: Tab or a typed mode, a live preview, and hover an object to align to it."
         },
         "tr": {
           "name": "Align+",
           "summary": "Her nesne tam olması gereken yerde.",
-          "description": "X, Y veya Z'de sola, ortaya, sağa hizala ya da eşit aralıkla dağıt; en dıştaki nesne yerinde kalır, seçim hatırlanır."
+          "description": "Nesneleri hizala ya da eşit aralıkla dağıt: Tab veya yazılan mod, canlı önizleme; bir nesnenin üzerine gel, ona hizala."
         }
       },
       "license": {
