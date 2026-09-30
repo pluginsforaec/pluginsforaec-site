@@ -703,19 +703,19 @@ export default {
       "requirementId": "S08",
       "moduleId": "arqo.smart_offset",
       "host": "sketchup",
-      "version": "0.1.0",
-      "implementationStatus": "planned",
+      "version": "0.2.0",
+      "implementationStatus": "in-development",
       "category": "geometry",
       "locales": {
         "en": {
           "name": "Smart Offset",
           "summary": "Offset selected geometry with guided distances.",
-          "description": "Multiple, two-sided and random offsets; reuse the previous value."
+          "description": "Offset every selected face outline inside, outside or both, several times over; distance, side and count are remembered."
         },
         "tr": {
           "name": "Smart Offset",
           "summary": "Bir sınırdan sayısız olasılığa.",
-          "description": "Çoklu, iki taraflı ve rastgele offset; önceki değeri yeniden kullanma."
+          "description": "Seçili tüm yüzeylerin dış hattını içe, dışa ya da iki yöne, istenen sayıda öteler; mesafe, taraf ve adet hatırlanır."
         }
       },
       "license": {
@@ -732,11 +732,34 @@ export default {
         "selection",
         "geometry"
       ],
-      "settingsSchemaVersion": 1,
-      "settings": [],
+      "settingsSchemaVersion": 2,
+      "settings": [
+        {
+          "id": "distanceMm",
+          "type": "number",
+          "default": 50
+        },
+        {
+          "id": "side",
+          "type": "string",
+          "default": "Inside"
+        },
+        {
+          "id": "count",
+          "type": "number",
+          "default": 1
+        }
+      ],
+      "settingsMigrations": [
+        {
+          "from": 1,
+          "to": 2,
+          "plan": "migration-1-2.md"
+        }
+      ],
       "icon": {
-        "current": "icons/v1.svg",
-        "revision": 1,
+        "current": "icons/v2.svg",
+        "revision": 2,
         "status": "draft",
         "history": [
           {
@@ -744,6 +767,12 @@ export default {
             "file": "icons/v1.svg",
             "note": "Initial outline study.",
             "sha256": "672dc419634e1d4f4ee3a53a2506760311fec3f8a9df011125e1d13f684a7ba3"
+          },
+          {
+            "revision": 2,
+            "file": "icons/v2.svg",
+            "note": "Face with one inset outline and the offset distance at the corner; fewer nested squares than v1.",
+            "sha256": "96894697dc8c33afcd8adf2ca4703c5cf7c791a4a670e631f7ef1e0561001ff4"
           }
         ]
       },
@@ -760,6 +789,14 @@ export default {
           "strokeWidth": 1.45,
           "body": "<path d=\"M4 4h24v24H4Zm5 5h14v14H9Zm5 5h4v4h-4Z\"/>",
           "note": "Initial outline study."
+        },
+        {
+          "revision": 2,
+          "file": "icons/v2.svg",
+          "sha256": "96894697dc8c33afcd8adf2ca4703c5cf7c791a4a670e631f7ef1e0561001ff4",
+          "strokeWidth": 2,
+          "body": "<path class=\"icon-object\" fill=\"currentColor\" fill-opacity=\".1\" d=\"M4 4h24v24H4Z\"/><path class=\"icon-action\" d=\"M10.5 10.5h11v11h-11ZM4 4l6.5 6.5\"/>",
+          "note": "Face with one inset outline and the offset distance at the corner; fewer nested squares than v1."
         }
       ]
     },
@@ -1153,19 +1190,19 @@ export default {
       "requirementId": "S14",
       "moduleId": "arqo.mirror",
       "host": "sketchup",
-      "version": "0.1.1",
-      "implementationStatus": "planned",
+      "version": "0.2.0",
+      "implementationStatus": "in-development",
       "category": "transform",
       "locales": {
         "en": {
           "name": "Mirror+",
           "summary": "Mirror selected objects about a reference plane.",
-          "description": "One-click mirror, mirror with copy, 45° and axis snapping."
+          "description": "Mirror across a vertical plane given by two clicks, as a copy or in place (Ctrl); SketchUp inference snaps the points."
         },
         "tr": {
           "name": "Mirror+",
           "summary": "Dengeli formlar, hızlı yansımalar.",
-          "description": "Tek tık aynalama, kopyalı aynalama, 45° ve eksen yakalama."
+          "description": "İki tıkla verilen dikey düzleme göre aynala; kopyalı ya da yerinde (Ctrl); noktalar SketchUp çıkarımına yapışır."
         }
       },
       "license": {
@@ -1233,19 +1270,19 @@ export default {
       "requirementId": "S15",
       "moduleId": "arqo.align",
       "host": "sketchup",
-      "version": "0.1.0",
-      "implementationStatus": "planned",
+      "version": "0.2.0",
+      "implementationStatus": "in-development",
       "category": "transform",
       "locales": {
         "en": {
           "name": "Align+",
           "summary": "Align objects using reference geometry.",
-          "description": "Align the selected objects."
+          "description": "Align left, centre or right in X, Y or Z, or distribute with equal gaps; the outermost object stays and the choice is remembered."
         },
         "tr": {
           "name": "Align+",
           "summary": "Her nesne tam olması gereken yerde.",
-          "description": "Seçili nesneleri hizalama."
+          "description": "X, Y veya Z'de sola, ortaya, sağa hizala ya da eşit aralıkla dağıt; en dıştaki nesne yerinde kalır, seçim hatırlanır."
         }
       },
       "license": {
@@ -1262,11 +1299,24 @@ export default {
         "selection",
         "geometry"
       ],
-      "settingsSchemaVersion": 1,
-      "settings": [],
+      "settingsSchemaVersion": 2,
+      "settings": [
+        {
+          "id": "mode",
+          "type": "string",
+          "default": "left"
+        }
+      ],
+      "settingsMigrations": [
+        {
+          "from": 1,
+          "to": 2,
+          "plan": "migration-1-2.md"
+        }
+      ],
       "icon": {
-        "current": "icons/v1.svg",
-        "revision": 1,
+        "current": "icons/v2.svg",
+        "revision": 2,
         "status": "draft",
         "history": [
           {
@@ -1274,6 +1324,12 @@ export default {
             "file": "icons/v1.svg",
             "note": "Initial outline study.",
             "sha256": "bcde8896f07fb4575f6c13656eb789155095eca8edea92025ffd69efce0ce945"
+          },
+          {
+            "revision": 2,
+            "file": "icons/v2.svg",
+            "note": "Three objects of different length on one shared edge; replaces the bar chart reading of v1.",
+            "sha256": "ccb8116a02aac30a6a098b1585eb3b8a7db694552cae4c02afbf61b4aaf5e3c8"
           }
         ]
       },
@@ -1290,6 +1346,14 @@ export default {
           "strokeWidth": 1.45,
           "body": "<path d=\"M4 27h24M7 5h6v15H7Zm13 7h6v8h-6ZM10 21v3m13-3v3\"/>",
           "note": "Initial outline study."
+        },
+        {
+          "revision": 2,
+          "file": "icons/v2.svg",
+          "sha256": "ccb8116a02aac30a6a098b1585eb3b8a7db694552cae4c02afbf61b4aaf5e3c8",
+          "strokeWidth": 2,
+          "body": "<path class=\"icon-object\" fill=\"currentColor\" fill-opacity=\".1\" d=\"M9 6h16v5H9Zm0 7.5h10v5H9ZM9 21h19v5H9Z\"/><path class=\"icon-action\" d=\"M5 3v26\"/>",
+          "note": "Three objects of different length on one shared edge; replaces the bar chart reading of v1."
         }
       ]
     },
@@ -1563,19 +1627,19 @@ export default {
       "requirementId": "S20",
       "moduleId": "arqo.reset_axis",
       "host": "sketchup",
-      "version": "0.1.0",
-      "implementationStatus": "planned",
-      "category": "transform",
+      "version": "0.2.0",
+      "implementationStatus": "in-development",
+      "category": "geometry",
       "locales": {
         "en": {
           "name": "Reset Axis+",
           "summary": "Reset object axes while preserving geometry placement.",
-          "description": "Reset origin and axes; fit the X axis to the nearest, longest or shortest edge."
+          "description": "Put a group's or component's axes back on its geometry: X on the longest edge, origin at the lower corner; nothing moves in the model."
         },
         "tr": {
           "name": "Reset Axis+",
           "summary": "Nesnelerin için doğru başlangıç.",
-          "description": "Orijin/eksen sıfırlama; X eksenini yakın, uzun veya kısa kenara uydurma."
+          "description": "Grup veya bileşenin eksenini geometrisine oturtur: X en uzun kenara, orijin alt köşeye; modelde hiçbir şey kıpırdamaz."
         }
       },
       "license": {
@@ -1595,8 +1659,8 @@ export default {
       "settingsSchemaVersion": 1,
       "settings": [],
       "icon": {
-        "current": "icons/v1.svg",
-        "revision": 1,
+        "current": "icons/v2.svg",
+        "revision": 2,
         "status": "draft",
         "history": [
           {
@@ -1604,6 +1668,12 @@ export default {
             "file": "icons/v1.svg",
             "note": "Initial outline study.",
             "sha256": "10be575768166e87a65b4af7048b83ab322ce647db395e4147d506d0dcaad4bf"
+          },
+          {
+            "revision": 2,
+            "file": "icons/v2.svg",
+            "note": "Rotated object with its new X/Y axes on the long edge and the origin at the corner; 16/24/32 px study.",
+            "sha256": "f87fa7ef0d507ddb51e2aba89032c21ea9bbba3b0509af59c6ad3d9f89a2e2ef"
           }
         ]
       },
@@ -1620,6 +1690,14 @@ export default {
           "strokeWidth": 1.45,
           "body": "<path d=\"M10 23V5m0 18h18m-18 0 12-10M7 8l3-3 3 3m12 12 3 3-3 3M19 13h3v3\"/><circle cx=\"10\" cy=\"23\" r=\"3\"/>",
           "note": "Initial outline study."
+        },
+        {
+          "revision": 2,
+          "file": "icons/v2.svg",
+          "sha256": "f87fa7ef0d507ddb51e2aba89032c21ea9bbba3b0509af59c6ad3d9f89a2e2ef",
+          "strokeWidth": 2,
+          "body": "<path class=\"icon-object\" fill=\"currentColor\" fill-opacity=\".1\" d=\"M6 21 21 13.5l3 6L9 27Z\"/><path class=\"icon-action\" d=\"M6 21 27 10.5m-4.6-.9 4.6.9-1.9 4.3M6 21 3 15\"/><circle class=\"icon-action-solid\" fill=\"currentColor\" stroke=\"none\" cx=\"6\" cy=\"21\" r=\"2.5\"/>",
+          "note": "Rotated object with its new X/Y axes on the long edge and the origin at the corner; 16/24/32 px study."
         }
       ]
     },

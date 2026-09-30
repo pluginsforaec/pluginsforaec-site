@@ -17,7 +17,7 @@ const SPAN = 46;                   // orthographic frustum height at zoom 1 (m)
 const DIST = 84;                   // perspective distance at zoom 1 (m)
 const HOME = { target: new THREE.Vector3(-1, 4.2, 2), dir: new THREE.Vector3(-16, 7, 46).normalize() };
 const SCENE_DIR = new THREE.Vector3(5, 10, 14).normalize(); // tool scenes sit on the plaza in front
-const TOOL_PLAZA = [-1, 0.1, 13.6];     // where the Demo House tool scenes are placed on the pavilion plaza
+const TOOL_PLAZA = [-1, 0.1, 16.4];     // where the Demo House tool scenes are placed on the pavilion plaza
 
 const TEXT = {
   en: {
@@ -29,6 +29,10 @@ const TEXT = {
     noScene: name => `${name} works in SketchUp. The demo model has no prepared scene for it yet.`,
     prompt: {
       S01: 'Make Face+: the two loops are selected. Click Apply or press Enter.',
+      S20: 'Reset Axis+: the bench is selected; its axes go onto its long side.',
+      S14: 'Mirror+: the seat is selected; the mirror line is the one on the floor.',
+      S15: 'Align+: the three boxes are selected; the mode is in Settings.',
+      S08: 'Smart Offset: the panel face is selected; distance, side and copies are in Settings.',
       S10: 'Find Gap: the edges are selected. Click Apply or press Enter.',
       S09: 'Connect / Heal: the edges are selected. Click Apply or press Enter.',
       S11: 'Weld+: the edges are selected. Click Apply or press Enter.',
@@ -39,11 +43,16 @@ const TEXT = {
     connect: (closed, left) => `${closed} gap${closed === 1 ? '' : 's'} closed${left ? `, ${left} open end${left === 1 ? '' : 's'} left: no partner within the gap limit` : ''}.`,
     weld: (edges, curves) => `${edges} edges welded into ${curves} curve${curves === 1 ? '' : 's'}; the branch is split where three edges meet.`,
     lineToFace: (walls, mm) => `${walls} wall face${walls === 1 ? '' : 's'} created, ${mm} mm high.`,
+    resetAxis: angle => `1 container reset: X axis on the long side (${angle}°), origin at the lower corner; the bench did not move.`,
+    mirror: n => `${n} object mirrored as a copy across the floor line.`,
+    align: (label, moved, count) => `${label}: ${moved} of ${count} objects moved.`,
+    smartOffset: (n, mm, side, count) => `${n} offset outline${n === 1 ? '' : 's'}, ${mm} mm ${side.toLowerCase()}${count > 1 ? ` × ${count}` : ''}.`,
     undone: label => `Undone: ${label}`, redone: label => `Redone: ${label}`, nothing: 'Nothing to undo.',
     pickTool: 'Pick an ARQO tool first.', badValue: 'Type a height such as 2500, 2.5m or 250cm.',
     noSelection: 'No Selection', madeBy: 'Made with', madeWith: (tool, parts, built) => `${tool} makes this part of the pavilion: ${parts}.${built ? '' : ' The tool is planned; it is not built yet.'}`, name: 'Name', type: 'Type', id: 'ARQO ID', size: 'Size', group: 'Group', edges: 'Edges', faces: 'Faces',
     height: 'Height', measurements: 'Measurements',
-    settings: { gapLimitMm: 'Gap limit (mm)', heightMm: 'Wall height (mm)', lastDistanceMm: 'Last distance (mm)' },
+    settings: { gapLimitMm: 'Gap limit (mm)', heightMm: 'Wall height (mm)', lastDistanceMm: 'Last distance (mm)', mode: 'Align', distanceMm: 'Offset distance (mm)', side: 'Side', count: 'Copies' },
+    options: { mode: { left: 'Left', center_x: 'Centre X', right: 'Right', front: 'Front', center_y: 'Centre Y', back: 'Back', bottom: 'Bottom', center_z: 'Centre Z', top: 'Top', distribute_x: 'Distribute X', distribute_y: 'Distribute Y', distribute_z: 'Distribute Z' }, side: { Inside: 'Inside', Outside: 'Outside', Both: 'Both' } },
     noSettings: 'This tool has no settings.', opensInSketchUp: 'Opens in SketchUp.', trayOnly: 'In SketchUp'
   },
   tr: {
@@ -55,6 +64,10 @@ const TEXT = {
     noScene: name => `${name} SketchUp'ta çalışır. Demo modelde bu araç için hazır sahne henüz yok.`,
     prompt: {
       S01: 'Make Face+: iki döngü seçili. Uygula\'ya bas ya da Enter.',
+      S20: 'Reset Axis+: bank seçili; ekseni uzun kenarına oturur.',
+      S14: 'Mirror+: oturma bloğu seçili; ayna çizgisi yerdeki çizgi.',
+      S15: 'Align+: üç kutu seçili; hizalama modu Ayarlar\'da.',
+      S08: 'Smart Offset: panel yüzeyi seçili; mesafe, taraf ve adet Ayarlar\'da.',
       S10: 'Find Gap: kenarlar seçili. Uygula\'ya bas ya da Enter.',
       S09: 'Connect / Heal: kenarlar seçili. Uygula\'ya bas ya da Enter.',
       S11: 'Weld+: kenarlar seçili. Uygula\'ya bas ya da Enter.',
@@ -65,11 +78,16 @@ const TEXT = {
     connect: (closed, left) => `${closed} boşluk kapatıldı${left ? `, ${left} açık uç kaldı: sınır içinde eşi yok` : ''}.`,
     weld: (edges, curves) => `${edges} kenar ${curves} eğriye birleştirildi; üç kenarın buluştuğu yerde dallanma ayrıldı.`,
     lineToFace: (walls, mm) => `${walls} duvar yüzeyi oluşturuldu, yükseklik ${mm} mm.`,
+    resetAxis: angle => `1 kap sıfırlandı: X ekseni uzun kenarda (${angle}°), orijin alt köşede; bank yerinden kıpırdamadı.`,
+    mirror: n => `${n} nesne yerdeki çizgiye göre kopyalı aynalandı.`,
+    align: (label, moved, count) => `${label}: ${count} nesneden ${moved} tanesi taşındı.`,
+    smartOffset: (n, mm, side, count) => `${n} öteleme hattı, ${mm} mm ${({ Inside: 'içe', Outside: 'dışa', Both: 'iki yöne' })[side] || side}${count > 1 ? ` × ${count}` : ''}.`,
     undone: label => `Geri alındı: ${label}`, redone: label => `Yinelendi: ${label}`, nothing: 'Geri alınacak işlem yok.',
     pickTool: 'Önce bir ARQO aracı seç.', badValue: 'Yüksekliği 2500, 2.5m ya da 250cm gibi yaz.',
     noSelection: 'Seçim yok', madeBy: 'Yapan araç', madeWith: (tool, parts, built) => `${tool} yapının şu parçasını yapar: ${parts}.${built ? '' : ' Araç planlandı, henüz yapılmadı.'}`, name: 'Ad', type: 'Tür', id: 'ARQO ID', size: 'Boyut', group: 'Grup', edges: 'Kenarlar', faces: 'Yüzeyler',
     height: 'Yükseklik', measurements: 'Measurements',
-    settings: { gapLimitMm: 'Boşluk sınırı (mm)', heightMm: 'Duvar yüksekliği (mm)', lastDistanceMm: 'Son mesafe (mm)' },
+    settings: { gapLimitMm: 'Boşluk sınırı (mm)', heightMm: 'Duvar yüksekliği (mm)', lastDistanceMm: 'Son mesafe (mm)', mode: 'Hizalama', distanceMm: 'Öteleme mesafesi (mm)', side: 'Taraf', count: 'Adet' },
+    options: { mode: { left: 'Sol', center_x: 'Orta X', right: 'Sağ', front: 'Ön', center_y: 'Orta Y', back: 'Arka', bottom: 'Alt', center_z: 'Orta Z', top: 'Üst', distribute_x: 'X boyunca dağıt', distribute_y: 'Y boyunca dağıt', distribute_z: 'Z boyunca dağıt' }, side: { Inside: 'İçe', Outside: 'Dışa', Both: 'İki yöne' } },
     noSettings: 'Bu aracın ayarı yok.', opensInSketchUp: "SketchUp'ta açılır.", trayOnly: "SketchUp'ta"
   }
 }[LANG];
@@ -346,6 +364,15 @@ function build() {
   }
 
   // --- tools --------------------------------------------------------------------------------
+  const settingField = s => {
+    const options = TEXT.options?.[s.id];
+    if (s.type === 'string' && options) return `<label>${TEXT.settings[s.id] || s.id}<select data-setting="${s.id}">${Object.entries(options).map(([value, label]) => `<option value="${value}"${value === s.default ? ' selected' : ''}>${label}</option>`).join('')}</select></label>`;
+    return `<label>${TEXT.settings[s.id] || s.id}<input type="number" min="0" step="any" data-setting="${s.id}" value="${s.default}"></label>`;
+  };
+  const settingText = (tool, id) => {
+    const input = settingsBox && settingsBox.querySelector(`[data-setting="${id}"]`);
+    return input ? input.value : tool?.manifest?.settings?.find(s => s.id === id)?.default;
+  };
   const setting = (tool, id) => {
     const input = settingsBox && settingsBox.querySelector(`[data-setting="${id}"]`);
     const fallback = tool?.manifest?.settings?.find(s => s.id === id)?.default;
@@ -355,7 +382,7 @@ function build() {
   function renderSettings(tool) {
     if (!settingsBox || document.getElementById('su-dialog')) return;
     const list = tool?.manifest?.settings || [];
-    settingsBox.innerHTML = list.length ? list.map(s => `<label>${TEXT.settings[s.id] || s.id}<input type="number" min="0" step="any" data-setting="${s.id}" value="${s.default}"></label>`).join('') : `<p class="su-muted">${TEXT.noSettings}</p>`;
+    settingsBox.innerHTML = list.length ? list.map(settingField).join('') : `<p class="su-muted">${TEXT.noSettings}</p>`;
   }
   function fixtureFor(tool) {
     const node = data?.showcase?.[tool?.productId]?.node;
@@ -477,6 +504,104 @@ function build() {
       const objects = chains.map((chain, i) => lines(chain.points.slice(0, -1).map((p, k) => [p, chain.points[k + 1]]), palette[i % palette.length]));
       objects.push(markers(chains.flatMap(c => [c.points[0], c.points[c.points.length - 1]]), '#1f5cff', 12));
       return keep(objects, tool.name, TEXT.weld(segments.length, chains.length));
+    } },
+    S20: { run(tool, fixture) { // Reset Axis+
+      const bench = fixture.node.getObjectByName('ResetAxis_Bench');
+      bench.updateWorldMatrix(true, false);
+      const edges = new THREE.EdgesGeometry(bench.geometry).attributes.position;
+      let best = null;
+      for (let i = 0; i < edges.count; i += 2) {
+        const a = new THREE.Vector3().fromBufferAttribute(edges, i).applyMatrix4(bench.matrixWorld);
+        const b = new THREE.Vector3().fromBufferAttribute(edges, i + 1).applyMatrix4(bench.matrixWorld);
+        if (Math.abs(a.y - b.y) > 1e-6) continue;
+        const d = new THREE.Vector3(b.x - a.x, 0, b.z - a.z);
+        if (!best || d.length() > best.length() + 1e-6) best = d;
+      }
+      const x = best.normalize(); if (x.x < 0) x.negate();
+      const up = new THREE.Vector3(0, 1, 0); const y = new THREE.Vector3().crossVectors(up, x).normalize();
+      const p = bench.geometry.attributes.position; const pts = [];
+      for (let i = 0; i < p.count; i++) pts.push(new THREE.Vector3().fromBufferAttribute(p, i).applyMatrix4(bench.matrixWorld));
+      const lo = [Infinity, Infinity, Infinity];
+      for (const q of pts) { lo[0] = Math.min(lo[0], q.dot(x)); lo[1] = Math.min(lo[1], q.y); lo[2] = Math.min(lo[2], q.dot(y)); }
+      const origin = x.clone().multiplyScalar(lo[0]).add(y.clone().multiplyScalar(lo[2])).setY(lo[1]);
+      const axes = [lines([[origin, origin.clone().addScaledVector(x, 0.7)]], 0xd23b2f), lines([[origin, origin.clone().addScaledVector(y, 0.4)]], 0x2f9a3a), lines([[origin, origin.clone().addScaledVector(up, 0.35)]], 0x1f5cff), markers([origin], '#d57750', 14)];
+      const angle = Math.round(Math.abs(Math.atan2(x.z, x.x) * 180 / Math.PI));
+      return keep(axes, tool.name, TEXT.resetAxis(angle));
+    } },
+    S14: { run(tool, fixture) { // Mirror+
+      const source = fixture.node.getObjectByName('Mirror_Source');
+      const [a, b] = segmentsOf(fixture.node.getObjectByName('Mirror_Line'))[0];
+      const n = new THREE.Vector3(-(b.z - a.z), 0, b.x - a.x).normalize();
+      const r = new THREE.Matrix4().set(1 - 2 * n.x * n.x, -2 * n.x * n.y, -2 * n.x * n.z, 0, -2 * n.y * n.x, 1 - 2 * n.y * n.y, -2 * n.y * n.z, 0, -2 * n.z * n.x, -2 * n.z * n.y, 1 - 2 * n.z * n.z, 0, 0, 0, 0, 1);
+      const reflect = new THREE.Matrix4().makeTranslation(a.x, a.y, a.z).multiply(r).multiply(new THREE.Matrix4().makeTranslation(-a.x, -a.y, -a.z));
+      source.updateWorldMatrix(true, true);
+      const objects = [];
+      source.traverse(child => {
+        if (!child.isMesh) return;
+        const m = faceMaterial(); const copy = new THREE.Mesh(child.geometry, m);
+        copy.matrixAutoUpdate = false; copy.matrix.copy(reflect).multiply(child.matrixWorld); copy.userData.webOnly = true;
+        objects.push(copy); settle(m);
+      });
+      objects.push(lines([[a, b]], ACCENT, { dashed: true }));
+      return keep(objects, tool.name, TEXT.mirror(1));
+    } },
+    S15: { run(tool, fixture) { // Align+
+      const mode = settingText(tool, 'mode') || 'left';
+      const boxes = [1, 2, 3].map(i => fixture.node.getObjectByName(`Align_Box_${i}`)).filter(Boolean);
+      const axis = { x: 'x', y: 'z', z: 'y' }[(mode.match(/_(x|y|z)$/) || [])[1] || ({ left: 'x', right: 'x', front: 'y', back: 'y', bottom: 'z', top: 'z' })[mode]];
+      const sign = axis === 'z' ? -1 : 1; // SketchUp Y (front to back) is three.js -Z
+      const box = o => new THREE.Box3().setFromObject(o);
+      const lowOf = o => sign > 0 ? box(o).min[axis] : -box(o).max[axis];
+      const highOf = o => sign > 0 ? box(o).max[axis] : -box(o).min[axis];
+      const before = boxes.map(o => o.position.clone());
+      const targets = new Map();
+      if (mode.startsWith('distribute')) {
+        const sorted = [...boxes].sort((p, q) => (lowOf(p) + highOf(p)) - (lowOf(q) + highOf(q)));
+        const sizes = sorted.map(o => highOf(o) - lowOf(o));
+        const gap = (highOf(sorted[sorted.length - 1]) - lowOf(sorted[0]) - sizes.reduce((u, v) => u + v, 0)) / (sorted.length - 1);
+        let cursor = lowOf(sorted[0]);
+        sorted.forEach((o, i) => { targets.set(o, cursor - lowOf(o)); cursor += sizes[i] + gap; });
+      } else {
+        const anchor = /^(left|front|bottom)$/.test(mode) ? 'min' : /^(right|back|top)$/.test(mode) ? 'max' : 'mid';
+        const lows = boxes.map(lowOf), highs = boxes.map(highOf);
+        const target = anchor === 'min' ? Math.min(...lows) : anchor === 'max' ? Math.max(...highs) : (Math.min(...lows) + Math.max(...highs)) / 2;
+        boxes.forEach((o, i) => targets.set(o, target - (anchor === 'min' ? lows[i] : anchor === 'max' ? highs[i] : (lows[i] + highs[i]) / 2)));
+      }
+      const moved = boxes.filter(o => Math.abs(targets.get(o)) > 1e-6).length;
+      const apply = () => boxes.forEach((o, i) => { o.position.copy(before[i]); o.position[axis] += sign * targets.get(o); });
+      const restore = () => boxes.forEach((o, i) => o.position.copy(before[i]));
+      apply();
+      const label = TEXT.options.mode[mode] || mode;
+      return { tool: tool.name, message: TEXT.align(label, moved, boxes.length), objects: boxes, undo: restore, redo: apply };
+    } },
+    S08: { run(tool, fixture) { // Smart Offset
+      const panel = fixture.node.getObjectByName('SmartOffset_Panel');
+      panel.updateWorldMatrix(true, false);
+      const p = panel.geometry.attributes.position;
+      const corners = [0, 1, 3, 2].map(i => new THREE.Vector3().fromBufferAttribute(p, i).applyMatrix4(panel.matrixWorld));
+      const distance = setting(tool, 'distanceMm') / 1000, count = Math.max(1, Math.min(20, Math.round(setting(tool, 'count')))), side = settingText(tool, 'side') || 'Inside';
+      const u = new THREE.Vector3().subVectors(corners[1], corners[0]).normalize();
+      const normal = new THREE.Vector3().subVectors(corners[3], corners[0]).cross(u).normalize();
+      const v = new THREE.Vector3().crossVectors(normal, u);
+      const flat = corners.map(c => new THREE.Vector2(c.clone().sub(corners[0]).dot(u), c.clone().sub(corners[0]).dot(v)));
+      const area = flat.reduce((sum, q, i) => { const r = flat[(i + 1) % flat.length]; return sum + q.x * r.y - r.x * q.y; }, 0) / 2;
+      const ccw = area > 0 ? flat : [...flat].reverse();
+      const offset = d => ccw.map((q, i) => {
+        const prev = ccw[(i - 1 + ccw.length) % ccw.length], next = ccw[(i + 1) % ccw.length];
+        const d1 = q.clone().sub(prev).normalize(), d2 = next.clone().sub(q).normalize();
+        const n1 = new THREE.Vector2(-d1.y, d1.x), n2 = new THREE.Vector2(-d2.y, d2.x);
+        const bis = n1.clone().add(n2).normalize();
+        return q.clone().addScaledVector(bis, d / Math.max(bis.dot(n1), 0.3));
+      });
+      const objects = []; let made = 0;
+      for (const s of side === 'Both' ? [1, -1] : side === 'Outside' ? [-1] : [1]) for (let k = 1; k <= count; k++) {
+        const loop = offset(s * distance * k);
+        const signed = loop.reduce((sum, q, i) => { const r = loop[(i + 1) % loop.length]; return sum + q.x * r.y - r.x * q.y; }, 0) / 2;
+        if (signed <= 1e-9) break;
+        const world = loop.map(q => corners[0].clone().addScaledVector(u, q.x).addScaledVector(v, q.y).addScaledVector(normal, 0.002));
+        objects.push(lines(world.map((w, i) => [w, world[(i + 1) % world.length]]), ACCENT)); made++;
+      }
+      return keep(objects, tool.name, TEXT.smartOffset(made, Math.round(distance * 1000), side, count));
     } },
     S02: { interactive: true, run(tool, fixture, heightM) { // Line to Face
       const h = heightM ?? setting(tool, 'heightMm') / 1000;
@@ -734,7 +859,7 @@ function build() {
   function renderSettingsAll() {
     if (!settingsBox || settingsBox.dataset.all) return;
     const seen = new Set(); const rows = [];
-    for (const t of state.catalog?.tools || []) for (const st of t.manifest.settings || []) { if (seen.has(st.id) || !TEXT.settings[st.id] || st.id === 'lastDistanceMm') continue; seen.add(st.id); rows.push(`<label>${TEXT.settings[st.id]}<input type="number" min="0" step="any" data-setting="${st.id}" value="${st.default}"></label>`); }
+    for (const t of state.catalog?.tools || []) for (const st of t.manifest.settings || []) { if (seen.has(st.id) || !TEXT.settings[st.id] || st.id === 'lastDistanceMm') continue; seen.add(st.id); rows.push(settingField(st)); }
     settingsBox.innerHTML = rows.join(''); settingsBox.dataset.all = '1';
   }
 
