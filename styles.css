@@ -30,7 +30,7 @@ body[data-theme=dark]{color-scheme:dark}body[data-theme=dark] .scene-top{fill:#b
 .marketplace-hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:56px;align-items:center}
 .marketplace-hero-copy>p{font-size:14px;line-height:1.9;color:var(--muted);margin-bottom:25px}
 .home-model-wrap{min-width:0}
-.home-model{position:relative;aspect-ratio:16/11;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:var(--surface-2);box-shadow:var(--shadow);cursor:grab;touch-action:none}
+.home-model{position:relative;aspect-ratio:16/11;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:linear-gradient(#b9dcf4 0%,#dcebf5 52%,#f3f5f2 100%);box-shadow:var(--shadow);cursor:grab;touch-action:none}
 .home-model:active{cursor:grabbing}
 .home-model canvas{display:block;width:100%!important;height:100%!important}
 .home-model-tag{position:absolute;left:18px;top:16px;z-index:2;font-size:8px;letter-spacing:1.4px;color:var(--muted);pointer-events:none}

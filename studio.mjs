@@ -13,10 +13,11 @@ const asset = name => new URL(`assets/${name}`, import.meta.url).href;
 const $ = selector => document.querySelector(selector);
 const ACCENT = 0xd57750;
 const SELECT = 0x1f5cff;
-const SPAN = 12.8;                 // orthographic frustum height at zoom 1 (m)
-const DIST = 23.5;                 // perspective distance at zoom 1 (m)
-const HOME = { target: new THREE.Vector3(0, 1.0, 0), dir: new THREE.Vector3(14, 10, 16).normalize() };
-const SCENE_DIR = new THREE.Vector3(9, 11, -15).normalize(); // tool scenes sit behind the house
+const SPAN = 46;                   // orthographic frustum height at zoom 1 (m)
+const DIST = 84;                   // perspective distance at zoom 1 (m)
+const HOME = { target: new THREE.Vector3(-1, 4.2, 2), dir: new THREE.Vector3(-16, 7, 46).normalize() };
+const SCENE_DIR = new THREE.Vector3(5, 10, 14).normalize(); // tool scenes sit on the plaza in front
+const TOOL_PLAZA = [-1, 0.1, 13.6];     // where the Demo House tool scenes are placed on the pavilion plaza
 
 const TEXT = {
   en: {
@@ -40,7 +41,7 @@ const TEXT = {
     lineToFace: (walls, mm) => `${walls} wall face${walls === 1 ? '' : 's'} created, ${mm} mm high.`,
     undone: label => `Undone: ${label}`, redone: label => `Redone: ${label}`, nothing: 'Nothing to undo.',
     pickTool: 'Pick an ARQO tool first.', badValue: 'Type a height such as 2500, 2.5m or 250cm.',
-    noSelection: 'No Selection', name: 'Name', type: 'Type', id: 'ARQO ID', size: 'Size', group: 'Group', edges: 'Edges', faces: 'Faces',
+    noSelection: 'No Selection', madeBy: 'Made with', madeWith: (tool, parts, built) => `${tool} makes this part of the pavilion: ${parts}.${built ? '' : ' The tool is planned; it is not built yet.'}`, name: 'Name', type: 'Type', id: 'ARQO ID', size: 'Size', group: 'Group', edges: 'Edges', faces: 'Faces',
     height: 'Height', measurements: 'Measurements',
     settings: { gapLimitMm: 'Gap limit (mm)', heightMm: 'Wall height (mm)', lastDistanceMm: 'Last distance (mm)' },
     noSettings: 'This tool has no settings.', opensInSketchUp: 'Opens in SketchUp.', trayOnly: 'In SketchUp'
@@ -66,7 +67,7 @@ const TEXT = {
     lineToFace: (walls, mm) => `${walls} duvar yüzeyi oluşturuldu, yükseklik ${mm} mm.`,
     undone: label => `Geri alındı: ${label}`, redone: label => `Yinelendi: ${label}`, nothing: 'Geri alınacak işlem yok.',
     pickTool: 'Önce bir ARQO aracı seç.', badValue: 'Yüksekliği 2500, 2.5m ya da 250cm gibi yaz.',
-    noSelection: 'Seçim yok', name: 'Ad', type: 'Tür', id: 'ARQO ID', size: 'Boyut', group: 'Grup', edges: 'Kenarlar', faces: 'Yüzeyler',
+    noSelection: 'Seçim yok', madeBy: 'Yapan araç', madeWith: (tool, parts, built) => `${tool} yapının şu parçasını yapar: ${parts}.${built ? '' : ' Araç planlandı, henüz yapılmadı.'}`, name: 'Ad', type: 'Tür', id: 'ARQO ID', size: 'Boyut', group: 'Grup', edges: 'Kenarlar', faces: 'Yüzeyler',
     height: 'Yükseklik', measurements: 'Measurements',
     settings: { gapLimitMm: 'Boşluk sınırı (mm)', heightMm: 'Duvar yüksekliği (mm)', lastDistanceMm: 'Son mesafe (mm)' },
     noSettings: 'Bu aracın ayarı yok.', opensInSketchUp: "SketchUp'ta açılır.", trayOnly: "SketchUp'ta"
@@ -215,13 +216,13 @@ function build() {
   const scene = new THREE.Scene();
   scene.add(new THREE.HemisphereLight('#ffffff', '#b9bdb0', 2.0));
   const sun = new THREE.DirectionalLight('#fffaf0', 2.2);
-  sun.position.set(-7, 13, 9); sun.castShadow = true; sun.shadow.mapSize.set(2048, 2048);
-  Object.assign(sun.shadow.camera, { left: -14, right: 14, top: 12, bottom: -12 });
+  sun.position.set(-22, 40, 30); sun.castShadow = true; sun.shadow.mapSize.set(4096, 4096);
+  Object.assign(sun.shadow.camera, { left: -42, right: 42, top: 36, bottom: -36, near: 1, far: 140 });
   sun.shadow.normalBias = 0.03; sun.shadow.bias = -0.0001;
   scene.add(sun);
   // SketchUp-like ground: a flat plane in a muted green-grey, with a shadow catcher.
-  const shadowPlane = new THREE.Mesh(new THREE.PlaneGeometry(200, 200), new THREE.ShadowMaterial({ opacity: 0.18 }));
-  shadowPlane.rotation.x = -Math.PI / 2; shadowPlane.position.y = -0.124; shadowPlane.receiveShadow = true; scene.add(shadowPlane);
+  const shadowPlane = new THREE.Mesh(new THREE.PlaneGeometry(400, 400), new THREE.ShadowMaterial({ opacity: 0.18 }));
+  shadowPlane.rotation.x = -Math.PI / 2; shadowPlane.position.y = -0.203; shadowPlane.receiveShadow = true; scene.add(shadowPlane);
 
   // Axes: red, green, blue; solid on the positive side, dotted on the negative.
   const axes = new THREE.Group();
@@ -242,7 +243,7 @@ function build() {
   controls.target.copy(HOME.target);
   controls.enableDamping = true; controls.dampingFactor = 0.1;
   controls.zoomToCursor = true;
-  controls.minDistance = 1; controls.maxDistance = 400; controls.minZoom = 0.2; controls.maxZoom = 12;
+  controls.minDistance = 1; controls.maxDistance = 400; controls.minZoom = 0.2; controls.maxZoom = 80;
   controls.maxPolarAngle = Math.PI - 0.01;
 
   function resize() {
@@ -281,23 +282,28 @@ function build() {
   const fixtureMaterial = new THREE.LineBasicMaterial({ color: '#1d1f22', depthTest: false, transparent: true });
   const selectedFixtureMaterial = new THREE.LineBasicMaterial({ color: SELECT, depthTest: false, transparent: true });
   const xrayStore = new Map();
+  const madeWith = new Map();   // tool product id -> pavilion parts made with it
+  let lit = [];
 
   Promise.all([
+    new GLTFLoader().loadAsync(asset('arqo-pavilion-01.glb')),
     new GLTFLoader().loadAsync(asset('arqo-demo-house-01.glb')),
     fetch(asset('showcase.json')).then(r => { if (!r.ok) throw new Error(`showcase.json ${r.status}`); return r.json(); }),
     import(new URL('lib/catalog.mjs', document.baseURI).href).catch(() => null)
-  ]).then(([gltf, showcase, catalog]) => {
+  ]).then(([pavilion, gltf, showcase, catalog]) => {
     data = showcase; state.catalog = catalog;
-    const model = gltf.scene;
+    const model = pavilion.scene;
+    // The tool scenes come from Demo House 01 and sit on the pavilion's plaza.
     const showcaseGroup = gltf.scenes[showcase.showcaseScene]?.getObjectByName('Showcase_Objects');
-    if (showcaseGroup) model.add(showcaseGroup);
+    if (showcaseGroup) { showcaseGroup.position.fromArray(TOOL_PLAZA); model.add(showcaseGroup); model.updateMatrixWorld(true); }
+    model.traverse(node => { if (node.userData.tool) { if (!madeWith.has(node.userData.tool)) madeWith.set(node.userData.tool, []); madeWith.get(node.userData.tool).push(node); } });
     model.traverse(node => {
       if (node.userData.arqoId) byId.set(node.userData.arqoId, node);
       if (!node.isMesh) return;
       meshes.push(node); pickables.push(node);
       node.material = node.material.clone();
       node.castShadow = !node.material.transparent; node.receiveShadow = !node.material.transparent;
-      if (!node.name.startsWith('Tree_Canopy')) { const e = new THREE.LineSegments(new THREE.EdgesGeometry(node.geometry, 30), edgeMaterial); e.raycast = () => {}; e.userData.webOnly = true; node.add(e); }
+      if (!node.name.startsWith('Tree_Canopy') && node.name !== 'Pool') { const e = new THREE.LineSegments(new THREE.EdgesGeometry(node.geometry, 30), edgeMaterial); e.raycast = () => {}; e.userData.webOnly = true; node.add(e); }
     });
     for (const record of showcase.fixtures) {
       const node = byId.get(record.arqoId) || model.getObjectByName(record.node);
@@ -334,8 +340,9 @@ function build() {
     const fixture = [...fixtures.values()].find(f => f.node === object);
     const edgeCount = fixture ? segmentsOf(object).length : 0;
     const type = fixture ? `${TEXT.edges} (${edgeCount})` : TEXT.group;
-    const name = fixture ? fixture.record.showcaseLabel : (object.name || '').replace(/_/g, ' ');
-    entityBox.innerHTML = `<p class="su-entity-title">${type}</p><dl><dt>${TEXT.name}</dt><dd>${name}</dd><dt>${TEXT.id}</dt><dd>${object.userData.arqoId || '—'}</dd><dt>${TEXT.size}</dt><dd>${mm(s.x)} × ${mm(s.z)} × ${mm(s.y)} mm</dd></dl>`;
+    const name = fixture ? fixture.record.showcaseLabel : object.userData.label ? object.userData.label[LANG] : (object.name || '').replace(/_/g, ' ');
+    const madeBy = object.userData.toolLabel ? `<dt>${TEXT.madeBy}</dt><dd>${object.userData.toolLabel}</dd>` : '';
+    entityBox.innerHTML = `<p class="su-entity-title">${type}</p><dl><dt>${TEXT.name}</dt><dd>${name}</dd><dt>${TEXT.id}</dt><dd>${object.userData.arqoId || '—'}</dd>${madeBy}<dt>${TEXT.size}</dt><dd>${mm(s.x)} × ${mm(s.z)} × ${mm(s.y)} mm</dd></dl>`;
   }
 
   // --- tools --------------------------------------------------------------------------------
@@ -363,17 +370,34 @@ function build() {
   function frame(box, extraHeight = 0) {
     const size = box.getSize(new THREE.Vector3()); const centre = box.getCenter(new THREE.Vector3());
     if (extraHeight > size.y) { centre.y += (extraHeight - size.y) / 2; size.y = extraHeight; }
-    const zoom = THREE.MathUtils.clamp(SPAN / (Math.max(size.x, size.z, size.y * 1.35, 0.5) * 2.4), 1, 4.5);
+    const zoom = THREE.MathUtils.clamp(SPAN / (Math.max(size.x, size.z, size.y * 1.35, 0.5) * 2.4), 1, 40);
     flyTo(centre, zoom, SCENE_DIR);
   }
 
+  function unlight() { for (const m of lit) if (m.material.emissive) { m.material.emissive.setHex(0); m.material.emissiveIntensity = 1; } lit = []; }
+  function showMadeWith(tool) {
+    const nodes = madeWith.get(tool.productId); if (!nodes) return false;
+    const box = new THREE.Box3();
+    for (const node of nodes) { box.expandByObject(node); node.traverse(c => { if (c.isMesh && c.material.emissive) { c.material.emissive.setHex(ACCENT); c.material.emissiveIntensity = 0.45; lit.push(c); } }); }
+    select(null); frame(box);
+    const names = nodes.map(n => n.userData.label[LANG]).join(', ');
+    const built = (tool.manifest?.implementationStatus || 'planned') !== 'planned' && tool.id !== 'A01';
+    const text = TEXT.madeWith(tool.name, names, built);
+    status(text); toast(`ARQO · ${tool.name}`, text);
+    return true;
+  }
+
   function activate(tool, fly) {
-    cancelInteractive();
+    cancelInteractive(); unlight();
     state.tool = tool; state.toolDef = null;
     renderSettings(tool);
     const status_ = tool.manifest?.implementationStatus || 'planned';
-    if (tool.id === 'A01') { status(TEXT.push); toast('ARQOPush', TEXT.push); showFixture(null); return; }
-    if (status_ === 'planned') { status(TEXT.planned(tool.name)); if (fly) toast('ARQO', TEXT.planned(tool.name)); showFixture(null); return; }
+    if (tool.id === 'A01' || status_ === 'planned') {
+      showFixture(null);
+      if (fly && showMadeWith(tool)) return;
+      const text = tool.id === 'A01' ? TEXT.push : TEXT.planned(tool.name);
+      status(text); if (fly) toast('ARQO', text); return;
+    }
     const fixture = fixtureFor(tool);
     const runner = RUNNERS[tool.id];
     if (!fixture || !runner) { status(TEXT.noScene(tool.name)); if (fly) toast(tool.name, TEXT.noScene(tool.name)); showFixture(null); return; }
@@ -560,7 +584,7 @@ function build() {
     if (interactive.on && !(e.buttons & 4)) { interactive.height = heightFromPointer(e); setVcb(TEXT.height, `${Math.round(interactive.height * 1000)} mm`); drawPreview(); }
     if (!hoverLabel) return;
     const owner = pick(e);
-    if (owner && owner.userData.arqoId) { hoverLabel.textContent = (owner.name || owner.userData.arqoId).replace(/_/g, ' '); hoverLabel.hidden = false; }
+    if (owner && owner.userData.arqoId) { hoverLabel.textContent = owner.userData.label ? `${owner.userData.label[LANG]} · ${owner.userData.toolLabel}` : (owner.name || owner.userData.arqoId).replace(/_/g, ' '); hoverLabel.hidden = false; }
     else hoverLabel.hidden = true;
   });
   renderer.domElement.addEventListener('pointerleave', () => { if (hoverLabel) hoverLabel.hidden = true; });
@@ -579,7 +603,7 @@ function build() {
   }
   function zoomExtents() {
     const box = new THREE.Box3().setFromObject(root); const sphere = box.getBoundingSphere(new THREE.Sphere());
-    flyTo(sphere.center, THREE.MathUtils.clamp(SPAN / (sphere.radius * 2.1), 0.2, 12));
+    flyTo(new THREE.Vector3(sphere.center.x, 4, sphere.center.z), THREE.MathUtils.clamp(SPAN / (sphere.radius * 1.5), 0.2, 12));
   }
   function view(dir) { flyTo(controls.target.clone(), camera === ortho ? ortho.zoom : DIST / camera.position.distanceTo(controls.target), dir); }
 
