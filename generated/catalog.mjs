@@ -1707,19 +1707,19 @@ export default {
       "requirementId": "S21",
       "moduleId": "arqo.smart_slice",
       "host": "sketchup",
-      "version": "0.1.1",
-      "implementationStatus": "planned",
+      "version": "0.2.0",
+      "implementationStatus": "in-development",
       "category": "cut",
       "locales": {
         "en": {
           "name": "Smart Slice",
           "summary": "Slice geometry using a reference cutting plane.",
-          "description": "Cut and separate by two or three points, an edge, a face or a perpendicular plane; with a section face."
+          "description": "Slice, cut or detach groups and components with a plane from two or three points, a face, an edge (perpendicular) or a typed height; the cut is closed with a section face."
         },
         "tr": {
           "name": "Smart Slice",
           "summary": "Geometriye yeni bir kesit aç.",
-          "description": "Kesme ve ayırma; iki/üç nokta, kenar, yüzey ve dik düzlem; kesit yüzeyi."
+          "description": "Grup ve bileşenleri iki/üç nokta, yüzey, kenara dik düzlem ya da yazılan yükseklikle böl, kes veya ayır; kesit yüzeyle kapanır."
         }
       },
       "license": {
@@ -1736,8 +1736,26 @@ export default {
         "selection",
         "geometry"
       ],
-      "settingsSchemaVersion": 1,
-      "settings": [],
+      "settingsSchemaVersion": 2,
+      "settings": [
+        {
+          "id": "mode",
+          "type": "string",
+          "default": "slice"
+        },
+        {
+          "id": "detachGapMm",
+          "type": "number",
+          "default": 300
+        }
+      ],
+      "settingsMigrations": [
+        {
+          "from": 1,
+          "to": 2,
+          "plan": "migration-1-2.md"
+        }
+      ],
       "icon": {
         "current": "icons/v2.svg",
         "revision": 2,
@@ -1919,19 +1937,19 @@ export default {
       "requirementId": "S24",
       "moduleId": "arqo.smart_select",
       "host": "sketchup",
-      "version": "0.1.0",
-      "implementationStatus": "planned",
+      "version": "0.2.0",
+      "implementationStatus": "in-development",
       "category": "selection",
       "locales": {
         "en": {
           "name": "Smart Select",
           "summary": "Select entities using reusable type and similarity filters.",
-          "description": "Advanced selection by length, area and other criteria."
+          "description": "Select everything in the current context that is like the reference: same component, definition family, material, size, shape, tag, axis or inside its bounding box. Criteria combine, sets of them are saved and reused."
         },
         "tr": {
           "name": "Smart Select",
           "summary": "Aradığın geometriyi kolayca bul.",
-          "description": "Uzunluk, alan ve diğer seçim ölçütlerine göre gelişmiş seçim."
+          "description": "Referansa benzeyen her şeyi seçer: aynı bileşen, tanım ailesi, malzeme, ölçü, biçim, etiket, eksen ya da sınır kutusunun içinde. Ölçütler birleşir, setler kaydedilip yeniden kullanılır."
         }
       },
       "license": {
@@ -1946,13 +1964,33 @@ export default {
       ],
       "coreDependencies": [
         "selection",
-        "objects"
+        "geometry"
       ],
-      "settingsSchemaVersion": 1,
-      "settings": [],
+      "settingsSchemaVersion": 2,
+      "settings": [
+        {
+          "id": "last",
+          "type": "string",
+          "default": "{}",
+          "panel": true
+        },
+        {
+          "id": "presets",
+          "type": "string",
+          "default": "[]",
+          "panel": true
+        }
+      ],
+      "settingsMigrations": [
+        {
+          "from": 1,
+          "to": 2,
+          "plan": "migration-1-2.md"
+        }
+      ],
       "icon": {
-        "current": "icons/v1.svg",
-        "revision": 1,
+        "current": "icons/v2.svg",
+        "revision": 2,
         "status": "draft",
         "history": [
           {
@@ -1960,6 +1998,12 @@ export default {
             "file": "icons/v1.svg",
             "note": "Initial outline study.",
             "sha256": "d0d3f9732c5e0ae634e01c01630b14da305e6fb0722478fe50e78aafd8275f5e"
+          },
+          {
+            "revision": 2,
+            "file": "icons/v2.svg",
+            "note": "A solid reference square, two alike squares picked out in the accent and an unlike circle left alone: select what is like the reference; 16/24/32 px study.",
+            "sha256": "cd5e3071e37d80bbfcec89d01928f5615c9bc7107c8db892dfa38a590f465e66"
           }
         ]
       },
@@ -1976,6 +2020,14 @@ export default {
           "strokeWidth": 1.45,
           "body": "<path d=\"M5 13V5h8m6 0h8v8m0 6v8h-8m-6 0H5v-8\"/><path fill=\"currentColor\" fill-opacity=\"0.12\" stroke=\"none\" d=\"m12 11 12 7-6 1-3 6Z\"/><path d=\"m12 11 12 7-6 1-3 6Z\"/>",
           "note": "Initial outline study."
+        },
+        {
+          "revision": 2,
+          "file": "icons/v2.svg",
+          "sha256": "cd5e3071e37d80bbfcec89d01928f5615c9bc7107c8db892dfa38a590f465e66",
+          "strokeWidth": 2,
+          "body": "<rect class=\"icon-action-solid\" fill=\"currentColor\" stroke=\"none\" x=\"4\" y=\"4\" width=\"10\" height=\"10\" rx=\"1.5\"/><rect class=\"icon-action\" x=\"19\" y=\"5\" width=\"9\" height=\"9\" rx=\"1.5\"/><rect class=\"icon-action\" x=\"5\" y=\"19\" width=\"9\" height=\"9\" rx=\"1.5\"/><circle class=\"icon-object\" fill=\"currentColor\" fill-opacity=\".1\" cx=\"23.5\" cy=\"23.5\" r=\"4.5\"/>",
+          "note": "A solid reference square, two alike squares picked out in the accent and an unlike circle left alone: select what is like the reference; 16/24/32 px study."
         }
       ]
     },

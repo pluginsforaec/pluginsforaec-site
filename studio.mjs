@@ -33,6 +33,8 @@ const TEXT = {
       S14: 'Mirror+: the seat is selected; the mirror line is the one on the floor.',
       S15: 'Align+: the three boxes are selected; the mode is in Settings.',
       S08: 'Smart Offset: the panel face is selected; distance, side and copies are in Settings.',
+      S21: 'Smart Slice: the beam is selected; the cut runs along the line on the floor. Slice, Cut or Detach is in Settings.',
+      S24: 'Smart Select: one stool is the reference; every placement of the same component is selected.',
       S10: 'Find Gap: the edges are selected. Click Apply or press Enter.',
       S09: 'Connect / Heal: the edges are selected. Click Apply or press Enter.',
       S11: 'Weld+: the edges are selected. Click Apply or press Enter.',
@@ -47,12 +49,15 @@ const TEXT = {
     mirror: n => `${n} object mirrored as a copy across the floor line.`,
     align: (label, moved, count) => `${label}: ${moved} of ${count} objects moved.`,
     smartOffset: (n, mm, side, count) => `${n} offset outline${n === 1 ? '' : 's'}, ${mm} mm ${side.toLowerCase()}${count > 1 ? ` × ${count}` : ''}.`,
+    smartSlice: (mode, mm) => mode === 'cut' ? '1 object cut, one side removed; the cut is closed with a section face.' : mode === 'detach' ? `1 object split into 2 parts and pulled ${mm} mm apart.` : '1 object split into 2 parts; both are closed with a section face.',
+    smartSelect: (n, criteria) => `${n} selected (${n} components) · ${criteria}`,
+    sameComponent: 'Same Component',
     undone: label => `Undone: ${label}`, redone: label => `Redone: ${label}`, nothing: 'Nothing to undo.',
     pickTool: 'Pick an ARQO tool first.', badValue: 'Type a height such as 2500, 2.5m or 250cm.',
     noSelection: 'No Selection', madeBy: 'Made with', madeWith: (tool, parts, built) => `${tool} makes this part of the pavilion: ${parts}.${built ? '' : ' The tool is planned; it is not built yet.'}`, name: 'Name', type: 'Type', id: 'ARQO ID', size: 'Size', group: 'Group', edges: 'Edges', faces: 'Faces',
     height: 'Height', measurements: 'Measurements',
-    settings: { gapLimitMm: 'Gap limit (mm)', heightMm: 'Wall height (mm)', lastDistanceMm: 'Last distance (mm)', mode: 'Align', distanceMm: 'Offset distance (mm)', side: 'Side', count: 'Copies' },
-    options: { mode: { left: 'Left', center_x: 'Centre X', right: 'Right', front: 'Front', center_y: 'Centre Y', back: 'Back', bottom: 'Bottom', center_z: 'Centre Z', top: 'Top', distribute_x: 'Distribute X', distribute_y: 'Distribute Y', distribute_z: 'Distribute Z' }, side: { Inside: 'Inside', Outside: 'Outside', Both: 'Both' } },
+    settings: { gapLimitMm: 'Gap limit (mm)', heightMm: 'Wall height (mm)', lastDistanceMm: 'Last distance (mm)', mode: 'Align', distanceMm: 'Offset distance (mm)', side: 'Side', count: 'Copies', 'S21:mode': 'Mode', detachGapMm: 'Detach gap (mm)' },
+    options: { mode: { left: 'Left', center_x: 'Centre X', right: 'Right', front: 'Front', center_y: 'Centre Y', back: 'Back', bottom: 'Bottom', center_z: 'Centre Z', top: 'Top', distribute_x: 'Distribute X', distribute_y: 'Distribute Y', distribute_z: 'Distribute Z' }, side: { Inside: 'Inside', Outside: 'Outside', Both: 'Both' }, 'S21:mode': { slice: 'Slice', cut: 'Cut', detach: 'Detach' } },
     noSettings: 'This tool has no settings.', opensInSketchUp: 'Opens in SketchUp.', trayOnly: 'In SketchUp'
   },
   tr: {
@@ -68,6 +73,8 @@ const TEXT = {
       S14: 'Mirror+: oturma bloğu seçili; ayna çizgisi yerdeki çizgi.',
       S15: 'Align+: üç kutu seçili; hizalama modu Ayarlar\'da.',
       S08: 'Smart Offset: panel yüzeyi seçili; mesafe, taraf ve adet Ayarlar\'da.',
+      S21: 'Smart Slice: kiriş seçili; kesim yerdeki çizgi boyunca. Böl, Kes ya da Ayır Ayarlar\'da.',
+      S24: 'Smart Select: bir tabure referans; aynı bileşenin her kopyası seçilir.',
       S10: 'Find Gap: kenarlar seçili. Uygula\'ya bas ya da Enter.',
       S09: 'Connect / Heal: kenarlar seçili. Uygula\'ya bas ya da Enter.',
       S11: 'Weld+: kenarlar seçili. Uygula\'ya bas ya da Enter.',
@@ -82,12 +89,15 @@ const TEXT = {
     mirror: n => `${n} nesne yerdeki çizgiye göre kopyalı aynalandı.`,
     align: (label, moved, count) => `${label}: ${count} nesneden ${moved} tanesi taşındı.`,
     smartOffset: (n, mm, side, count) => `${n} öteleme hattı, ${mm} mm ${({ Inside: 'içe', Outside: 'dışa', Both: 'iki yöne' })[side] || side}${count > 1 ? ` × ${count}` : ''}.`,
+    smartSlice: (mode, mm) => mode === 'cut' ? '1 nesne kesildi, bir tarafı silindi; kesit yüzeyle kapandı.' : mode === 'detach' ? `1 nesne 2 parçaya bölündü ve ${mm} mm ayrıldı.` : '1 nesne 2 parçaya bölündü; ikisi de kesit yüzeyle kapandı.',
+    smartSelect: (n, criteria) => `${n} nesne seçildi (${n} bileşen) · ${criteria}`,
+    sameComponent: 'Aynı Bileşen',
     undone: label => `Geri alındı: ${label}`, redone: label => `Yinelendi: ${label}`, nothing: 'Geri alınacak işlem yok.',
     pickTool: 'Önce bir ARQO aracı seç.', badValue: 'Yüksekliği 2500, 2.5m ya da 250cm gibi yaz.',
     noSelection: 'Seçim yok', madeBy: 'Yapan araç', madeWith: (tool, parts, built) => `${tool} yapının şu parçasını yapar: ${parts}.${built ? '' : ' Araç planlandı, henüz yapılmadı.'}`, name: 'Ad', type: 'Tür', id: 'ARQO ID', size: 'Boyut', group: 'Grup', edges: 'Kenarlar', faces: 'Yüzeyler',
     height: 'Yükseklik', measurements: 'Measurements',
-    settings: { gapLimitMm: 'Boşluk sınırı (mm)', heightMm: 'Duvar yüksekliği (mm)', lastDistanceMm: 'Son mesafe (mm)', mode: 'Hizalama', distanceMm: 'Öteleme mesafesi (mm)', side: 'Taraf', count: 'Adet' },
-    options: { mode: { left: 'Sol', center_x: 'Orta X', right: 'Sağ', front: 'Ön', center_y: 'Orta Y', back: 'Arka', bottom: 'Alt', center_z: 'Orta Z', top: 'Üst', distribute_x: 'X boyunca dağıt', distribute_y: 'Y boyunca dağıt', distribute_z: 'Z boyunca dağıt' }, side: { Inside: 'İçe', Outside: 'Dışa', Both: 'İki yöne' } },
+    settings: { gapLimitMm: 'Boşluk sınırı (mm)', heightMm: 'Duvar yüksekliği (mm)', lastDistanceMm: 'Son mesafe (mm)', mode: 'Hizalama', distanceMm: 'Öteleme mesafesi (mm)', side: 'Taraf', count: 'Adet', 'S21:mode': 'Mod', detachGapMm: 'Ayırma aralığı (mm)' },
+    options: { mode: { left: 'Sol', center_x: 'Orta X', right: 'Sağ', front: 'Ön', center_y: 'Orta Y', back: 'Arka', bottom: 'Alt', center_z: 'Orta Z', top: 'Üst', distribute_x: 'X boyunca dağıt', distribute_y: 'Y boyunca dağıt', distribute_z: 'Z boyunca dağıt' }, side: { Inside: 'İçe', Outside: 'Dışa', Both: 'İki yöne' }, 'S21:mode': { slice: 'Böl', cut: 'Kes', detach: 'Ayır' } },
     noSettings: 'Bu aracın ayarı yok.', opensInSketchUp: "SketchUp'ta açılır.", trayOnly: "SketchUp'ta"
   }
 }[LANG];
@@ -390,10 +400,13 @@ function build() {
   }
 
   // --- tools --------------------------------------------------------------------------------
-  const settingField = s => {
-    const options = TEXT.options?.[s.id];
-    if (s.type === 'string' && options) return `<label>${TEXT.settings[s.id] || s.id}<select data-setting="${s.id}">${Object.entries(options).map(([value, label]) => `<option value="${value}"${value === s.default ? ' selected' : ''}>${label}</option>`).join('')}</select></label>`;
-    return `<label>${TEXT.settings[s.id] || s.id}<input type="number" min="0" step="any" data-setting="${s.id}" value="${s.default}"></label>`;
+  // Options and labels may be tool-scoped ("S21:mode") where two tools share a setting id.
+  const settingField = (s, tool) => {
+    const scoped = tool ? `${tool.id}:${s.id}` : s.id;
+    const options = TEXT.options?.[scoped] || TEXT.options?.[s.id];
+    const label = TEXT.settings[scoped] || TEXT.settings[s.id] || s.id;
+    if (s.type === 'string' && options) return `<label>${label}<select data-setting="${s.id}">${Object.entries(options).map(([value, label]) => `<option value="${value}"${value === s.default ? ' selected' : ''}>${label}</option>`).join('')}</select></label>`;
+    return `<label>${label}<input type="number" min="0" step="any" data-setting="${s.id}" value="${s.default}"></label>`;
   };
   const settingText = (tool, id) => {
     const input = settingsBox && settingsBox.querySelector(`[data-setting="${id}"]`);
@@ -407,8 +420,8 @@ function build() {
   };
   function renderSettings(tool) {
     if (!settingsBox || document.getElementById('su-dialog')) return;
-    const list = tool?.manifest?.settings || [];
-    settingsBox.innerHTML = list.length ? list.map(settingField).join('') : `<p class="su-muted">${TEXT.noSettings}</p>`;
+    const list = (tool?.manifest?.settings || []).filter(s => !s.panel);
+    settingsBox.innerHTML = list.length ? list.map(s => settingField(s, tool)).join('') : `<p class="su-muted">${TEXT.noSettings}</p>`;
   }
   function fixtureFor(tool) {
     const node = data?.showcase?.[tool?.productId]?.node;
@@ -629,6 +642,45 @@ function build() {
         objects.push(lines(world.map((w, i) => [w, world[(i + 1) % world.length]]), ACCENT)); made++;
       }
       return keep(objects, tool.name, TEXT.smartOffset(made, Math.round(distance * 1000), side, count));
+    } },
+    S21: { run(tool, fixture) { // Smart Slice
+      const beam = fixture.node.getObjectByName('SmartSlice_Beam');
+      const [a] = segmentsOf(fixture.node.getObjectByName('SmartSlice_Line'))[0];
+      const mode = settingText(tool, 'mode') || 'slice';
+      const gap = setting(tool, 'detachGapMm') / 1000;
+      beam.updateWorldMatrix(true, false);
+      const box = new THREE.Box3().setFromObject(beam);
+      const cut = Math.min(Math.max(a.x, box.min.x + 0.01), box.max.x - 0.01);
+      const piece = (from, to, shift) => {
+        const size = new THREE.Vector3(to - from, box.max.y - box.min.y, box.max.z - box.min.z);
+        const mesh = new THREE.Mesh(new THREE.BoxGeometry(size.x, size.y, size.z), beam.material.clone());
+        mesh.position.set((from + to) / 2 + shift, (box.min.y + box.max.y) / 2, (box.min.z + box.max.z) / 2);
+        mesh.userData.webOnly = true; return mesh;
+      };
+      const objects = [piece(box.min.x, cut, 0)];
+      if (mode !== 'cut') objects.push(piece(cut, box.max.x, mode === 'detach' ? gap : 0));
+      const section = (x, facing) => {
+        const m = faceMaterial(); const s = new THREE.Mesh(new THREE.PlaneGeometry(box.max.z - box.min.z, box.max.y - box.min.y), m);
+        s.rotation.y = facing * Math.PI / 2; s.position.set(x + facing * 0.001, (box.min.y + box.max.y) / 2, (box.min.z + box.max.z) / 2); s.userData.webOnly = true; settle(m); return s;
+      };
+      objects.push(section(cut, 1));
+      if (mode !== 'cut') objects.push(section(cut + (mode === 'detach' ? gap : 0), -1));
+      const show = () => { beam.visible = false; objects.forEach(o => opsGroup.add(o)); };
+      const hide = () => { beam.visible = true; objects.forEach(o => opsGroup.remove(o)); };
+      show();
+      flashObjects(objects.filter(o => o.geometry?.type === 'BoxGeometry'));
+      return { tool: tool.name, message: TEXT.smartSlice(mode, Math.round(gap * 1000)), objects, undo: hide, redo: show };
+    } },
+    S24: { run(tool, fixture) { // Smart Select
+      const stools = [1, 2, 3, 4].map(i => fixture.node.getObjectByName(`Stool_${i}`)).filter(Boolean);
+      const outlines = stools.map(stool => {
+        stool.updateWorldMatrix(true, false);
+        const p = new THREE.EdgesGeometry(stool.geometry).attributes.position; const pairs = [];
+        for (let i = 0; i < p.count; i += 2) pairs.push([new THREE.Vector3().fromBufferAttribute(p, i).applyMatrix4(stool.matrixWorld), new THREE.Vector3().fromBufferAttribute(p, i + 1).applyMatrix4(stool.matrixWorld)]);
+        return lines(pairs, ACCENT);
+      });
+      flashObjects(stools);
+      return keep(outlines, tool.name, TEXT.smartSelect(stools.length, TEXT.sameComponent));
     } },
     S02: { interactive: true, run(tool, fixture, heightM) { // Line to Face
       const h = heightM ?? setting(tool, 'heightMm') / 1000;
@@ -886,7 +938,7 @@ function build() {
   function renderSettingsAll() {
     if (!settingsBox || settingsBox.dataset.all) return;
     const seen = new Set(); const rows = [];
-    for (const t of state.catalog?.tools || []) for (const st of t.manifest.settings || []) { if (seen.has(st.id) || !TEXT.settings[st.id] || st.id === 'lastDistanceMm') continue; seen.add(st.id); rows.push(settingField(st)); }
+    for (const t of state.catalog?.tools || []) for (const st of t.manifest.settings || []) { if (st.panel || seen.has(st.id) || !TEXT.settings[st.id] || st.id === 'lastDistanceMm') continue; seen.add(st.id); rows.push(settingField(st)); }
     settingsBox.innerHTML = rows.join(''); settingsBox.dataset.all = '1';
   }
 
