@@ -7,17 +7,17 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { houseTool } from './house-tools.mjs';
 
 const LANG = document.documentElement.lang === 'tr' ? 'tr' : 'en';
 const asset = name => new URL(`assets/${name}`, import.meta.url).href;
 const $ = selector => document.querySelector(selector);
 const ACCENT = 0xd57750;
 const SELECT = 0x1f5cff;
-const SPAN = 46;                   // orthographic frustum height at zoom 1 (m)
-const DIST = 84;                   // perspective distance at zoom 1 (m)
-const HOME = { target: new THREE.Vector3(-1, 4.2, 2), dir: new THREE.Vector3(-16, 7, 46).normalize() };
-const SCENE_DIR = new THREE.Vector3(5, 10, 14).normalize(); // tool scenes sit on the plaza in front
-const TOOL_PLAZA = [-1, 0.1, 16.4];     // where the Demo House tool scenes are placed on the pavilion plaza
+const SPAN = 22;                   // orthographic frustum height at zoom 1 (m)
+const DIST = 38;                   // perspective distance at zoom 1 (m)
+const HOME = { target: new THREE.Vector3(0, 1.6, 0), dir: new THREE.Vector3(-16, 9, 30).normalize() };
+const SCENE_DIR = new THREE.Vector3(5, 10, 14).normalize(); // a tool scene seen from the front, a little above
 
 const TEXT = {
   en: {
@@ -54,7 +54,7 @@ const TEXT = {
     sameComponent: 'Same Component',
     undone: label => `Undone: ${label}`, redone: label => `Redone: ${label}`, nothing: 'Nothing to undo.',
     pickTool: 'Pick an ARQO tool first.', badValue: 'Type a height such as 2500, 2.5m or 250cm.',
-    noSelection: 'No Selection', madeBy: 'Made with', madeWith: (tool, parts, built) => `${tool} makes this part of the pavilion: ${parts}.${built ? '' : ' The tool is planned; it is not built yet.'}`, name: 'Name', type: 'Type', id: 'ARQO ID', size: 'Size', group: 'Group', edges: 'Edges', faces: 'Faces',
+    noSelection: 'No Selection', madeBy: 'Made with', madeWith: (tool, parts, built) => `${tool} makes this part of the house: ${parts}.${built ? '' : ' The tool is planned; it is not built yet.'}`, name: 'Name', type: 'Type', id: 'ARQO ID', size: 'Size', group: 'Group', edges: 'Edges', faces: 'Faces',
     height: 'Height', measurements: 'Measurements',
     settings: { gapLimitMm: 'Gap limit (mm)', heightMm: 'Wall height (mm)', lastDistanceMm: 'Last distance (mm)', mode: 'Align', distanceMm: 'Offset distance (mm)', side: 'Side', count: 'Copies', 'S21:mode': 'Mode', detachGapMm: 'Detach gap (mm)' },
     options: { mode: { left: 'Left', center_x: 'Centre X', right: 'Right', front: 'Front', center_y: 'Centre Y', back: 'Back', bottom: 'Bottom', center_z: 'Centre Z', top: 'Top', distribute_x: 'Distribute X', distribute_y: 'Distribute Y', distribute_z: 'Distribute Z' }, side: { Inside: 'Inside', Outside: 'Outside', Both: 'Both' }, 'S21:mode': { slice: 'Slice', cut: 'Cut', detach: 'Detach' } },
@@ -94,7 +94,7 @@ const TEXT = {
     sameComponent: 'Aynı Bileşen',
     undone: label => `Geri alındı: ${label}`, redone: label => `Yinelendi: ${label}`, nothing: 'Geri alınacak işlem yok.',
     pickTool: 'Önce bir ARQO aracı seç.', badValue: 'Yüksekliği 2500, 2.5m ya da 250cm gibi yaz.',
-    noSelection: 'Seçim yok', madeBy: 'Yapan araç', madeWith: (tool, parts, built) => `${tool} yapının şu parçasını yapar: ${parts}.${built ? '' : ' Araç planlandı, henüz yapılmadı.'}`, name: 'Ad', type: 'Tür', id: 'ARQO ID', size: 'Boyut', group: 'Grup', edges: 'Kenarlar', faces: 'Yüzeyler',
+    noSelection: 'Seçim yok', madeBy: 'Yapan araç', madeWith: (tool, parts, built) => `${tool} evin şu parçasını yapar: ${parts}.${built ? '' : ' Araç planlandı, henüz yapılmadı.'}`, name: 'Ad', type: 'Tür', id: 'ARQO ID', size: 'Boyut', group: 'Grup', edges: 'Kenarlar', faces: 'Yüzeyler',
     height: 'Yükseklik', measurements: 'Measurements',
     settings: { gapLimitMm: 'Boşluk sınırı (mm)', heightMm: 'Duvar yüksekliği (mm)', lastDistanceMm: 'Son mesafe (mm)', mode: 'Hizalama', distanceMm: 'Öteleme mesafesi (mm)', side: 'Taraf', count: 'Adet', 'S21:mode': 'Mod', detachGapMm: 'Ayırma aralığı (mm)' },
     options: { mode: { left: 'Sol', center_x: 'Orta X', right: 'Sağ', front: 'Ön', center_y: 'Orta Y', back: 'Arka', bottom: 'Alt', center_z: 'Orta Z', top: 'Üst', distribute_x: 'X boyunca dağıt', distribute_y: 'Y boyunca dağıt', distribute_z: 'Z boyunca dağıt' }, side: { Inside: 'İçe', Outside: 'Dışa', Both: 'İki yöne' }, 'S21:mode': { slice: 'Böl', cut: 'Kes', detach: 'Ayır' } },
@@ -336,20 +336,21 @@ function build() {
   const fixtureMaterial = new THREE.LineBasicMaterial({ color: '#1d1f22', depthTest: false, transparent: true });
   const selectedFixtureMaterial = new THREE.LineBasicMaterial({ color: SELECT, depthTest: false, transparent: true });
   const xrayStore = new Map();
-  const madeWith = new Map();   // tool product id -> pavilion parts made with it
+  const madeWith = new Map();   // tool product id -> house parts made with it
   let lit = [];
 
   Promise.all([
-    new GLTFLoader().loadAsync(asset('arqo-pavilion-01.glb')),
     new GLTFLoader().loadAsync(asset('arqo-demo-house-01.glb')),
     fetch(asset('showcase.json')).then(r => { if (!r.ok) throw new Error(`showcase.json ${r.status}`); return r.json(); }),
     import(new URL('lib/catalog.mjs', document.baseURI).href).catch(() => null)
-  ]).then(([pavilion, gltf, showcase, catalog]) => {
+  ]).then(([gltf, showcase, catalog]) => {
     data = showcase; state.catalog = catalog;
-    const model = pavilion.scene;
-    // The tool scenes come from Demo House 01 and sit on the pavilion's plaza.
+    // The Demo House as in SketchUp, with its tool scenes where the model keeps them.
+    const model = gltf.scenes.find(s => s.name === 'ARQO_HOUSE_CLEAN') || gltf.scene;
     const showcaseGroup = gltf.scenes[showcase.showcaseScene]?.getObjectByName('Showcase_Objects');
-    if (showcaseGroup) { showcaseGroup.position.fromArray(TOOL_PLAZA); model.add(showcaseGroup); model.updateMatrixWorld(true); }
+    if (showcaseGroup) { model.add(showcaseGroup); model.updateMatrixWorld(true); }
+    // each part names the tool that makes it (site/house-tools.mjs)
+    model.traverse(node => { const made = houseTool(node.userData.arqoId); if (made) Object.assign(node.userData, made); });
     model.traverse(node => { if (node.userData.tool) { if (!madeWith.has(node.userData.tool)) madeWith.set(node.userData.tool, []); madeWith.get(node.userData.tool).push(node); } });
     model.traverse(node => {
       if (node.userData.arqoId) byId.set(node.userData.arqoId, node);

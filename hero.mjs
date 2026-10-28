@@ -1,25 +1,17 @@
-// Home hero: ARQO Pavilion, rendered live (hand-written source, not generated).
-// Every part names the ARQO tool that makes it. Drag to turn, wheel to zoom.
+// Home hero: ARQO Demo House, the same model the plugin is tested on, rendered live (hand-written source, not
+// generated). Every part names the ARQO tool that makes it (site/house-tools.mjs). Drag to turn, wheel to zoom.
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
-import { Water } from 'three/addons/objects/Water.js';
-import { createLook, SUN } from './look.mjs';
+import { createLook } from './look.mjs';
+import { houseTool } from './house-tools.mjs';
 
 const host = document.getElementById('home-model');
 const label = document.getElementById('home-model-label');
 const LANG = document.documentElement.lang === 'tr' ? 'tr' : 'en';
-const HOME = { position: [-27, 9, 60], target: [-3, 5, 0] };
 const capture = new URLSearchParams(location.search).has('capture');
-
-function roundedRect(x0, z0, x1, z1, r) {
-  const s = new THREE.Shape();
-  s.moveTo(x0 + r, -z0); s.lineTo(x1 - r, -z0); s.absarc(x1 - r, -z0 - r, r, Math.PI / 2, 0, true);
-  s.lineTo(x1, -z1 + r); s.absarc(x1 - r, -z1 + r, r, 0, -Math.PI / 2, true);
-  s.lineTo(x0 + r, -z1); s.absarc(x0 + r, -z1 + r, r, -Math.PI / 2, -Math.PI, true);
-  s.lineTo(x0, -z0 - r); s.absarc(x0 + r, -z0 - r, r, Math.PI, Math.PI / 2, true);
-  return s;
-}
+// The house's SketchUp materials that the shared look already knows; the rest keep their own colour.
+const LOOK_NAMES = { MAT_GLASS: 'MAT_glass', MAT_TREE_TRUNK: 'MAT_trunk', MAT_TREE_GREEN: 'MAT_leaf' };
 
 function start() {
   if (!host) return;
@@ -32,17 +24,13 @@ function start() {
   const scene = new THREE.Scene();
   scene.fog = new THREE.Fog('#e9dcc6', 90, 260);
 
-  const camera = new THREE.PerspectiveCamera(34, 1, 0.3, 600);
-  camera.position.fromArray(HOME.position);
+  const camera = new THREE.PerspectiveCamera(30, 1, 0.1, 600);
   const controls = new OrbitControls(camera, renderer.domElement);
-  controls.target.fromArray(HOME.target);
   controls.enableDamping = true; controls.dampingFactor = 0.08;
-  controls.minDistance = 14; controls.maxDistance = 120;
   controls.enablePan = false;
   controls.maxPolarAngle = Math.PI / 2 - 0.03;
   controls.autoRotate = !capture; controls.autoRotateSpeed = 0.35;
   controls.addEventListener('start', () => { controls.autoRotate = false; });
-  camera.lookAt(controls.target);
 
   function resize() {
     const width = host.clientWidth || 1, height = host.clientHeight || 1;
@@ -52,20 +40,32 @@ function start() {
   new ResizeObserver(resize).observe(host);
   resize();
 
-  let meshes = [], water = null;
-  new GLTFLoader().loadAsync(new URL('assets/arqo-pavilion-01.glb', import.meta.url).href).then(gltf => {
-    const model = gltf.scene;
+  let meshes = [];
+  new GLTFLoader().loadAsync(new URL('assets/arqo-demo-house-01.glb', import.meta.url).href).then(gltf => {
+    const model = gltf.scenes.find(s => s.name === 'ARQO_HOUSE_CLEAN') || gltf.scene;
+    model.traverse(node => { if (node.isMesh && LOOK_NAMES[node.material.name]) node.material.name = LOOK_NAMES[node.material.name]; });
     ({ meshes } = look.apply(scene, model));
-    scene.add(model);
-    // The long pool in front mirrors the building.
-    const geometry = new THREE.ShapeGeometry(roundedRect(-34, 16.4, 30, 22.4, 1.6), 12); geometry.rotateX(-Math.PI / 2);
-    water = new Water(geometry, {
-      textureWidth: small ? 512 : 1024, textureHeight: small ? 512 : 1024, waterNormals: look.normals,
-      sunDirection: new THREE.Vector3(...SUN).normalize(), sunColor: 0xffd7a6, waterColor: 0x1d4a5e, distortionScale: 0.55, fog: false
+    const edges = new THREE.LineBasicMaterial({ color: '#1f231c', transparent: true, opacity: 0.38 });
+    model.traverse(node => {
+      if (!node.isMesh || meshes.includes(node)) return;
+      // the SketchUp colour, lit and shadowed like the rest, with SketchUp's own drawn edges
+      node.material = new THREE.MeshStandardMaterial({ color: node.material.color, roughness: 0.82, side: THREE.DoubleSide });
+      node.material.userData.base = { emissive: 0, intensity: 1 };
+      node.castShadow = node.receiveShadow = true;
+      const e = new THREE.LineSegments(new THREE.EdgesGeometry(node.geometry, 30), edges); e.raycast = () => {}; node.add(e);
+      meshes.push(node);
     });
-    water.material.uniforms.size.value = 5;
-    water.position.y = 0.06;
-    scene.add(water);
+    scene.add(model);
+    // Frame the house: every part with a tool (the ground left out).
+    const box = new THREE.Box3();
+    model.updateMatrixWorld(true);
+    model.traverse(node => { if (node.isMesh && houseTool(partOf(node)?.userData.arqoId)) box.expandByObject(node); });
+    if (box.isEmpty()) box.setFromObject(model);
+    const center = box.getCenter(new THREE.Vector3()), size = box.getSize(new THREE.Vector3()).length();
+    controls.target.copy(center);
+    camera.position.copy(center).add(new THREE.Vector3(-0.62, 0.42, 0.95).normalize().multiplyScalar(size * 1.45));
+    controls.minDistance = size * 0.45; controls.maxDistance = size * 3;
+    camera.lookAt(center);
     host.classList.add('ready');
     if (capture) setTimeout(() => console.log('HERO-READY'), 500);
   }).catch(error => { console.error(error); host.classList.add('failed'); });
@@ -73,7 +73,7 @@ function start() {
   // Hover names the part and the tool that makes it.
   const raycaster = new THREE.Raycaster(), pointer = new THREE.Vector2();
   let hovered = [], pending = null, dragging = false;
-  const partOf = node => { let n = node; while (n && !n.userData.arqoId && n.parent) n = n.parent; return n && n.userData.arqoId ? n : null; };
+  function partOf(node) { let n = node; while (n && !n.userData.arqoId && n.parent) n = n.parent; return n && n.userData.arqoId ? n : null; }
   const clear = () => { hovered.forEach(look.unglow); hovered = []; if (label) label.hidden = true; };
   renderer.domElement.addEventListener('pointerdown', () => { dragging = true; clear(); });
   addEventListener('pointerup', () => { dragging = false; });
@@ -83,12 +83,13 @@ function start() {
     const rect = renderer.domElement.getBoundingClientRect();
     pointer.set(((event.clientX - rect.left) / rect.width) * 2 - 1, -((event.clientY - rect.top) / rect.height) * 2 + 1);
     raycaster.setFromCamera(pointer, camera);
-    const hit = raycaster.intersectObjects(meshes, false).find(h => !/glass|water/.test(h.object.material.name));
+    const hit = raycaster.intersectObjects(meshes, false).find(h => !/glass/.test(h.object.material.name));
     const part = hit ? partOf(hit.object) : null;
+    const made = part && houseTool(part.userData.arqoId);
     clear();
-    if (!part || part.userData.type === 'site') return;
-    part.traverse(n => { if (n.isMesh && !/light|amber/.test(n.material.name)) { look.glow(n, 0xd57750, 0.32); hovered.push(n); } });
-    if (label) { label.textContent = `${part.userData.label[LANG]} · ${part.userData.toolLabel}`; label.hidden = false; }
+    if (!made) return;
+    part.traverse(n => { if (n.isMesh) { look.glow(n, 0xd57750, 0.32); hovered.push(n); } });
+    if (label) { label.textContent = `${made.label[LANG]} · ${made.toolLabel}`; label.hidden = false; }
   }
 
   let visible = true;
@@ -99,7 +100,6 @@ function start() {
     const t = clock.getElapsedTime();
     if (pending) { hover(pending); pending = null; }
     look.update(t);
-    if (water) water.material.uniforms.time.value = t * 0.35;
     controls.update();
     renderer.render(scene, camera);
   });

@@ -1,4 +1,4 @@
-/* Generated from design/tokens.json. Edit the source, then npm run build. */
+/* Generated from design/tokens.json and products/arqo/icon-palette.json. Edit the source, then npm run build. */
 :root {
   --bg: #f7f6f2;
   --surface: #fffefa;
@@ -10,6 +10,13 @@
   --accent: #d57750;
   --accent-soft: #f2e4db;
   --accent-ink: #9b4a2b;
+  --icon-object-ink: #2c3022;
+  --icon-action-ink: #a0461f;
+  --icon-body-ink: #5d6d31;
+  --icon-guide-ink: #9a7300;
+  --icon-action-fill: #d9673a;
+  --icon-body-fill: #97ad58;
+  --icon-guide-fill: #e2b02c;
 }
 body[data-theme="dark"] {
   --bg: #20241f;
@@ -18,4 +25,8 @@ body[data-theme="dark"] {
   --ink: #e9ede0;
   --muted: #abb7a1;
   --line: #41493a;
+  --icon-object-ink: #ecebdc;
+  --icon-action-ink: #f0a882;
+  --icon-body-ink: #c4d48f;
+  --icon-guide-ink: #efcf74;
 }
