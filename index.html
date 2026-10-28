@@ -1,157 +1,54 @@
 <!doctype html>
-<html lang="en" data-site="public">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="color-scheme" content="light dark">
-  <title>PluginsForAEC — ARQO for SketchUp</title>
-  <meta name="description" content="PluginsForAEC: professional plugins for architects and engineers. First product: ARQO for SketchUp, forty modelling tools you can buy one by one or as a complete package.">
-  <link rel="canonical" href="https://pluginsforaec.com/">
-  <meta property="og:url" content="https://pluginsforaec.com/">
-  <meta property="og:locale" content="en_US">
-  <meta property="og:locale:alternate" content="tr_TR">
-  <link rel="alternate" hreflang="en" href="https://pluginsforaec.com/">
-  <link rel="alternate" hreflang="tr" href="https://pluginsforaec.com/tr/">
-  <link rel="alternate" hreflang="x-default" href="https://pluginsforaec.com/">
-  <meta property="og:title" content="PluginsForAEC — ARQO for SketchUp">
-  <meta property="og:description" content="In the software you already use. Do more. ARQO for SketchUp: forty modelling tools, one toolbar, a live demo model.">
-  <link rel="icon" href="favicon.svg" type="image/svg+xml">
-  <link rel="apple-touch-icon" href="assets/icon-180.png">
-  <meta property="og:type" content="website">
-  <meta property="og:site_name" content="PluginsForAEC">
-  <meta property="og:image" content="https://pluginsforaec.com/assets/og.jpg">
-  <meta property="og:image:type" content="image/jpeg">
-  <meta property="og:image:width" content="2400">
-  <meta property="og:image:height" content="1260">
-  <meta property="og:image:alt" content="ARQO for SketchUp: the demo house in its garden and ARQO toolbar icons">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:image" content="https://pluginsforaec.com/assets/og.jpg">
-  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://pluginsforaec.com/#organization","name":"PluginsForAEC","url":"https://pluginsforaec.com/","logo":"https://pluginsforaec.com/assets/logo-512.png","email":"info@pluginsforaec.com","sameAs":["https://www.instagram.com/pluginsforaec/"]},{"@type":"WebSite","@id":"https://pluginsforaec.com/#website","name":"PluginsForAEC","url":"https://pluginsforaec.com/","publisher":{"@id":"https://pluginsforaec.com/#organization"},"inLanguage":["en","tr"]}]}</script>
-  <link rel="stylesheet" href="generated/tokens.css">
-  <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="icon-review.css">
-  <link rel="stylesheet" href="su.css">
-  <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.180.0/examples/jsm/"}}</script>
-  <script type="module" src="studio.mjs"></script>
-  <script type="module" src="hero.mjs"></script>
-  <script type="module" src="app.js"></script>
-</head>
-<body>
-  <header class="preview-bar">
-    <div class="preview-label"><span class="status-dot"></span> PLUGINSFORAEC <span class="draft-tag">ARQO FOR SKETCHUP · ALPHA</span></div>
-    <nav class="view-switch" aria-label="View">
-      <button class="active" data-view="website" aria-pressed="true">Website</button>
-      <button data-view="plugin" aria-pressed="false">SketchUp plugin</button>
-      <button data-view="icons" aria-pressed="false">Icon system</button>
-    </nav>
-    <div class="preview-settings">
-      <a class="lang-switch" href="tr/" hreflang="tr" lang="tr" title="Türkçe">TR</a>
-      <button id="theme-toggle" class="theme-toggle" aria-label="Switch to dark theme" aria-pressed="false">◐ <span>Theme</span></button>
-    </div>
-  </header>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PluginsForAEC — Professional plugins for AEC</title><meta name="description" content="Professional plugins for architects, engineers and builders. First product: ARQO for SketchUp, forty modelling tools.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="assets/icon-180.png"><link rel="stylesheet" href="style.css">
+<link rel="canonical" href="https://pluginsforaec.com/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="PluginsForAEC"><meta property="og:url" content="https://pluginsforaec.com/">
+<meta property="og:title" content="PluginsForAEC — Professional plugins for AEC"><meta property="og:description" content="Professional plugins for architects, engineers and builders. First product: ARQO for SketchUp, forty modelling tools."><meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://pluginsforaec.com/assets/og.jpg"><meta property="og:image:type" content="image/jpeg"><meta property="og:image:width" content="2400"><meta property="og:image:height" content="1260">
+<meta property="og:image:alt" content="ARQO for SketchUp: the demo house and ARQO toolbar icons">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="https://pluginsforaec.com/assets/og.jpg">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://pluginsforaec.com/#organization","name":"PluginsForAEC","url":"https://pluginsforaec.com/","logo":"https://pluginsforaec.com/assets/logo-512.png","email":"info@pluginsforaec.com","sameAs":["https://www.instagram.com/pluginsforaec/"]},{"@type":"WebSite","@id":"https://pluginsforaec.com/#website","name":"PluginsForAEC","url":"https://pluginsforaec.com/","publisher":{"@id":"https://pluginsforaec.com/#organization"},"inLanguage":"en"}]}</script>
+</head><body><header class="nav"><div class="wrap nav-row">
+  <a class="brand" href="index.html"><img src="assets/pluginsforaec-dark.svg" alt="PluginsForAEC"></a>
+  <nav class="links"><a href="index.html#products">Products</a><a href="docs/index.html">Documentation</a><a href="downloads/index.html">Downloads</a><a href="support/index.html">Support</a><a class="up" href="account/index.html">Account &amp; licences</a></nav>
+  <a class="btn btn-clay" href="mailto:info@pluginsforaec.com?subject=Early%20access">Get early access</a>
+</div></header>
+<section class="hero hero-company"><div class="wrap">
+  <p class="eyebrow">PluginsForAEC</p>
+  <h1>In the software you already use.<br><span>Do more.</span></h1>
+  <p class="lede">Professional plugins for architects, engineers and builders. One family of tools, one way of working: every action undoable, your model safe, every result explained.</p>
+  <div class="cta"><a class="btn btn-clay" href="arqo/index.html">Meet ARQO for SketchUp</a><a class="btn btn-ghost" href="#products">All products</a></div>
+</div></section>
 
-  <main id="website-view" class="view active">
-    <header class="marketplace-nav"><button class="marketplace-brand" data-site-page="home"><span class="marketplace-mark"><svg viewBox="120 80 274 372" aria-hidden="true"><path d="M178,296 H382 A204,204 0 0 0 178,92 Z" fill="var(--accent)"/><rect x="132" y="92" width="46" height="348" fill="currentColor"/><rect x="178" y="282" width="204" height="28" fill="currentColor"/></svg></span><span>Plugins<span>ForAEC</span><small>PLUGINSFORAEC.COM</small></span></button><nav aria-label="Marketplace menu"><button data-site-page="home">Products</button><button data-info="docs">Documentation</button><button data-info="downloads">Downloads</button><button data-info="support">Support</button></nav><button class="account-button" data-info="account">Account & licences ↗</button></header>
-    <section id="marketplace-home" class="marketplace-home site-container">
-      <div class="marketplace-hero"><div class="marketplace-hero-copy"><div class="eyebrow"><span class="short-line"></span> ARCHITECTURE · ENGINEERING · DESIGN</div><h1>In the software you already use.<br><em>Do more.</em></h1><p>From everyday modelling to project control.<br>Tools for the AEC world, in one product family.</p><button class="button primary" data-site-page="arqo">Explore our first product <span>↗</span></button><div class="roadmap-caption">The big roadmap / ARQO first. New platforms next.</div></div><div class="home-model-wrap"><div id="home-model" class="home-model" aria-label="ARQO Demo House, live 3D model"><span class="home-model-tag">ARQO DEMO HOUSE · 01</span><span id="home-model-label" class="studio-label" hidden></span></div><p class="home-model-caption"><b>Every part is a tool.</b> Drag to turn it and hover a part to see which ARQO tool makes it. The same model opens with the tools in the plugin view.</p></div></div>
-      <div class="portfolio-heading"><h2>One ecosystem. Four workspaces.</h2><span>PLATFORMS / 01—04</span></div>
-      <div class="platform-grid">
-        <button class="platform-card featured" data-site-page="arqo"><span class="platform-top"><span class="platform-index">01 / SKETCHUP</span><span class="platform-state">FIRST PRODUCT · IN DEVELOPMENT</span></span><strong>arqo<span>.</span></strong><h3>A new toolset for everyday modelling.</h3><p>40 baseline tools + ARQO additions.<br>Single tools and complete package options.</p><span class="platform-link">View the product page <b>↗</b></span><span class="platform-cube" aria-hidden="true"></span></button>
-        <button class="platform-card future" data-info="autocad"><span class="platform-top"><span class="platform-index">02 / AUTOCAD</span><span class="platform-state">ON THE ROADMAP</span></span><strong>CADPILOT</strong><h3>Drawing intelligence and project control.</h3><p>QA, standardisation and delivery automation.<br>After ARQO's commercial validation.</p><span class="platform-link">Planned scope <b>↗</b></span></button>
-        <button class="platform-card future" data-info="rhino"><span class="platform-top"><span class="platform-index">03 / RHINO</span><span class="platform-state">ON THE ROADMAP</span></span><strong>RHINOPILOT</strong><h3>From geometry to fabrication.</h3><p>Geometry intelligence, surfaces and fabrication.<br>After the AutoCAD product stages.</p><span class="platform-link">Planned scope <b>↗</b></span></button>
-        <button class="platform-card future" data-info="grasshopper"><span class="platform-top"><span class="platform-index">04 / GRASSHOPPER</span><span class="platform-state">ON THE ROADMAP</span></span><strong>GH Tools</strong><h3>Make your parametric flow visible.</h3><p>GH Doctor, Copilot and definition tools.<br>Independent modules grown from Rhino.</p><span class="platform-link">Planned scope <b>↗</b></span></button>
-      </div>
-      <div class="shared-services"><div><span class="eyebrow">SHARED FOUNDATION</span><h2>Different products.<br>One consistent experience.</h2></div><button data-info="account"><span>01</span><strong>Account & licences</strong><small>Your single tools and packages</small></button><button data-info="downloads"><span>02</span><strong>Download & update</strong><small>Versions and changes</small></button><button data-info="docs"><span>03</span><strong>Documentation</strong><small>Clear guides for every tool</small></button><button data-info="support"><span>04</span><strong>Support</strong><small>Help and known issues</small></button></div>
-      <footer class="site-footer"><strong>PluginsForAEC</strong><span>One product platform for AEC tools.</span><span>In development · Not on sale yet · Early access: <a href="mailto:info@pluginsforaec.com?subject=ARQO%20early%20access">info@pluginsforaec.com</a></span></footer>
-    </section>
-    <div class="site-container" id="arqo-product" hidden>
-      <div class="breadcrumbs"><button data-site-page="home">PluginsForAEC</button><span>/</span><span>SketchUp</span><span>/</span><strong>ARQO for SketchUp</strong></div>
-      <header class="site-nav">
-        <a class="brand" href="#" aria-label="ARQO home"><span class="brand-mark" aria-hidden="true"></span><span>arqo<span class="brand-dot">.</span></span></a>
-        <nav aria-label="Site menu"><a href="#tools">Tools</a><a href="#packages">Packages</a><button data-view="plugin">Explore the plugin <span>↗</span></button></nav>
-        <button class="collection-button" id="collection-open">My tools <span id="collection-count">0</span></button>
-      </header>
+<section id="products" class="products"><div class="wrap">
+  <p class="eyebrow dark">Products</p>
+  <h2>One ecosystem. Four workspaces.</h2>
+  <div class="product-grid">
+    <a class="product product-live" href="arqo/index.html"><div class="product-text"><span class="host">01 / SketchUp</span><span class="state live">First product · Early access</span><h3><img src="assets/arqo-dark.svg" alt="ARQO for SketchUp"></h3><p class="line">A new toolset for everyday modelling.</p><p>Forty tools and ARQOPush on one toolbar. Every action one Undo, your components safe.</p><span class="go">Explore ARQO →</span></div><img class="product-shot" src="assets/shots/house_wide.png" alt="ARQO for SketchUp: the Demo House in SketchUp" loading="lazy"></a><article class="product product-cad"><span class="host">02 / AutoCAD</span><span class="state">On the roadmap</span><h3>CADPILOT</h3><p class="line">Drawing intelligence and project control.</p><p>QA, standardisation and delivery automation for drawing sets.</p></article><article class="product product-rhino"><span class="host">03 / Rhino</span><span class="state">On the roadmap</span><h3>RHINOPILOT</h3><p class="line">From geometry to fabrication.</p><p>Geometry intelligence, surfaces and fabrication.</p></article><article class="product product-gh"><span class="host">04 / Grasshopper</span><span class="state">On the roadmap</span><h3>GH Tools</h3><p class="line">Make your parametric flow visible.</p><p>GH Doctor, Copilot and definition tools.</p></article>
+  </div>
+</div></section>
 
-      <section class="hero">
-        <div class="hero-copy">
-          <div class="eyebrow"><span class="short-line"></span> ARQO FOR SKETCHUP</div>
-          <h1>Fewer steps.<br>More <em>design.</em></h1>
-          <p>From line to structure, from first sketch to final detail.<br>Your modelling tools in one workshop.</p>
-          <div class="hero-actions"><a class="button primary" href="#tools">Explore the tools <span>↗</span></a><a class="text-link" href="#packages">See the complete package <span>→</span></a></div>
-          <div class="hero-meta"><span><strong>40</strong> baseline tools</span><span><strong>1</strong> shared workspace</span><span>One by one.<br><strong>Or all of them together.</strong></span></div>
-        </div>
-        <div class="hero-art">
-          <div class="art-topline"><span>FORM STUDY — 001</span><span>AXONOMETRIC / ARQO</span></div>
-          <div id="hero-scene" class="architectural-scene"></div>
-          <div class="floating-tool"><span class="floating-icon" id="hero-icon"></span><div><strong>Make Face+</strong><small>Give your lines a face.</small></div><span class="floating-check">↗</span></div>
-          <div class="art-bottomline"><span><i></i> FROM IDEA TO GEOMETRY</span><span>01 — 40</span></div>
-        </div>
-      </section>
+<section id="way" class="promise"><div class="wrap">
+  <p class="eyebrow dark">Our way</p>
+  <h2>Every product keeps three promises.</h2>
+  <div class="three">
+    <article><span class="num">01</span><h3>One action, one Undo.</h3><p>Whatever a tool does is one step in your history. Try it, look, take it back.</p></article>
+    <article><span class="num">02</span><h3>Your model stays safe.</h3><p>Shared parts, layers and data you did not pick are never changed behind your back.</p></article>
+    <article><span class="num">03</span><h3>Results in plain words.</h3><p>Every tool says what it did and what it left alone. When it cannot help, it says why and changes nothing.</p></article>
+  </div>
+</div></section>
 
-      <div class="capability-strip"><span>GEOMETRY</span><span>REPAIR</span><span>TRANSFORM</span><span>COMPONENTS</span><span>ARCHITECTURE</span><span>PRESENTATION</span></div>
-
-      <section id="tools" class="tools-section">
-        <div class="section-heading"><div><div class="eyebrow">YOUR FLOW, YOUR TOOLS</div><h2>The right tool. Right where you need it.</h2><p>Every tool can be bought on its own. Your collection grows with your needs.</p></div><span class="section-number">01 / TOOLS</span></div>
-        <div class="catalog-controls"><div id="category-filters" class="filters" aria-label="Tool categories"></div><label class="search-box"><span aria-hidden="true">⌕</span><input id="tool-search" type="search" placeholder="Search tools…" aria-label="Search by tool name or function"><kbd>/</kbd></label></div>
-        <div class="results-line"><span id="result-count">40 tools</span><span>Each one part of the same ARQO family.</span></div>
-        <div id="tool-grid" class="tool-grid"></div>
-        <div id="empty-state" class="empty-state" hidden><h3>No tool matches this search.</h3><p>Try another word or category.</p><button id="clear-filters" class="button secondary">Clear filters</button></div>
-      </section>
-
-      <section id="packages" class="packages-section">
-        <div class="section-heading"><div><div class="eyebrow">MORE, TOGETHER</div><h2>From one tool to the whole workshop.</h2></div><span class="section-number">02 / PACKAGES</span></div>
-        <div class="package-grid">
-          <article class="single-package"><span class="package-kicker">SINGLE TOOLS</span><div id="single-package-icon" class="large-tool-icon"></div><h3>Only what you need.</h3><p>Each of the 40 tools is a product of its own. Use the one you pick with all its core functions.</p><ul><li>Its own usage and help screen</li><li>One shared ARQO installation and updates</li><li>Add more tools later</li></ul><a href="#tools" class="button secondary">Build your own set <span>↗</span></a><small>Pricing is not set yet.</small></article>
-          <article class="complete-package"><div class="complete-copy"><span class="package-kicker">ARQO / COMPLETE PACKAGE</span><h3>All your tools.<br>In one place.</h3><p>All 40 baseline tools. The ARQO additions included in the package. One uninterrupted modelling flow.</p><div class="complete-metrics"><strong>40<span>baseline tools</span></strong><span class="metric-plus">+</span><strong>ARQO<span>additions</span></strong></div><button id="bundle-preview" class="button accent-button">See what's inside <span>↗</span></button><small>Nothing is sold on this page yet.</small></div><div class="package-art" aria-hidden="true"><div class="software-box"><span class="box-label">FOR SKETCHUP</span><strong>arqo.</strong><div class="box-lines"></div><span class="box-bottom">THE COMPLETE TOOLSET<br><b>40 / TOOLS & MORE</b></span></div><span class="package-art-note">COMPLETE COLLECTION — 01</span></div></article>
-        </div>
-      </section>
-      <footer class="site-footer"><span class="brand footer-brand">arqo.</span><span>Beyond the lines.</span><span>© 2026 PluginsForAEC · <a href="mailto:info@pluginsforaec.com">info@pluginsforaec.com</a></span></footer>
-    </div>
-  </main>
-
-  <main id="plugin-view" class="view" hidden>
-    <section class="studio-container">
-      <div class="section-heading studio-heading"><div><div class="eyebrow">DESIGNED FOR SKETCHUP</div><h2>Keep your model at the centre.</h2><p>Click a tool on the ARQO toolbar: it runs on its scene in the model and reports the result. Ctrl+Z undoes it. Middle button orbits, Shift + middle button pans, the wheel zooms.</p></div><span class="draft-badge">Web preview · The plugin itself runs inside SketchUp</span></div>
-      <div class="su-window su-real" id="su-window">
-        <div class="su-chrome">
-          <img src="assets/su/chrome-top.png" width="1540" height="110" alt="SketchUp 2025: title bar, menu bar and toolbar" draggable="false">
-          <nav class="su-menubar" id="su-menubar" aria-label="Menu bar"><button type="button" data-su-menu="File" style="left:0.519%;width:2.078%;top:35.455%;height:21.818%"><span>File</span></button><button type="button" data-su-menu="Edit" style="left:3.247%;width:2.208%;top:35.455%;height:21.818%"><span>Edit</span></button><button type="button" data-su-menu="View" style="left:6.169%;width:2.662%;top:35.455%;height:21.818%"><span>View</span></button><button type="button" data-su-menu="Camera" style="left:9.481%;width:4.026%;top:35.455%;height:21.818%"><span>Camera</span></button><button type="button" data-su-menu="Draw" style="left:14.221%;width:2.857%;top:35.455%;height:21.818%"><span>Draw</span></button><button type="button" data-su-menu="Tools" style="left:17.727%;width:2.922%;top:35.455%;height:21.818%"><span>Tools</span></button><button type="button" data-su-menu="Window" style="left:21.299%;width:4.221%;top:35.455%;height:21.818%"><span>Window</span></button><button type="button" data-su-menu="Extensions" style="left:26.169%;width:5.455%;top:35.455%;height:21.818%"><span>Extensions</span></button><button type="button" data-su-menu="Help" style="left:32.273%;width:2.597%;top:35.455%;height:21.818%"><span>Help</span></button></nav>
-          <div class="su-native" id="su-native" aria-label="SketchUp tools"></div>
-        </div>
-        <div class="su-toolbars">
-          <div class="su-toolbar su-arqo"><span class="su-grip" title="ARQO for SketchUp"></span><div id="quick-tools" class="quick-tools" aria-label="ARQO for SketchUp"></div></div>
-        </div>
-        <div class="su-body">
-          <div class="model-viewport su-viewport">
-            <div id="plugin-scene" class="architectural-scene live-model"><p id="studio-loading" class="studio-loading">Loading the model…</p><span id="studio-label" class="studio-label" hidden></span></div>
-            <div id="su-dialog" class="su-dialog" hidden><div class="su-dialog-title"><span>ARQO Settings</span><button type="button" id="su-dialog-close" aria-label="Close">✕</button></div><div class="su-settings" id="su-settings"></div><div class="su-dialog-actions"><button type="button" id="su-dialog-ok">OK</button></div></div>
-            <div id="su-toast" class="su-toast" role="status" hidden></div>
-          </div>
-          <aside class="su-tray" aria-label="Default Tray"><img src="assets/su/tray.png" width="212" height="720" alt="SketchUp Default Tray" draggable="false"><div class="su-entity" id="su-entity"></div></aside>
-        </div>
-        <div class="su-status"><span class="su-status-tool"><span id="viewport-active-icon"></span><span id="viewport-active-label"></span></span><span id="studio-status" role="status">Ready</span><label class="su-vcb"><span id="su-vcb-label">Measurements</span><input id="su-vcb" autocomplete="off" spellcheck="false" aria-label="Measurements"></label></div>
-        <div hidden>
-          <div id="property-icon"></div><span id="property-category"></span><h3 id="property-title"></h3><p id="property-description"></p>
-          <button data-scope="selection" class="active" aria-pressed="true">Selection</button><input id="show-guides" type="checkbox" checked><button id="toggle-highlight" type="button">Apply</button><button id="plugin-details" type="button">Details</button>
-          <button id="all-tools-open" type="button">Library</button><div class="sidebar-heading"><span>40</span></div><input id="plugin-search" type="search"><div id="plugin-tool-list"></div>
-        </div>
-      </div>
-      <p class="su-disclaimer">SketchUp is a trademark of Trimble Inc. This screen is a browser preview of the ARQO plugin; it is not SketchUp itself.</p>
-      
-      <div class="studio-notes"><div><span>01</span><strong>One visual language</strong><p>The icon you see on the site is the tool you use in the plugin.</p></div><div><span>02</span><strong>Tools that are yours</strong><p>Single tools and the complete package in the same workspace.</p></div><div><span>03</span><strong>Make room for your model</strong><p>Tools sorted into categories, with simple and consistent settings.</p></div></div>
-    </section>
-  </main>
-
-  <main id="icons-view" class="view" hidden>
-    <section class="icon-container"><div class="section-heading"><div><div class="eyebrow">ARQO / VISUAL SYSTEM</div><h2>40 tools. One shared language.</h2><p>Architectural lines, simple geometry and a single accent colour.</p></div><span class="draft-badge">Original vector icon drafts</span></div>
-      <section class="icon-review-section" aria-label="Revision comparison for six icons"><div class="review-heading"><div><div class="eyebrow">REVISION 02 / FIRST 6 TOOLS</div><h3>Clearer at small sizes.</h3><p>First drafts and revised icons side by side at real pixel sizes.</p></div><span class="review-status">REVIEW DRAFT</span></div><div id="icon-comparisons" class="icon-comparisons"></div><div class="toolbar-review"><div class="toolbar-review-copy"><h3>Now look at them in a toolbar.</h3><p>Compare them without enlarging. The monochrome view shows whether they differ only by colour.</p><label class="mono-toggle"><input id="icon-monochrome" type="checkbox"> Compare in monochrome</label><div class="icon-version-controls"><button data-icon-version="current" class="active" aria-pressed="true">Revised set</button><button data-icon-version="legacy" aria-pressed="false">First draft</button></div></div><div id="toolbar-size-review"></div></div></section>
-      <div class="icon-library-heading"><div><h3>Icon library for 40 tools</h3><p>6 icons revised. The other 34 are kept as first drafts.</p></div><span class="draft-badge">The site and the plugin share one icon source</span></div>
-      <div class="design-tokens"><div><span class="token-sample graphite"></span><span>Graphite<small>Main character</small></span></div><div><span class="token-sample chalk"></span><span>Off-white<small>Working surface</small></span></div><div><span class="token-sample accent-sample"></span><span>Accent colour<small>Action and focus</small></span></div><div class="type-token"><strong>Aa</strong><span>Simple typography<small>Readable and calm</small></span></div><div class="icon-size-controls" aria-label="Icon size"><button data-size="16" aria-pressed="false">16 px</button><button data-size="24" aria-pressed="false">24 px</button><button data-size="32" class="active" aria-pressed="true">32 px</button><button data-size="48" aria-pressed="false">48 px</button></div></div>
-      <div id="icon-grid" class="icon-grid"></div><p class="icon-bottom-note">Click an icon to see the tool and how it looks at each size. Names and artwork are not final yet.</p>
-    </section>
-  </main>
-
-  <dialog id="tool-dialog" class="tool-dialog" aria-labelledby="dialog-title"><button class="dialog-close" aria-label="Close">×</button><div id="dialog-content"></div></dialog>
-  <div id="toast" class="toast" role="status" aria-live="polite"></div>
-</body>
-</html>
+<section class="foundation"><div class="wrap">
+  <p class="eyebrow">Shared foundation</p>
+  <h2>Different products. One consistent experience.</h2>
+  <div class="four">
+    <a href="account/index.html"><b>Account &amp; licences</b><span>Your single tools and packages in one place.</span></a>
+    <a href="downloads/index.html"><b>Download &amp; update</b><span>One installer, every version and change listed.</span></a>
+    <a href="docs/index.html"><b>Documentation</b><span>A clear guide for every tool.</span></a>
+    <a href="support/index.html"><b>Support</b><span>Help from the people who build the tools.</span></a>
+  </div>
+</div></section><footer class="foot"><div class="wrap foot-row">
+  <div><img src="assets/pluginsforaec-dark.svg" alt="PluginsForAEC"><p>Professional plugins for architects, engineers and builders. First product: ARQO for SketchUp.</p></div>
+  <div class="foot-links"><a href="mailto:info@pluginsforaec.com">info@pluginsforaec.com</a><a href="https://www.instagram.com/pluginsforaec/">Instagram</a><span>© 2026 PluginsForAEC</span></div>
+</div></footer><script src="app.js"></script></body></html>

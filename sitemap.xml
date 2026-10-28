@@ -1,5 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
-  <url><loc>https://pluginsforaec.com/</loc><xhtml:link rel="alternate" hreflang="tr" href="https://pluginsforaec.com/tr/"/><xhtml:link rel="alternate" hreflang="en" href="https://pluginsforaec.com/"/></url>
-  <url><loc>https://pluginsforaec.com/tr/</loc><xhtml:link rel="alternate" hreflang="en" href="https://pluginsforaec.com/"/><xhtml:link rel="alternate" hreflang="tr" href="https://pluginsforaec.com/tr/"/></url>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://pluginsforaec.com/</loc></url>
+  <url><loc>https://pluginsforaec.com/account/</loc></url>
+  <url><loc>https://pluginsforaec.com/arqo/</loc></url>
+  <url><loc>https://pluginsforaec.com/arqo/tools/align.html</loc></url>
+  <url><loc>https://pluginsforaec.com/arqo/tools/arqo-push.html</loc></url>
+  <url><loc>https://pluginsforaec.com/arqo/tools/attach-to-face.html</loc></url>
+  <url><loc>https://pluginsforaec.com/arqo/tools/axis-length-scale.html</loc></url>
+  <url><loc>https://pluginsforaec.com/arqo/tools/clipping-camera.html</loc></url>
+  <url><loc>https://pluginsforaec.com/arqo/tools/connect-heal.html</loc></url>
+  <url><loc>https://pluginsforaec.com/arqo/tools/copy-follow.html</loc></url>
+  <url><loc>https://pluginsforaec.com/arqo/tools/crop-lasso-select.html</loc></url>
+  <url><loc>https://pluginsforaec.com/arqo/tools/curve-to-arc.html</loc></url>
+  <url><loc>https://pluginsforaec.com/arqo/tools/delete-overlap.html</loc></url>
+  <url><loc>https://pluginsforaec.com/arqo/tools/divide.html</loc></url>
+  <url><loc>https://pluginsforaec.com/arqo/tools/draw-boundary.html</loc></url>
+  <url><loc>https://pluginsforaec.com/arqo/tools/explode.html</loc></url>
+  <url><loc>https://pluginsforaec.com/arqo/tools/export-scenes.html</loc></url>
+  <url><loc>https://pluginsforaec.com/arqo/tools/filter-selection.html</loc></url>
+  <url><loc>https://pluginsforaec.com/arqo/tools/find-gap.html</loc></url>
+  <url><loc>https://pluginsforaec.com/arqo/tools/frame.html</loc></url>
+  <url><loc>https://pluginsforaec.com/arqo/tools/hide-show-lines.html</loc></url>
+  <url><loc>https://pluginsforaec.com/arqo/tools/import-camera.html</loc></url>
+  <url><loc>https://pluginsforaec.com/arqo/tools/import-dxf.html</loc></url>
+  <url><loc>https://pluginsforaec.com/arqo/tools/line-to-face.html</loc></url>
+  <url><loc>https://pluginsforaec.com/arqo/tools/line-tool.html</loc></url>
+  <url><loc>https://pluginsforaec.com/arqo/tools/make-box.html</loc></url>
+  <url><loc>https://pluginsforaec.com/arqo/tools/make-face.html</loc></url>
+  <url><loc>https://pluginsforaec.com/arqo/tools/material-tools.html</loc></url>
+  <url><loc>https://pluginsforaec.com/arqo/tools/mirror.html</loc></url>
+  <url><loc>https://pluginsforaec.com/arqo/tools/multi-slice.html</loc></url>
+  <url><loc>https://pluginsforaec.com/arqo/tools/paint.html</loc></url>
+  <url><loc>https://pluginsforaec.com/arqo/tools/panel.html</loc></url>
+  <url><loc>https://pluginsforaec.com/arqo/tools/reference-scale.html</loc></url>
+  <url><loc>https://pluginsforaec.com/arqo/tools/reset-axis.html</loc></url>
+  <url><loc>https://pluginsforaec.com/arqo/tools/scale-definition.html</loc></url>
+  <url><loc>https://pluginsforaec.com/arqo/tools/scene-shadows.html</loc></url>
+  <url><loc>https://pluginsforaec.com/arqo/tools/smart-offset.html</loc></url>
+  <url><loc>https://pluginsforaec.com/arqo/tools/smart-select.html</loc></url>
+  <url><loc>https://pluginsforaec.com/arqo/tools/smart-slice.html</loc></url>
+  <url><loc>https://pluginsforaec.com/arqo/tools/smart-stair.html</loc></url>
+  <url><loc>https://pluginsforaec.com/arqo/tools/tag-tools.html</loc></url>
+  <url><loc>https://pluginsforaec.com/arqo/tools/to-components.html</loc></url>
+  <url><loc>https://pluginsforaec.com/arqo/tools/transformer.html</loc></url>
+  <url><loc>https://pluginsforaec.com/arqo/tools/weld.html</loc></url>
+  <url><loc>https://pluginsforaec.com/docs/</loc></url>
+  <url><loc>https://pluginsforaec.com/downloads/</loc></url>
+  <url><loc>https://pluginsforaec.com/support/</loc></url>
 </urlset>
