@@ -1,5 +1,10 @@
-// ARQO site v2 (draft): the toolbar's hover card and the before/after slider.
+// ARQO site v2: the narrow-screen menu, the toolbar's hover card and the before/after slider.
 (() => {
+  const nav = document.querySelector('.nav'), menu = nav && nav.querySelector('.menu');
+  if (menu) {
+    menu.addEventListener('click', () => menu.setAttribute('aria-expanded', String(nav.classList.toggle('open'))));
+    nav.querySelectorAll('.links a').forEach(a => a.addEventListener('click', () => { nav.classList.remove('open'); menu.setAttribute('aria-expanded', 'false'); }));
+  }
   const tip = document.querySelector('.tb-tip');
   if (tip) {
     document.querySelectorAll('.tb').forEach(button => {
