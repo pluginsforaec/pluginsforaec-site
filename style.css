@@ -194,3 +194,6 @@ kbd { font-family: inherit; font-size: 13px; font-weight: 700; padding: 4px 10px
   .nav .btn { display: none; }
   .tool-title { flex-direction: column; align-items: flex-start; }
 }
+/* the guide's diagrams (scripts/guide-diagrams.cjs): line drawings that take the text colour */
+figure.diagram{margin:0 0 28px;padding:22px;border:1px solid var(--line, #dcd9cc);border-radius:14px;text-align:center;overflow-x:auto}
+figure.diagram svg{max-width:100%;height:auto;color:inherit}
