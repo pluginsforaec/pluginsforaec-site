@@ -21,7 +21,6 @@
     const films = JSON.parse(box.dataset.reel);
     const video = box.querySelector('video');
     const title = box.querySelector('.reel-title');
-    const caption = box.querySelector('.reel-caption');
     const dots = Array.from(box.querySelectorAll('.reel-dots button'));
     let at = 0;
     const play = () => { const p = video.play(); if (p && p.catch) p.catch(() => {}); };
@@ -32,7 +31,6 @@
       else video.currentTime = 0;
       title.textContent = f.name + ' →';
       title.href = f.href;
-      caption.textContent = f.caption;
       video.setAttribute('aria-label', f.caption);
       dots.forEach((d, i) => d.classList.toggle('on', i === at));
       play();
