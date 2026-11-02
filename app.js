@@ -16,6 +16,31 @@
       button.addEventListener('mouseleave', () => { tip.hidden = true; });
     });
   }
+  // the film reel: each film to its end, then the next; paused while off screen
+  document.querySelectorAll('[data-reel]').forEach(box => {
+    const films = JSON.parse(box.dataset.reel);
+    const video = box.querySelector('video');
+    const title = box.querySelector('.reel-title');
+    const caption = box.querySelector('.reel-caption');
+    const dots = Array.from(box.querySelectorAll('.reel-dots button'));
+    let at = 0;
+    const play = () => { const p = video.play(); if (p && p.catch) p.catch(() => {}); };
+    const show = n => {
+      at = (n + films.length) % films.length;
+      const f = films[at];
+      if (video.getAttribute('src') !== f.src) { video.src = f.src; video.poster = f.poster; }
+      else video.currentTime = 0;
+      title.textContent = f.name + ' →';
+      title.href = f.href;
+      caption.textContent = f.caption;
+      video.setAttribute('aria-label', f.caption);
+      dots.forEach((d, i) => d.classList.toggle('on', i === at));
+      play();
+    };
+    video.addEventListener('ended', () => show(at + 1));
+    dots.forEach((d, i) => d.addEventListener('click', () => show(i)));
+    if ('IntersectionObserver' in window) new IntersectionObserver(entries => entries.forEach(e => (e.isIntersecting ? play() : video.pause())), { threshold: 0.25 }).observe(video);
+  });
   document.querySelectorAll('[data-compare]').forEach(box => {
     const after = box.querySelector('.after'), range = box.querySelector('input');
     const set = () => { after.style.clipPath = `inset(0 0 0 ${range.value}%)`; box.style.setProperty('--split', `${range.value}%`); };

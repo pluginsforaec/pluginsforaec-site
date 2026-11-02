@@ -268,3 +268,14 @@ figure.diagram svg{max-width:100%;height:auto;color:inherit}
 .film { margin: 0; }
 .film video { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; border-radius: var(--radius); background: #ece6da; box-shadow: 0 30px 70px rgba(40, 35, 20, .12); }
 .film figcaption { padding: 12px 4px 0; font-size: 14px; color: var(--muted); }
+.reel { padding: 72px 0 64px; background: var(--paper); }
+.reel h2 { margin: 6px 0 24px; }
+.reel-player { border-radius: var(--radius); overflow: hidden; background: #ece6da; box-shadow: 0 30px 70px rgba(40, 35, 20, .12); }
+.reel-player video { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; }
+.reel-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 18px; padding: 14px 20px; background: #fff; }
+.reel-title { font-weight: 700; color: var(--ink); text-decoration: none; }
+.reel-title:hover { color: var(--clay-ink, #9b4a2b); }
+.reel-caption { color: var(--muted); font-size: 14px; flex: 1 1 260px; }
+.reel-dots { display: flex; gap: 8px; }
+.reel-dots button { width: 10px; height: 10px; padding: 0; border-radius: 50%; border: 0; background: var(--paper-2, #ddd); cursor: pointer; }
+.reel-dots button.on { background: var(--ink); }
