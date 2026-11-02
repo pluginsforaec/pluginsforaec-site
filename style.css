@@ -265,3 +265,6 @@ figure.diagram svg{max-width:100%;height:auto;color:inherit}
 /* the ARQO Special toolbar: ARQOPush's twelve modes, its own bar as in SketchUp */
 .toolbar.special { border-top: 1px solid #dcdcdc; align-items: center; }
 .toolbar.special .tb-label { font: 600 12px/1 system-ui, sans-serif; color: #6b6f60; padding: 0 10px 0 4px; letter-spacing: .02em; }
+.film { margin: 0; }
+.film video { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; border-radius: var(--radius); background: #ece6da; box-shadow: 0 30px 70px rgba(40, 35, 20, .12); }
+.film figcaption { padding: 12px 4px 0; font-size: 14px; color: var(--muted); }
