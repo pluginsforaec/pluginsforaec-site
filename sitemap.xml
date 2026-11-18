@@ -4,15 +4,22 @@
   <url><loc>https://pluginsforaec.com/account/</loc></url>
   <url><loc>https://pluginsforaec.com/arqo/</loc></url>
   <url><loc>https://pluginsforaec.com/arqo/tools/align.html</loc></url>
+  <url><loc>https://pluginsforaec.com/arqo/tools/arqo-array.html</loc></url>
+  <url><loc>https://pluginsforaec.com/arqo/tools/arqo-dimension.html</loc></url>
+  <url><loc>https://pluginsforaec.com/arqo/tools/arqo-gap.html</loc></url>
+  <url><loc>https://pluginsforaec.com/arqo/tools/arqo-match.html</loc></url>
   <url><loc>https://pluginsforaec.com/arqo/tools/arqo-push.html</loc></url>
+  <url><loc>https://pluginsforaec.com/arqo/tools/ask-arqo.html</loc></url>
   <url><loc>https://pluginsforaec.com/arqo/tools/attach-to-face.html</loc></url>
   <url><loc>https://pluginsforaec.com/arqo/tools/axis-length-scale.html</loc></url>
+  <url><loc>https://pluginsforaec.com/arqo/tools/bevel.html</loc></url>
   <url><loc>https://pluginsforaec.com/arqo/tools/clipping-camera.html</loc></url>
   <url><loc>https://pluginsforaec.com/arqo/tools/connect-heal.html</loc></url>
   <url><loc>https://pluginsforaec.com/arqo/tools/copy-follow.html</loc></url>
   <url><loc>https://pluginsforaec.com/arqo/tools/crop-lasso-select.html</loc></url>
   <url><loc>https://pluginsforaec.com/arqo/tools/curve-to-arc.html</loc></url>
   <url><loc>https://pluginsforaec.com/arqo/tools/delete-overlap.html</loc></url>
+  <url><loc>https://pluginsforaec.com/arqo/tools/demo-tour.html</loc></url>
   <url><loc>https://pluginsforaec.com/arqo/tools/divide.html</loc></url>
   <url><loc>https://pluginsforaec.com/arqo/tools/draw-boundary.html</loc></url>
   <url><loc>https://pluginsforaec.com/arqo/tools/explode.html</loc></url>
@@ -21,38 +28,53 @@
   <url><loc>https://pluginsforaec.com/arqo/tools/find-gap.html</loc></url>
   <url><loc>https://pluginsforaec.com/arqo/tools/frame.html</loc></url>
   <url><loc>https://pluginsforaec.com/arqo/tools/hide-show-lines.html</loc></url>
+  <url><loc>https://pluginsforaec.com/arqo/tools/import-cad-cleaner.html</loc></url>
   <url><loc>https://pluginsforaec.com/arqo/tools/import-camera.html</loc></url>
   <url><loc>https://pluginsforaec.com/arqo/tools/import-dxf.html</loc></url>
   <url><loc>https://pluginsforaec.com/arqo/tools/kitchen-builder.html</loc></url>
   <url><loc>https://pluginsforaec.com/arqo/tools/library.html</loc></url>
   <url><loc>https://pluginsforaec.com/arqo/tools/line-to-face.html</loc></url>
   <url><loc>https://pluginsforaec.com/arqo/tools/line-tool.html</loc></url>
+  <url><loc>https://pluginsforaec.com/arqo/tools/live-quantity.html</loc></url>
   <url><loc>https://pluginsforaec.com/arqo/tools/make-box.html</loc></url>
   <url><loc>https://pluginsforaec.com/arqo/tools/make-face.html</loc></url>
   <url><loc>https://pluginsforaec.com/arqo/tools/material-tools.html</loc></url>
   <url><loc>https://pluginsforaec.com/arqo/tools/mesh-studio.html</loc></url>
   <url><loc>https://pluginsforaec.com/arqo/tools/mirror.html</loc></url>
   <url><loc>https://pluginsforaec.com/arqo/tools/model-doctor.html</loc></url>
+  <url><loc>https://pluginsforaec.com/arqo/tools/model-health.html</loc></url>
+  <url><loc>https://pluginsforaec.com/arqo/tools/model-journal.html</loc></url>
+  <url><loc>https://pluginsforaec.com/arqo/tools/move-to-face.html</loc></url>
   <url><loc>https://pluginsforaec.com/arqo/tools/multi-slice.html</loc></url>
+  <url><loc>https://pluginsforaec.com/arqo/tools/office-standard.html</loc></url>
   <url><loc>https://pluginsforaec.com/arqo/tools/paint.html</loc></url>
   <url><loc>https://pluginsforaec.com/arqo/tools/panel.html</loc></url>
+  <url><loc>https://pluginsforaec.com/arqo/tools/paper-cut.html</loc></url>
+  <url><loc>https://pluginsforaec.com/arqo/tools/performance-doctor.html</loc></url>
   <url><loc>https://pluginsforaec.com/arqo/tools/plan-to-3d.html</loc></url>
   <url><loc>https://pluginsforaec.com/arqo/tools/reference-scale.html</loc></url>
+  <url><loc>https://pluginsforaec.com/arqo/tools/replace-similar.html</loc></url>
   <url><loc>https://pluginsforaec.com/arqo/tools/reset-axis.html</loc></url>
   <url><loc>https://pluginsforaec.com/arqo/tools/scale-definition.html</loc></url>
   <url><loc>https://pluginsforaec.com/arqo/tools/scene-shadows.html</loc></url>
   <url><loc>https://pluginsforaec.com/arqo/tools/section-sheet.html</loc></url>
   <url><loc>https://pluginsforaec.com/arqo/tools/smart-door-window.html</loc></url>
+  <url><loc>https://pluginsforaec.com/arqo/tools/smart-extrude.html</loc></url>
   <url><loc>https://pluginsforaec.com/arqo/tools/smart-offset.html</loc></url>
+  <url><loc>https://pluginsforaec.com/arqo/tools/smart-railing.html</loc></url>
   <url><loc>https://pluginsforaec.com/arqo/tools/smart-roof.html</loc></url>
   <url><loc>https://pluginsforaec.com/arqo/tools/smart-select.html</loc></url>
+  <url><loc>https://pluginsforaec.com/arqo/tools/smart-skirting.html</loc></url>
+  <url><loc>https://pluginsforaec.com/arqo/tools/smart-slab.html</loc></url>
   <url><loc>https://pluginsforaec.com/arqo/tools/smart-slice.html</loc></url>
   <url><loc>https://pluginsforaec.com/arqo/tools/smart-stair.html</loc></url>
   <url><loc>https://pluginsforaec.com/arqo/tools/smart-wall.html</loc></url>
+  <url><loc>https://pluginsforaec.com/arqo/tools/sun-view.html</loc></url>
   <url><loc>https://pluginsforaec.com/arqo/tools/tag-tools.html</loc></url>
   <url><loc>https://pluginsforaec.com/arqo/tools/tile.html</loc></url>
   <url><loc>https://pluginsforaec.com/arqo/tools/to-components.html</loc></url>
   <url><loc>https://pluginsforaec.com/arqo/tools/transformer.html</loc></url>
+  <url><loc>https://pluginsforaec.com/arqo/tools/try-mode.html</loc></url>
   <url><loc>https://pluginsforaec.com/arqo/tools/weld.html</loc></url>
   <url><loc>https://pluginsforaec.com/docs/</loc></url>
   <url><loc>https://pluginsforaec.com/downloads/</loc></url>
