@@ -45,3 +45,37 @@
     range.addEventListener('input', set); set();
   });
 })();
+
+// ARQO page: the low wall / raised wall comparison (GPT "Working Model", 2026-11-21)
+(() => {
+  const comparison = document.querySelector('[data-arqo-compare]');
+  if (!comparison || !window.CSS?.supports('clip-path', 'inset(0 50% 0 0)')) return;
+
+  const stage = comparison.querySelector('.arqo-compare-stage');
+  const controls = comparison.querySelector('.arqo-compare-controls');
+  const slider = controls.querySelector('input[type="range"]');
+
+  function render() {
+    const value = slider.valueAsNumber;
+    stage.style.setProperty('--arqo-reveal', value + '%');
+    stage.toggleAttribute('data-split', value > 0 && value < 100);
+
+    let valueText = value + '% raised wall visible';
+    if (value === 0) valueText = 'Low wall only';
+    if (value === 100) valueText = 'Raised wall only';
+    slider.setAttribute('aria-valuetext', valueText);
+  }
+
+  slider.addEventListener('input', render);
+  for (const button of controls.querySelectorAll('[data-reveal]')) {
+    button.addEventListener('click', () => {
+      slider.value = button.dataset.reveal;
+      render();
+      slider.focus({ preventScroll: true });
+    });
+  }
+
+  render();
+  controls.hidden = false;
+  comparison.classList.add('arqo-compare-ready');
+})();
